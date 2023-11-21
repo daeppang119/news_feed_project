@@ -1,13 +1,12 @@
 import React from "react";
 import styled from "styled-components";
-import user from "../assets/usericon.png";
 
 function Category() {
   return (
     <Container>
       <UserInfo>
         <UserProfile>
-          <img src={user} />
+          {/* <img src={user} /> */}
           <UserNameEmail>
             <UserName>최애의 아이들</UserName>
             <UserEmail>test@gmail.com</UserEmail>

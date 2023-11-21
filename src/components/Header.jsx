@@ -1,12 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "./logo.img-removebg-preview.png";
 
 export default function Header() {
   return (
     <Warpper>
       <Imgfigure>
-        <img src={logo} />
+        <img src={process.env.PUBLIC_URL + "/headerimg/logo.png"} />
       </Imgfigure>
       <InputBox>
         <input type="text" />
