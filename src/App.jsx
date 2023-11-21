@@ -1,10 +1,10 @@
 import React from "react";
-import GlobalStyle from "./StyledComponents/GlobalStyle";
-import Router from "./shared/Router";
 import { ThemeProvider } from "styled-components";
+import GlobalStyle from "./StyledComponents/GlobalStyle";
 import theme from "./StyledComponents/theme/theme";
 import Sample from "./components/Sample/Sample";
 import { fireBase } from "./firebase/firebase";
+import Router from "./shared/Router";
 /*
 - router 설치 완료
 - styled component 설치 완료
