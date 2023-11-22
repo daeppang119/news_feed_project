@@ -2,6 +2,8 @@ import { createGlobalStyle } from "styled-components";
 import reset from "../StyledComponents/reset.module.css";
 const GlobalStyle = createGlobalStyle`
 ${reset}
+
+
 html {
     scroll-behavior: smooth;
     font-size : 62.5%; // 1rem = 10px
