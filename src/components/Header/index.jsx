@@ -1,7 +1,7 @@
 import React from "react";
 import * as St from "../../StyledComponents/modules/HeaderStyle/StyledHeader";
 
-export default function Header() {
+export default function Header({ setIsopen, users, setusers }) {
   return (
     <St.Warpper>
       <St.Imgfigure>
@@ -16,10 +16,23 @@ export default function Header() {
           />
         </button>
       </St.InputBox>
-      <St.Buttons>
-        <button>계정정보</button>
-        <button>글쓰기</button>
-      </St.Buttons>
+      {users ? (
+        <St.Buttons>
+          <button onClick={() => setusers(false)}>로그아웃</button>
+          <button
+            onClick={() => {
+              setIsopen(true);
+            }}
+          >
+            글쓰기
+          </button>
+        </St.Buttons>
+      ) : (
+        <St.Buttons>
+          <button onClick={() => setusers(true)}>로그인</button>
+          <button>회원가입</button>
+        </St.Buttons>
+      )}
     </St.Warpper>
   );
 }
