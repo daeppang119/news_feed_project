@@ -1,10 +1,10 @@
 import React from "react";
-import GlobalStyle from "./StyledComponents/GlobalStyle";
-import Router from "./shared/Router";
 import { ThemeProvider } from "styled-components";
+import GlobalStyle from "./StyledComponents/GlobalStyle";
 import theme from "./StyledComponents/theme/theme";
 import Sample from "./components/Sample/Sample";
 import { fireBase } from "./firebase/firebase";
+import Router from "./shared/Router";
 /*
 - router 설치 완료
 - styled component 설치 완료
@@ -27,8 +27,8 @@ function App() {
   console.log(fireBase);
   return (
     <>
-      <GlobalStyle />
       <ThemeProvider theme={theme}>
+        <GlobalStyle />
         {/* Sample Component는 테스트용입니다. Sample을 보신 후 반드시 삭제해 주셔요 */}
         <Sample />
         <Router />
