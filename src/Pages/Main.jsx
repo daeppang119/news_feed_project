@@ -1,7 +1,7 @@
 import React from "react";
 
 function Main() {
-  return <div>Main</div>;
+  return <>탭을 클릭해주세요</>;
 }
 
 export default Main;
