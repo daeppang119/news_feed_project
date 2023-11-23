@@ -20,12 +20,14 @@ const initialValue = {
   userName: "",
   photoUrl: "",
   intro: "",
-  comment: [
+  post: [
     {
       category: "",
       imgurl: "",
       text: "",
-      date: ""
+      date: "",
+      uid: "",
+      isEdit: false
     }
   ]
 };
@@ -37,9 +39,10 @@ const user = (state = initialValue, action) => {
     case SIGN_OUT:
       return initialValue;
     case UPDATE_INFO:
+      console.log(action.payload);
       return action.payload;
     case INITIAL_FETECHED_USER_POST:
-      return { ...state, comment: action.payload };
+      return { ...state, post: action.payload };
     case FAILED_LOGIN:
       return { ...state, ...action.payload };
     default:

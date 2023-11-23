@@ -8,12 +8,12 @@ function SamplePersonal() {
   const post = useSelector((state) => state.post);
 
   /* 
+  
   user도 수정해줄까? 아니면 어차피 전체 post에서 삭제 했으니까 상세페이지 들어가면 filter로 그냥 처리해줄까 고민이 되네요
 
-  
    */
   const user = useSelector((state) => state.user);
-  console.log(user.currentUser);
+
   const dispatch = useDispatch();
   const textRef = useRef();
   const [fireStoreUpdateData, setFireStoreUpdateDate] = useState();

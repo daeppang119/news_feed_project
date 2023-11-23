@@ -168,15 +168,6 @@ const StForm = styled.div`
   }
 `;
 
-const StInput = styled.input.attrs({
-  type: "email"
-})`
-  all: unset;
-  border: 1px solid black;
-  padding-left: 12px;
-  padding: 12px;
-`;
-
 const StBtn = styled.button`
   border: 1px solid #333;
   padding: 10px;
