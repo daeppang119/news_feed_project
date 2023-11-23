@@ -1,7 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/HeaderStyle/StyledHeader";
-import { auth } from "../../firebase/firebase";
 import { signUpInSetState } from "../../redux/modules/user";
 
 export default function Header({ setIsopen }) {
@@ -10,7 +9,10 @@ export default function Header({ setIsopen }) {
   const loginhandle = () => {
     dispatch(signUpInSetState({ currentUser: true }));
   };
-  if (auth.currentUser) {
+  const logouthandle = () => {
+    dispatch(signUpInSetState({ currentUser: false }));
+  };
+  if (user.currentUser) {
     return (
       <St.Warpper>
         <St.Imgfigure>
@@ -27,7 +29,7 @@ export default function Header({ setIsopen }) {
         </St.InputBox>
 
         <St.Buttons>
-          <button>로그아웃</button>
+          <button onClick={logouthandle}>로그아웃</button>
           <button
             onClick={() => {
               setIsopen(true);
@@ -38,7 +40,7 @@ export default function Header({ setIsopen }) {
         </St.Buttons>
       </St.Warpper>
     );
-  } else if (auth.currentUser === null) {
+  } else if (!user.currentUser) {
     return (
       <St.Warpper>
         <St.Imgfigure>

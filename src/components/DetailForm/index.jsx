@@ -1,16 +1,24 @@
+import { deleteDoc, doc } from "@firebase/firestore";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/AddFormStyle/AddFormStyle";
-import { auth } from "../../firebase/firebase";
+import { auth, db } from "../../firebase/firebase";
 
 export default function DetailForm({ DetailisOpen, setDetailIsopen, contents }) {
   const [isEditing, setIsEditing] = useState(false);
 
   const user = useSelector((state) => state.user);
+  const post = useSelector((state) => state.post);
   const foundData = user.post[0];
   const [editingText, setEditingText] = useState(foundData.contents);
 
-  if (auth.currentUser) {
+  const onClickDeleteData = async () => {
+    alert("삭제하시겠습니까?");
+    const postRef = doc(db, "users", post.id);
+    await deleteDoc(postRef);
+  };
+
+  if (user.currentUser) {
     return (
       <>
         {DetailisOpen ? (
@@ -59,7 +67,9 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, contents }) 
                     >
                       수정
                     </button>
-                    <button type="button">삭제</button>
+                    <button type="button" onClick={() => onClickDeleteData(foundData.id)}>
+                      삭제
+                    </button>
                     <button type="button" onClick={() => setDetailIsopen(false)}>
                       홈으로
                     </button>
@@ -71,7 +81,7 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, contents }) 
         ) : null}
       </>
     );
-  } else if (!auth.currentUser) {
+  } else if (!user.currentUser) {
     return (
       <>
         {DetailisOpen ? (
@@ -83,15 +93,15 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, contents }) 
                     <img src={process.env.PUBLIC_URL + "/categoryimg/usericon.png"} />
                   </St.AvatarFigure>
                   <St.NickNameAndEmail>
-                    <St.NickName>닉네임</St.NickName>
-                    <St.Email>test01@gamil.com</St.Email>
+                    <St.NickName>{auth.currentUser.displayName}</St.NickName>
+                    <St.Email>{auth.currentUser.email}</St.Email>
                   </St.NickNameAndEmail>
                 </St.DetailUserInfo>
                 <St.TitleAndDate>
-                  <St.Title>제목</St.Title>
-                  <St.AddDate>23. 11. 22 PM 08:50</St.AddDate>
+                  <St.Title>{foundData.text}</St.Title>
+                  <St.AddDate>{foundData.Date}</St.AddDate>
                 </St.TitleAndDate>
-                <St.DetailContent>{contents}</St.DetailContent>
+                <St.DetailContent>{foundData.contents}</St.DetailContent>
                 <St.Buttons>
                   <button type="button" onClick={() => setDetailIsopen(false)}>
                     홈으로
