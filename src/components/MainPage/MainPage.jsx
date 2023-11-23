@@ -11,7 +11,7 @@ function MainPage() {
   const post = useSelector((state) => state.post);
   console.log(auth);
   console.log(storage);
-  const docRef = doc(db);
+  const docRef = doc(db, "users");
   const docSnap = getDoc(docRef);
   console.log(docSnap.data());
   return (
