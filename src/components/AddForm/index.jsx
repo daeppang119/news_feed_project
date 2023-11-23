@@ -15,7 +15,7 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
 
   const handleAddPost = async () => {
     if (!user.currentUser) return alert("로그인 후 작성 할 수 있습니다.");
-    if (!user["comment"]) user["comment"] = [];
+    if (!user["post"]) user["post"] = [];
     const newPost = {
       text: title,
       contents,
@@ -31,7 +31,7 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
       isEdit: false,
       category: category
     };
-    user["comment"].unshift(newPost);
+    user["post"].unshift(newPost);
     dispatch(updateUserInfoSetState({ ...user }));
 
     await addDoc(userDataRef, newPost);
