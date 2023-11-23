@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import * as St from "../../StyledComponents/modules/AddFormStyle/AddFormStyle";
 
-export default function DetailForm({ DetailisOpen, setDetailIsopen, users }) {
+export default function DetailForm({ DetailisOpen, setDetailIsopen, users, contents }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editingText, setEditingText] = useState("");
   return (
@@ -25,16 +25,24 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, users }) {
               </St.TitleAndDate>
               {isEditing ? (
                 <St.Content
+                  defaultValue={contents}
                   value={editingText}
                   onChange={(e) => {
                     setEditingText(e.target.value);
                   }}
                 />
               ) : (
-                <St.DetailContent>내용</St.DetailContent>
+                <St.DetailContent>{contents}</St.DetailContent>
               )}
 
-              {users ? (
+              {isEditing ? (
+                <St.Buttons>
+                  <button type="button">수정 완료</button>
+                  <button type="button" onClick={() => setIsEditing(false)}>
+                    취소
+                  </button>
+                </St.Buttons>
+              ) : (
                 <St.Buttons>
                   <button
                     type="button"
@@ -44,14 +52,10 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, users }) {
                   >
                     수정
                   </button>
-                  <button>삭제</button>
+                  <button type="button">삭제</button>
                   <button type="button" onClick={() => setDetailIsopen(false)}>
                     홈으로
                   </button>
-                </St.Buttons>
-              ) : (
-                <St.Buttons>
-                  <button onClick={() => setDetailIsopen(false)}>홈으로</button>
                 </St.Buttons>
               )}
             </St.Warpper>

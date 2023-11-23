@@ -3,9 +3,9 @@ import React, { useEffect, useState } from "react";
 import * as St from "../../StyledComponents/modules/AddFormStyle/AddFormStyle";
 import { db } from "../../firebase/firebase";
 
-export default function AddForm({ isOpen, setIsopen }) {
+export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
   const [title, setTitle] = useState("");
-  const [contents, setContents] = useState("");
+
   const [hobby, setHobby] = useState("");
 
   useEffect(() => {
@@ -32,9 +32,18 @@ export default function AddForm({ isOpen, setIsopen }) {
             onSubmit={async (e) => {
               e.preventDefault();
               const newPost = {
-                title,
-                contents,
-                hobby
+                uid: "",
+                userName: "",
+                profilePhotoUrl: "",
+                intro: "",
+                comment: [
+                  {
+                    category: hobby,
+                    imgurl: "",
+                    text: contents,
+                    date: new Date().toLocaleDateString()
+                  }
+                ]
               };
 
               const collectionRef = collection(db, "users");
