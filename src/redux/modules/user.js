@@ -1,15 +1,13 @@
 const PREFIX = "user/";
-const SIGN_UP = `${PREFIX}SIGN_UP`;
-const SIGN_IN = `${PREFIX}SIGN_IN`;
+const SIGN_UP_IN = `${PREFIX}SIGN_UP_IN`;
 const SIGN_OUT = `${PREFIX}SIGN_OUT`;
 const UPDATE_INFO = `${PREFIX}UPDATE_INFO`;
 const FAILED_LOGIN = `${PREFIX}FAILED_LOGIN`;
-const INITIAL_FETECHED_POST = `${PREFIX}INITIAL_FETECHED_POST`;
-export const signUpSetState = (payload) => ({ type: SIGN_UP, payload });
-export const signInSetState = (payload) => ({ type: SIGN_IN, payload });
+const INITIAL_FETECHED_USER_POST = `${PREFIX}INITIAL_FETECHED_USER_POST`;
+export const signUpInSetState = (payload) => ({ type: SIGN_UP_IN, payload });
 export const signOutSetState = (payload) => ({ type: SIGN_OUT, payload });
-export const initialFetchedPost = (payload) => ({
-  type: INITIAL_FETECHED_POST,
+export const initialFetchedUserPost = (payload) => ({
+  type: INITIAL_FETECHED_USER_POST,
   payload
 });
 export const updateUserInfoSetState = (payload) => ({ type: UPDATE_INFO, payload });
@@ -18,33 +16,33 @@ export const failedLoginSetState = (payload) => ({ type: FAILED_LOGIN, payload }
 const initialValue = {
   currentUser: false,
   email: "",
-  pwd: "",
   uid: "",
   userName: "",
-  profilePhotoUrl: "",
+  photoUrl: "",
   intro: "",
-  comment: [
+  post: [
     {
       category: "",
       imgurl: "",
       text: "",
-      date: ""
+      date: "",
+      uid: "",
+      isEdit: false
     }
   ]
 };
 
 const user = (state = initialValue, action) => {
   switch (action.type) {
-    case SIGN_UP:
-      return action.payload;
-    case SIGN_IN:
+    case SIGN_UP_IN:
       return { ...state, ...action.payload };
     case SIGN_OUT:
       return initialValue;
     case UPDATE_INFO:
+      console.log(action.payload);
       return action.payload;
-    case INITIAL_FETECHED_POST:
-      return { ...state, comment: action.payload };
+    case INITIAL_FETECHED_USER_POST:
+      return { ...state, post: action.payload };
     case FAILED_LOGIN:
       return { ...state, ...action.payload };
     default:

@@ -1,4 +1,4 @@
-import { collection, getDocs, query } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
@@ -9,15 +9,15 @@ import { initialFetchPost } from "./redux/modules/post";
 import Router from "./shared/Router";
 function App() {
   const post = useSelector((state) => state.post);
+
   const dispatch = useDispatch();
   const initialFetchData = useCallback(async () => {
     console.log("app에서 실행");
     // 전체 users라는 문서에서 내용물 다 가져오기
-    const q = query(collection(db, "users"));
+    // orderBy(key값,"desc||asc")
+    const q = query(collection(db, "users"), orderBy("date", "asc"));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      // console.log("doc의 id", doc.id);
-      // console.log("doc의 데이타", doc.data());
       post.unshift({ ...doc.data(), id: doc.id });
       dispatch(initialFetchPost(post));
     });
