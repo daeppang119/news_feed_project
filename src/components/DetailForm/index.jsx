@@ -1,10 +1,14 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/AddFormStyle/AddFormStyle";
 import { auth } from "../../firebase/firebase";
 
 export default function DetailForm({ DetailisOpen, setDetailIsopen, contents }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editingText, setEditingText] = useState("");
+
+  const user = useSelector((state) => state.user);
+  const fonudData = user.comment;
 
   if (auth.currentUser) {
     return (
@@ -23,19 +27,19 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, contents }) 
                   </St.NickNameAndEmail>
                 </St.DetailUserInfo>
                 <St.TitleAndDate>
-                  <St.Title>{}</St.Title>
-                  <St.AddDate>23. 11. 22 PM 08:50</St.AddDate>
+                  <St.Title>{fonudData.title}</St.Title>
+                  <St.AddDate>{fonudData.date}</St.AddDate>
                 </St.TitleAndDate>
                 {isEditing ? (
                   <St.Content
-                    defaultValue={contents}
+                    defaultValue={fonudData.contents}
                     value={editingText}
                     onChange={(e) => {
                       setEditingText(e.target.value);
                     }}
                   />
                 ) : (
-                  <St.DetailContent>{contents}</St.DetailContent>
+                  <St.DetailContent>{fonudData.contents}</St.DetailContent>
                 )}
 
                 {isEditing ? (
@@ -67,7 +71,7 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, contents }) 
         ) : null}
       </>
     );
-  } else if (auth.currentUser === null) {
+  } else if (!auth.currentUser) {
     return (
       <>
         {DetailisOpen ? (

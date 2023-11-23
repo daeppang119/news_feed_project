@@ -1,11 +1,52 @@
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, getDocs, query } from "firebase/firestore";
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/AddFormStyle/AddFormStyle";
 import { auth, db } from "../../firebase/firebase";
+import { updatePost } from "../../redux/modules/post";
+import { updateUserInfoSetState } from "../../redux/modules/user";
 
 export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
+  const user = useSelector((state) => state.user);
+  const userDataRef = collection(db, "users");
+  const dispatch = useDispatch();
+
+  const handleAddPost = async () => {
+    if (!user.currentUser) return alert("로그인 후 작성 할 수 있습니다.");
+    if (!user["comment"]) user["comment"] = [];
+    const newPost = {
+      text: title,
+      contents,
+      Date: new Date().toLocaleDateString("ko", {
+        year: "2-digit",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit"
+      }),
+      uid: auth.currentUser.uid || "",
+      isEdit: false,
+      category: category
+    };
+    user["comment"].unshift(newPost);
+    dispatch(updateUserInfoSetState({ ...user }));
+
+    await addDoc(userDataRef, newPost);
+    const q = query(userDataRef);
+    const querySnapshot = await getDocs(q);
+    const dataSet = new Set();
+    querySnapshot.forEach((doc) => {
+      dataSet.add({ id: doc.id, ...doc.data() });
+    });
+    const newPostState = [...dataSet];
+
+    dispatch(updatePost(newPostState));
+  };
+
+  console.log(user);
 
   console.log(auth.currentUser);
 
@@ -17,33 +58,7 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
             <St.Container
               onSubmit={async (e) => {
                 e.preventDefault();
-                const newPost = {
-                  uid: auth.currentUser.uid,
-                  userName: auth.currentUser.displayName,
-                  profilePhotoUrl: "",
-                  intro: "",
-                  comment: [
-                    {
-                      title,
-                      category,
-                      imgurl: "",
-                      text: contents,
-                      date: new Date().toLocaleDateString("ko", {
-                        year: "2-digit",
-                        month: "2-digit",
-                        day: "2-digit",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                        second: "2-digit"
-                      }),
-                      email: auth.currentUser.email
-                    }
-                  ]
-                };
-
-                const collectionRef = collection(db, "users");
-
-                await addDoc(collectionRef, newPost);
+                handleAddPost();
               }}
             >
               <St.Warpper>

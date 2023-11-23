@@ -1,8 +1,15 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/HeaderStyle/StyledHeader";
 import { auth } from "../../firebase/firebase";
+import { signUpInSetState } from "../../redux/modules/user";
 
 export default function Header({ setIsopen }) {
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const loginhandle = () => {
+    dispatch(signUpInSetState({ currentUser: true }));
+  };
   if (auth.currentUser) {
     return (
       <St.Warpper>
@@ -48,7 +55,7 @@ export default function Header({ setIsopen }) {
         </St.InputBox>
 
         <St.Buttons>
-          <button>로그인</button>
+          <button onClick={loginhandle}>로그인</button>
           <button>회원가입</button>
         </St.Buttons>
       </St.Warpper>
