@@ -46,10 +46,6 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
     dispatch(updatePost(newPostState));
   };
 
-  console.log(user);
-
-  console.log(auth.currentUser);
-
   if (auth.currentUser) {
     return (
       <>

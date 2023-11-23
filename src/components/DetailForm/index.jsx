@@ -5,10 +5,10 @@ import { auth } from "../../firebase/firebase";
 
 export default function DetailForm({ DetailisOpen, setDetailIsopen, contents }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [editingText, setEditingText] = useState("");
 
   const user = useSelector((state) => state.user);
-  const fonudData = user.comment;
+  const foundData = user.post[0];
+  const [editingText, setEditingText] = useState(foundData.contents);
 
   if (auth.currentUser) {
     return (
@@ -27,19 +27,19 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, contents }) 
                   </St.NickNameAndEmail>
                 </St.DetailUserInfo>
                 <St.TitleAndDate>
-                  <St.Title>{fonudData.title}</St.Title>
-                  <St.AddDate>{fonudData.date}</St.AddDate>
+                  <St.Title>{foundData.text}</St.Title>
+                  <St.AddDate>{foundData.Date}</St.AddDate>
                 </St.TitleAndDate>
                 {isEditing ? (
                   <St.Content
-                    defaultValue={fonudData.contents}
+                    defaultValue={foundData.contents}
                     value={editingText}
                     onChange={(e) => {
                       setEditingText(e.target.value);
                     }}
                   />
                 ) : (
-                  <St.DetailContent>{fonudData.contents}</St.DetailContent>
+                  <St.DetailContent>{foundData.contents}</St.DetailContent>
                 )}
 
                 {isEditing ? (
