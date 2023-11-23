@@ -52,12 +52,14 @@ function App() {
   //   const conditionalQuerySnapshot = await getDocs(conditionalQuery);
   //   conditionalQuerySnapshot.forEach((doc) => {});
   // };
-
+  console.log(post);
   useEffect(() => {
     if (post.length) {
       return;
-    } else initialFetchData();
-    return;
+    } else {
+      console.log("1?");
+      initialFetchData();
+    }
   }, [initialFetchData, post.length]);
   return (
     <>
