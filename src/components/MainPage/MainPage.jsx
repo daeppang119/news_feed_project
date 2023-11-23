@@ -1,16 +1,26 @@
+import { doc, getDoc } from "firebase/firestore";
 import React from "react";
+import { useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/StyledMainPage/StyledMainPage";
+import { auth, db, storage } from "../../firebase/firebase";
 import Category from "../Category/Category";
 import Header from "../Header";
 
 function MainPage() {
+  const user = useSelector((state) => state.user);
+  const post = useSelector((state) => state.post);
+  console.log(auth);
+  console.log(storage);
+  const docRef = doc(db);
+  const docSnap = getDoc(docRef);
+  console.log(docSnap.data());
   return (
     <St.MainPageContainer>
       <Header />
       <St.MainPageCategoryPost>
         <Category />
         <St.MainPagePostWrapper>
-          <St.MainPagePost>
+          {/* <St.MainPagePost>
             <St.MainPagePostUser>
               <St.MainPagePostImgNickname>
                 <img src={process.env.PUBLIC_URL + "/categoryimg/usericon.png"} />
@@ -25,7 +35,7 @@ function MainPage() {
             <St.MainPagePostInfo>
               <St.MainPagePostLike>♥︎ 200</St.MainPagePostLike>
             </St.MainPagePostInfo>
-          </St.MainPagePost>
+          </St.MainPagePost> */}
           <St.MainPagePost>
             <St.MainPagePostUser>
               <St.MainPagePostImgNickname>
