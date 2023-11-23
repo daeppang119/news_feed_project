@@ -1,24 +1,10 @@
-import { collection, getDocs } from "@firebase/firestore";
 import React, { useState } from "react";
 import * as St from "../../StyledComponents/modules/AddFormStyle/AddFormStyle";
-import { auth, db } from "../../firebase/firebase";
+import { auth } from "../../firebase/firebase";
 
 export default function DetailForm({ DetailisOpen, setDetailIsopen, contents }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editingText, setEditingText] = useState("");
-
-  const fetchData = async () => {
-    const q = collection(db, "users");
-    const querySnapshot = await getDocs(q);
-
-    querySnapshot.forEach((doc) => {
-      const data = {
-        id: doc.id,
-        ...doc.data()
-      };
-    });
-  };
-  fetchData();
 
   if (auth.currentUser) {
     return (
