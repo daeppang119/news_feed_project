@@ -76,7 +76,7 @@ function SamplePersonal() {
   return (
     <div>
       {post.map((el, i) => {
-        console.log(el.uid, user.currentUser.uid);
+        console.log(el);
         return (
           <DivContainer key={el.id}>
             <Div>

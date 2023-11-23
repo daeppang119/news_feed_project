@@ -14,7 +14,7 @@ export const updatePost = (payload) => ({
   type: UPDATE_POSTS,
   payload
 });
-export const editPost = (payload) => ({
+export const editPgost = (payload) => ({
   type: EDIT_POST,
   payload
 });
