@@ -30,9 +30,11 @@ function Login() {
 
   return (
     <St.LoginLalyout>
-      <St.Logo>
-        <img src={process.env.PUBLIC_URL + "/Logo/logo.png"} />
-      </St.Logo>
+      <Link to="/">
+        <St.Logo>
+          <img src={process.env.PUBLIC_URL + "/Logo/logo.png"} />
+        </St.Logo>
+      </Link>
       <form onSubmit={handleSubmit}>
         <div>
           <St.Ir>아이디(이메일)</St.Ir>
@@ -51,7 +53,6 @@ function Login() {
           <St.Ir>패스워드</St.Ir>
           <St.LoginInput
             type="password"
-            pattern="[0-9a-fA-F]{4,8}"
             placeholder="패스워드"
             value={password}
             onChange={(e) => {

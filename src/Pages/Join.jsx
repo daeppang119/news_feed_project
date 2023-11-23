@@ -15,27 +15,19 @@ function Join() {
     inputFocus.current.focus();
   }, []);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     const {
       target: { name, value }
     } = event;
-    if (name === "email") {
-      setEmail(value);
-    }
-    if (name === "password") {
-      setPassword(value);
-    }
-  };
-
-  const signUp = async (event) => {
-    event.preventDefault();
+    console.log(name, value);
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       console.log(userCredential);
-      alert("회원가입이 완료되었습니다.");
+      window.alert("회원가입이 완료되었습니다.");
       navigate("/login");
     } catch (error) {
-      alert("오류입니다");
+      window.alert("오류입니다");
     }
   };
 
