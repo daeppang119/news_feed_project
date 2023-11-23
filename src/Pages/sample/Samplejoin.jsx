@@ -9,11 +9,14 @@ function SampleJoin() {
   const user = useSelector((state) => state.user);
   const inputRef = useRef({});
   const dispatch = useDispatch();
+
   // 회원가입 하면 사용 할 local state입니다.
   const [isLoged, setIsLoged] = useState(false);
+
   // 유나님이 해보고 싶으셨던 로딩중? progressBar state
   const [loading, setLoading] = useState(false);
   const animationArr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+
   // 회원가입 함수
   const signUp = async () => {
     const email = inputRef.current.email;
@@ -23,6 +26,7 @@ function SampleJoin() {
     try {
       await createUserWithEmailAndPassword(auth, email.value, pwd.value).then((userCredential) => {
         setIsLoged(true);
+        setLoading(false);
       });
     } catch (error) {
       setLoading(false);
@@ -57,13 +61,16 @@ function SampleJoin() {
   const logIn = async () => {
     // 로그인 되어있으면 alert띄우고 함수 탈출
     if (user.currentUser !== false) return alert("이미 로그인 되어있습니다.");
+    setLoading(true);
     const email = inputRef.current.email;
     const pwd = inputRef.current.pwd;
     try {
       await signInFirebase().then(() => {
         setIsLoged(true);
+        setLoading(false);
       });
     } catch (e) {
+      setLoading(false);
       console.log(e);
     }
 
@@ -79,11 +86,12 @@ function SampleJoin() {
       await signOutFirebase().then(() => {
         setIsLoged(false);
       });
-    } catch {}
+    } catch (e) {
+      console.log(e);
+    }
   };
   // firebase 통신은 함수들입니다. 각각 로그인 로그아웃을 담당합니다.
   const signInFirebase = useCallback(async () => {
-    setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, inputRef.current.email.value, inputRef.current.pwd.value).then(
         (userCredential) => {
@@ -92,11 +100,9 @@ function SampleJoin() {
           });
           dispatch(initialFetchedUserPost(userComment));
           console.log("firbase에서 로그인됨", userCredential);
-          setLoading(false);
         }
       );
     } catch (e) {
-      setLoading(false);
       throw new Error("로그인 상태확인해주세요");
     }
   }, [dispatch, post]);
@@ -106,7 +112,7 @@ function SampleJoin() {
     try {
       await signOut(auth).then(() => console.log("firebase에서 로그아웃됨"));
     } catch (e) {
-      console.log("로그아웃중에", e);
+      throw new Error("로그인 중", e);
     }
   };
 
