@@ -6,16 +6,17 @@ import Header from "../components/Header";
 
 function Main() {
   const [isOpen, setIsopen] = useState(false);
-  const [users, setusers] = useState(false);
   const [DetailisOpen, setDetailIsopen] = useState(false);
   const [contents, setContents] = useState("");
   return (
     <>
-      <Header setIsopen={setIsopen} users={users} setusers={setusers} />
-      <Category users={users} />
+      <Header setIsopen={setIsopen} />
+      <Category />
       <AddForm isOpen={isOpen} setIsopen={setIsopen} contents={contents} setContents={setContents} />
-      <DetailForm DetailisOpen={DetailisOpen} setDetailIsopen={setDetailIsopen} users={users} contents={contents} />
-      <button onClick={() => setDetailIsopen(true)}>모달열기</button>
+      <DetailForm DetailisOpen={DetailisOpen} setDetailIsopen={setDetailIsopen} contents={contents} />
+      <button type="button" onClick={() => setDetailIsopen(true)}>
+        모달열기
+      </button>
     </>
   );
 }

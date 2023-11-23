@@ -1,10 +1,24 @@
+import { collection, getDocs } from "@firebase/firestore";
 import React, { useState } from "react";
 import * as St from "../../StyledComponents/modules/AddFormStyle/AddFormStyle";
-import { auth } from "../../firebase/firebase";
+import { auth, db } from "../../firebase/firebase";
 
-export default function DetailForm({ DetailisOpen, setDetailIsopen, users, contents }) {
+export default function DetailForm({ DetailisOpen, setDetailIsopen, contents }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editingText, setEditingText] = useState("");
+
+  const fetchData = async () => {
+    const q = collection(db, "users");
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+      const data = {
+        id: doc.id,
+        ...doc.data()
+      };
+    });
+  };
+  fetchData();
 
   if (auth.currentUser) {
     return (
@@ -18,12 +32,12 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, users, conte
                     <img src={process.env.PUBLIC_URL + "/categoryimg/usericon.png"} />
                   </St.AvatarFigure>
                   <St.NickNameAndEmail>
-                    <St.NickName>닉네임</St.NickName>
-                    <St.Email>test01@gamil.com</St.Email>
+                    <St.NickName>{auth.currentUser.displayName}</St.NickName>
+                    <St.Email>{auth.currentUser.email}</St.Email>
                   </St.NickNameAndEmail>
                 </St.DetailUserInfo>
                 <St.TitleAndDate>
-                  <St.Title>제목</St.Title>
+                  <St.Title>{}</St.Title>
                   <St.AddDate>23. 11. 22 PM 08:50</St.AddDate>
                 </St.TitleAndDate>
                 {isEditing ? (

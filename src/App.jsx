@@ -2,7 +2,6 @@ import React from "react";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./StyledComponents/GlobalStyle";
 import theme from "./StyledComponents/theme/theme";
-import { fireBase } from "./firebase/firebase";
 import Router from "./shared/Router";
 /*
 - router 설치 완료
@@ -23,7 +22,6 @@ redux/ moduls/ 이거봐주세요 text를 읽고 난 후 삭제해 주세요.
 */
 
 function App() {
-  console.log(fireBase);
   return (
     <>
       <ThemeProvider theme={theme}>

@@ -1,28 +1,11 @@
-import { addDoc, collection, getDocs, query } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import { addDoc, collection } from "firebase/firestore";
+import React, { useState } from "react";
 import * as St from "../../StyledComponents/modules/AddFormStyle/AddFormStyle";
 import { auth, db } from "../../firebase/firebase";
 
 export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
   const [title, setTitle] = useState("");
-
-  const [hobby, setHobby] = useState("");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const q = query(collection(db, "users"));
-      const querySnapshot = await getDocs(q);
-
-      querySnapshot.forEach((doc) => {
-        const data = {
-          id: doc.id,
-          ...doc.data()
-        };
-        console.log(data);
-      });
-    };
-    fetchData();
-  }, []);
+  const [category, setCategory] = useState("");
 
   console.log(auth.currentUser);
 
@@ -42,10 +25,17 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
                   comment: [
                     {
                       title,
-                      category: hobby,
+                      category,
                       imgurl: "",
                       text: contents,
-                      date: new Date().toLocaleDateString(),
+                      date: new Date().toLocaleDateString("ko", {
+                        year: "2-digit",
+                        month: "2-digit",
+                        day: "2-digit",
+                        hour: "2-digit",
+                        minute: "2-digit",
+                        second: "2-digit"
+                      }),
                       email: auth.currentUser.email
                     }
                   ]
@@ -57,15 +47,6 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
               }}
             >
               <St.Warpper>
-                <St.UserInfo>
-                  <St.AvatarFigure>
-                    <img src={process.env.PUBLIC_URL + "/categoryimg/usericon.png"} />
-                  </St.AvatarFigure>
-                  <St.NickNameAndEmail>
-                    <St.NickName>닉네임</St.NickName>
-                    <St.Email>test01@gamil.com</St.Email>
-                  </St.NickNameAndEmail>
-                </St.UserInfo>
                 <St.TitleAndDate>
                   <St.Title>
                     <input
@@ -84,9 +65,9 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
                 <St.Selecter>
                   <St.Lable>취미</St.Lable>
                   <St.Select
-                    value={hobby}
+                    value={category}
                     onChange={(e) => {
-                      setHobby(e.target.value);
+                      setCategory(e.target.value);
                     }}
                   >
                     <option value="애니메이션">애니메이션</option>
