@@ -9,13 +9,15 @@ import { initialFetchPost } from "./redux/modules/post";
 import Router from "./shared/Router";
 function App() {
   const post = useSelector((state) => state.post);
-
+  const user = useSelector((state) => state.user);
+  console.log(post);
+  console.log(user);
   const dispatch = useDispatch();
   const initialFetchData = useCallback(async () => {
     console.log("app에서 실행");
     // 전체 users라는 문서에서 내용물 다 가져오기
     // orderBy(key값,"desc||asc")
-    const q = query(collection(db, "users"), orderBy("date", "asc"));
+    const q = query(collection(db, "users"), orderBy("date", "desc"));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       post.unshift({ ...doc.data(), id: doc.id });
