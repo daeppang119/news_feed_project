@@ -6,6 +6,7 @@ import theme from "./StyledComponents/theme/theme";
 import Router from "./shared/Router";
 
 /*
+
 - router 설치 완료
 - styled component 설치 완료
 - redux 설치 완료 하였습니다.
@@ -21,6 +22,7 @@ redux 폴더의 module을 가보시면 text가 있습니다.
 StyledComponents/modules/StyledTest를 읽고 난 후 삭제 해주시면 감사하겠습니다.
 Components/Sample을 이해하고 난 후 삭제 해 주시면 감사하겠습니다.
 redux/ moduls/ 이거봐주세요 text를 읽고 난 후 삭제해 주세요.
+
 */
 
 function App() {

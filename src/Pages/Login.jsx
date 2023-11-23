@@ -67,13 +67,17 @@ function Login() {
             <St.Box></St.Box>
             <St.LinksA>비밀번호 찾기</St.LinksA>
           </div>
-          <div>
+          <St.LinksA>
             <Link to="/join">회원가입</Link>
-          </div>
+          </St.LinksA>
         </St.Links>
         <St.LoginBtn>로그인</St.LoginBtn>
       </form>
-      <St.EasyLogin>간편로그인</St.EasyLogin>
+      <St.EasyLoginCon>
+        <St.HorizontalBox></St.HorizontalBox>
+        <St.EasyLogin>간편로그인</St.EasyLogin>
+        <St.HorizontalBox></St.HorizontalBox>
+      </St.EasyLoginCon>
       <div>
         <St.SnsBtn>구글로 로그인하기</St.SnsBtn>
       </div>

@@ -7,6 +7,8 @@ import { auth } from "../firebase/firebase";
 function Join() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordCheck, setPasswordCheck] = useState("");
+
   const navigate = useNavigate();
 
   const inputFocus = useRef(null);
@@ -17,10 +19,11 @@ function Join() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const {
-      target: { name, value }
-    } = event;
-    console.log(name, value);
+
+    if (password !== passwordCheck) {
+      window.alert("비밀번호가 달라요 다시 확인좀...");
+      return;
+    }
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       console.log(userCredential);
@@ -55,7 +58,6 @@ function Join() {
             <St.Ir>패스워드</St.Ir>
             <St.LoginInput
               type="password"
-              pattern="[0-9a-fA-F]{4,8}"
               placeholder="패스워드"
               value={password}
               onChange={(e) => {
@@ -64,11 +66,24 @@ function Join() {
               required
             ></St.LoginInput>
           </div>
+          <div>
+            <St.Ir>패스워드 확인</St.Ir>
+            <St.LoginInput
+              type="password"
+              placeholder="패스워드 확인"
+              value={passwordCheck}
+              onChange={(e) => {
+                setPasswordCheck(e.target.value);
+              }}
+              required
+            ></St.LoginInput>
+          </div>
+
           <St.LoginBtn>회원가입</St.LoginBtn>
         </form>
-        <div>
-          <Link to="/login">로그인하러가기</Link>
-        </div>
+        <St.LoginGo>
+          <Link to="/login">이미 가입하셨나요?</Link>
+        </St.LoginGo>
       </div>
     </St.LoginLalyout>
   );

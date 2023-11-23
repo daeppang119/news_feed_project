@@ -7,6 +7,7 @@ export const LoginLalyout = styled.div`
 
 export const Logo = styled.h2`
   margin-bottom: 24px;
+  cursor: pointer;
 `;
 
 export const Ir = styled.label`
@@ -67,11 +68,23 @@ export const LinksA = styled.a`
   cursor: pointer;
 `;
 
+export const EasyLoginCon = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+`;
+
 export const EasyLogin = styled.div`
   color: #8d9096;
   font-size: 14px;
   text-align: center;
-  margin-bottom: 24px;
+`;
+
+export const HorizontalBox = styled.div`
+  width: 34%;
+  height: 1px;
+  background: #8d9096;
 `;
 
 export const SnsBtn = styled.button`
@@ -84,6 +97,13 @@ export const SnsBtn = styled.button`
   color: #8d9096;
   margin-bottom: 6px;
   background: #fff;
+  cursor: pointer;
+`;
+
+export const LoginGo = styled.div`
+  color: #8d9096;
+  font-size: 14px;
+  text-align: center;
   cursor: pointer;
 `;
 
