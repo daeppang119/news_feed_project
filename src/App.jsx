@@ -42,6 +42,8 @@ function App() {
     //   console.log(doc.id);
     //   console.log(doc.data);
     // });
+
+    console.log(post);
   }, [post, dispatch]);
 
   // 원하는것만 데이터에서 얻어오는 함수
