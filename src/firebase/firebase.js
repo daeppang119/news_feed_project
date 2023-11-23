@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import AddForm from "../components/AddForm";
 
@@ -18,3 +19,4 @@ const firebaseConfig = {
 // Initialize Firebase
 export const fireBase = initializeApp(firebaseConfig);
 export const db = getFirestore(AddForm);
+export const auth = getAuth();
