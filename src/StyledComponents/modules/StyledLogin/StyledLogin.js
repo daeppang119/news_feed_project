@@ -55,6 +55,18 @@ export const Links = styled.div`
   margin: 24px 0;
 `;
 
+export const Box = styled.div`
+  width: 1px;
+  background: #8d9096;
+  height: 12px;
+  display: inline-block;
+  margin: 0 14px;
+`;
+
+export const LinksA = styled.a`
+  cursor: pointer;
+`;
+
 export const EasyLogin = styled.div`
   color: #8d9096;
   font-size: 14px;

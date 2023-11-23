@@ -62,8 +62,9 @@ function Login() {
         </div>
         <St.Links>
           <div>
-            <a>아이디 찾기</a>
-            <a>비밀번호 찾기</a>
+            <St.LinksA>아이디 찾기</St.LinksA>
+            <St.Box></St.Box>
+            <St.LinksA>비밀번호 찾기</St.LinksA>
           </div>
           <div>
             <Link to="/join">회원가입</Link>
