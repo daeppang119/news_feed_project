@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Main from "../Pages/Main";
 import Join from "../Pages/Join";
+import Login from "../Pages/Login";
+import Main from "../Pages/Main";
 import PersonalPage from "../Pages/PersonalPage";
 
 const Router = () => {
@@ -9,6 +10,8 @@ const Router = () => {
       <Routes>
         {/* main 페이지 */}
         <Route path="/" element={<Main />} />
+        {/* login */}
+        <Route path="/login" element={<Login />} />
         {/* join */}
         <Route path="/join" element={<Join />} />
         {/* personal Page  */}
