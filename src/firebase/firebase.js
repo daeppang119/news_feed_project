@@ -1,4 +1,6 @@
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
+import AddForm from "../components/AddForm";
 
 // .env.local 이라는 파일을 root에서 만들어주고 그 파일 안에다
 //REACT_APP_FB_API_KEY = "AIzaSyAxmTgM_oMiwatey1BLjk30SEG9X07Bx4A"
@@ -15,3 +17,4 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const fireBase = initializeApp(firebaseConfig);
+export const db = getFirestore(AddForm);
