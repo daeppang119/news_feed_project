@@ -4,6 +4,7 @@ const SIGN_OUT = `${PREFIX}SIGN_OUT`;
 const UPDATE_INFO = `${PREFIX}UPDATE_INFO`;
 const FAILED_LOGIN = `${PREFIX}FAILED_LOGIN`;
 const INITIAL_FETECHED_USER_POST = `${PREFIX}INITIAL_FETECHED_USER_POST`;
+
 export const signUpInSetState = (payload) => ({ type: SIGN_UP_IN, payload });
 export const signOutSetState = (payload) => ({ type: SIGN_OUT, payload });
 export const initialFetchedUserPost = (payload) => ({
@@ -25,6 +26,7 @@ const initialValue = {
   photoUrl: "",
   // profile에 넣어도 되고 안넣어도 되는 한줄 자기소개
   intro: "",
+
   post: [
     {
       category: "",
