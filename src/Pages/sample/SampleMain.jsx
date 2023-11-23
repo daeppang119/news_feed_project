@@ -49,7 +49,6 @@ function SampleMain() {
     const imgFile = inputRef.current.img.files[0];
     try {
       if (!imgFile) return;
-
       const imgRef = ref(storage, `Users/${auth.currentUser.uid}/${imgFile.name}`);
       await uploadBytes(imgRef, imgFile);
       const downloadUrl = await getDownloadURL(imgRef);
