@@ -1,12 +1,10 @@
 import React from "react";
-import Category from "../components/Category/Category";
-import Header from "../components/Header";
+import MainPage from "../components/MainPage/MainPage";
 
 function Main() {
   return (
     <>
-      <Header />
-      <Category />
+      <MainPage />
     </>
   );
 }

@@ -4,16 +4,16 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 10px;
   ${({ theme }) => theme.mediaQuery.md`
     display: block;
-    margin-left: 20%;
     font-size: 12px;
-    width: 150px;
+    margin-left: 20px;
   `}
   ${({ theme }) => theme.mediaQuery.lg`
     display: block;
-    margin-left: 20%;
     text-align: start;
+    margin-left: 30px;
   `}
 `;
 export const UserInfo = styled.div`
@@ -25,7 +25,7 @@ export const UserInfo = styled.div`
   border-radius: 10px;
 
   ${({ theme }) => theme.mediaQuery.md`
-    width: 150px;
+    width: 120px;
   `}
   ${({ theme }) => theme.mediaQuery.lg`
     width: 200px;
@@ -116,7 +116,7 @@ export const CategoryBar = styled.div`
   display: none;
   ${({ theme }) => theme.mediaQuery.md`
       display: block;
-      width: 150px;
+      width: 120px;
   `}
   ${({ theme }) => theme.mediaQuery.lg`
       width: 200px;

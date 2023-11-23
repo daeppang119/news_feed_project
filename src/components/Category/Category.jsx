@@ -1,5 +1,5 @@
 import React from "react";
-import * as St from "../../StyledComponents/modules/CategoryStyle/CategoryStyle";
+import * as St from "../../StyledComponents/modules/StyledCategory/StyledCategory";
 
 function Category() {
   return (
