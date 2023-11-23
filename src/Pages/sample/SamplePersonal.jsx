@@ -8,7 +8,7 @@ function SamplePersonal() {
   const post = useSelector((state) => state.post);
 
   /* 
-  
+
   user도 수정해줄까? 아니면 어차피 전체 post에서 삭제 했으니까 상세페이지 들어가면 filter로 그냥 처리해줄까 고민이 되네요
 
    */
@@ -58,6 +58,7 @@ function SamplePersonal() {
     dispatch(removePost(newPosts));
   };
   const deleteFireStoreData = useCallback(async () => {
+    console.log(fireStoreRemoveDate);
     const removeDataRef = doc(db, "users", fireStoreRemoveDate);
     try {
       await deleteDoc(removeDataRef).then(() => console.log("삭제완료"));
@@ -71,16 +72,17 @@ function SamplePersonal() {
       deleteFireStoreData();
     }
   }, [deleteFireStoreData, fireStoreRemoveDate]);
-  console.log(post);
+  console.log(user.currentUser);
   return (
     <div>
       {post.map((el, i) => {
+        console.log(el);
         return (
           <DivContainer key={el.id}>
             <Div>
               <img src={el.imgurl} alt="" />
               <TextAreaForwad props={el} ref={textRef} />
-              {user.currentUser && (
+              {user.uid === el.uid && (
                 <ConditionalButtonGroup
                   el={el}
                   handleEdit={handleEdit}

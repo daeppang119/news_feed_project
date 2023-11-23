@@ -11,6 +11,7 @@ import SamplePersonal from "./SamplePersonal";
 function SampleMain() {
   const inputRef = useRef({});
   const user = useSelector((state) => state.user);
+  console.log(user);
   const userDataRef = collection(db, "users");
   const dispatch = useDispatch();
   // 이미지 파일 업로드 후 이미지 url과 같이 post를 추가하는 함수 입니다.
