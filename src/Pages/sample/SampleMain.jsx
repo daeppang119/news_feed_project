@@ -28,16 +28,18 @@ function SampleMain() {
     };
     user["comment"].unshift(newPost);
     dispatch(updateUserInfoSetState({ ...user }));
-
+    console.log(newPost);
     // 여기서 부턴 firebase에 추가 후 다시 불러들여 post에 'id'를 부여 하기 위해 다시 추가 하는 로직입니다.
     await addDoc(userDataRef, newPost);
     const q = query(userDataRef);
+    console.log("check");
     const querySnapshot = await getDocs(q);
     const dataSet = new Set();
     querySnapshot.forEach((doc) => {
       dataSet.add({ id: doc.id, ...doc.data() });
     });
     const newPostState = [...dataSet];
+    console.log(newPostState);
     dispatch(updatePost(newPostState));
   };
 
@@ -46,6 +48,9 @@ function SampleMain() {
     const imgFile = inputRef.current.img.files[0];
     try {
       if (!imgFile) return;
+      console.log(imgFile);
+      console.log(auth.currentUser.uid);
+      console.log(imgFile.name);
       const imgRef = ref(storage, `Users/${auth.currentUser.uid}/${imgFile.name}`);
       await uploadBytes(imgRef, imgFile);
       const downloadUrl = await getDownloadURL(imgRef);

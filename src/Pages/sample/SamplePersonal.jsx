@@ -71,6 +71,7 @@ function SamplePersonal() {
       deleteFireStoreData();
     }
   }, [deleteFireStoreData, fireStoreRemoveDate]);
+  console.log(post);
   return (
     <div>
       {post.map((el, i) => {
