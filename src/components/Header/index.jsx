@@ -35,7 +35,6 @@ export default function Header({ setIsopen, setTitle, setContents }) {
               setIsopen(true);
               setTitle("");
               setContents("");
-              alert("click");
             }}
           >
             글쓰기

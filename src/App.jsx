@@ -33,10 +33,13 @@ function App() {
   const initialFetchData = useCallback(async () => {
     const q = query(collection(db, "users"), orderBy("date", "desc"));
     const querySnapshot = await getDocs(q);
+    console.log(querySnapshot);
     querySnapshot.forEach((doc) => {
+      console.log(doc.data());
       post.unshift({ ...doc.data(), id: doc.id });
       dispatch(initialFetchPost(post));
     });
+    console.log(post);
   }, [post, dispatch]);
   useEffect(() => {
     if (post.length) {

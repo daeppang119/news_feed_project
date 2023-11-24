@@ -25,6 +25,7 @@ function MainPage({ categorizedPosts }) {
     <St.MainPageContainer>
       <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
       {categorizedPosts.map((item) => {
+        console.log(item);
         return (
           <St.MainPagePost key={item.id} onClick={onClickPostHandler}>
             <St.MainPagePostUser>
