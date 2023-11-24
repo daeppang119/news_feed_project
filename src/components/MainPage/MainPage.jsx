@@ -4,13 +4,12 @@ import { useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/StyledMainPage/StyledMainPage";
 // import { auth, db, storage } from "../../firebase/firebase";
 import { getFormattedDate } from "../../util/date";
-import Modal from "./Modal";
+import DetailForm from "../DetailForm";
 
 function MainPage({ categorizedPosts }) {
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
-  const [isLoged, setIsLoged] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [DetailisOpen, setDetailIsopen] = useState(false);
   // console.log(post);
   // console.log(auth);
   // console.log(storage);
@@ -18,15 +17,15 @@ function MainPage({ categorizedPosts }) {
   // const docSnap = getDoc(docRef);
   // console.log(docSnap.data());
   const onClickPostHandler = (e) => {
-    setIsOpen(true);
+    setDetailIsopen(true);
     console.log(e.target.id);
   };
   return (
     <St.MainPageContainer>
-      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
+      <DetailForm DetailisOpen={DetailisOpen} setDetailIsopen={setDetailIsopen} />
       {categorizedPosts.map((item) => {
         return (
-          <St.MainPagePost key={item.id} onClick={onClickPostHandler}>
+          <St.MainPagePost id={item.id} key={item.id} onClick={onClickPostHandler}>
             <St.MainPagePostUser>
               <St.MainPagePostImgNickname>
                 <img src={item.imgurl} />

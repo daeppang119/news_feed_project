@@ -1,7 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/StyledMainPage/StyledModal";
 
 function Modal({ isOpen, setIsOpen }) {
+  const post = useSelector((state) => state.post);
+  // post.map((item) => console.log(item.uid));
   return (
     <St.ModalContainer style={{ display: isOpen ? "block" : "none" }}>
       <St.ModalCard>
