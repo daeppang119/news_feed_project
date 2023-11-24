@@ -1,3 +1,4 @@
+import uuid from "react-uuid";
 const PREFIX = "user/";
 const SIGN_UP_IN = `${PREFIX}SIGN_UP_IN`;
 const SIGN_OUT = `${PREFIX}SIGN_OUT`;
@@ -14,6 +15,7 @@ export const updateUserInfoSetState = (payload) => ({ type: UPDATE_INFO, payload
 export const failedLoginSetState = (payload) => ({ type: FAILED_LOGIN, payload });
 
 const initialValue = {
+  id: uuid(),
   currentUser: false,
   // profile에 들어갈 email,
   email: "",

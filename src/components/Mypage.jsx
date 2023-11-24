@@ -86,7 +86,7 @@ function Mypage() {
                 .map((ea) => {
                   return (
                     <>
-                      <St.Feed key={ea.uid}>
+                      <St.Feed key={ea.id}>
                         <img src={ea.imgurl} />
                         <p>{ea.text}</p>
                         <p>{ea.date}</p>

@@ -286,7 +286,7 @@ export const ModalContent = styled.div`
   max-height: 90vh;
   min-height: 70vh;
   overflow-y: auto;
-  transition: all 0.2s ease-out;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 12px 60px 5px;
   ${({ theme: { mediaQuery } }) => mediaQuery.md`
   width:100%;
   max-width: 620px;
