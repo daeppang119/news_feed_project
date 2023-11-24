@@ -5,6 +5,7 @@ export const Container = styled.div`
   margin: auto;
   background-color: white;
   min-width: 0;
+  height: 100vh;
   // 768px 이상일 때;
   ${({ theme: { mediaQuery } }) => mediaQuery.md`
    background-color: #fac0bb;
@@ -13,7 +14,7 @@ export const Container = styled.div`
    
    width:100%;
    display :flex; 
-   
+    height:100vh;
   `};
 
   // 1200px 이상일 때;
@@ -21,7 +22,7 @@ export const Container = styled.div`
   background-color: #fac0bb;
   max-width: 1280px;
   display :flex; 
-  
+  height:100vh;
   `};
 `;
 
@@ -91,9 +92,12 @@ export const Avatar = styled.img`
   height: 100px;
   border-radius: 50%;
 `;
-export const ChangeImg = styled.h1`
+export const ImageLabel = styled.label`
   font-size: 16px;
   cursor: pointer;
+`;
+export const ChangeImg = styled.input`
+  display: none;
 `;
 export const Confirm = styled.h1`
   color: white;

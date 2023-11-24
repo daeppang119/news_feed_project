@@ -5,7 +5,6 @@ import PersonalPage from "../Pages/PersonalPage";
 import SampleLayout from "../Pages/sample/SampleLayout";
 import SampleMain from "../Pages/sample/SampleMain";
 import SampleJoin from "../Pages/sample/Samplejoin.jsx";
-
 const Router = () => {
   return (
     <BrowserRouter>
@@ -19,7 +18,7 @@ const Router = () => {
           {/* join */}
           <Route path="/join" element={<Join />} />
           {/* personal Page  */}
-          <Route path="'/personalPage'" element={<PersonalPage />} />
+          <Route path="/personalPage" element={<PersonalPage />} />
           {/* Not Found */}
           <Route path="*" element={<h1>이상한곳 가지마라...</h1>} />
         </Routes>

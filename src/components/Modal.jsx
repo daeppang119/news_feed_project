@@ -1,17 +1,34 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import * as St from "../StyledComponents/modules/PersonalPage/PersonlPage.js";
-function Modal({ modalOpen, setModalOpen }) {
+import { updateUserInfoSetState } from "../redux/modules/user.js";
+function Modal({ modalOpen, setModalOpen, image }) {
   // modal handler
-
   const ModalHandler = () => {
     setModalOpen(!modalOpen);
   };
-  // form state start
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [nickName, setNickName] = useState("");
-  const [lineIntro, setLineIntro] = useState("");
 
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
+  // form state start
+  const [name, setName] = useState(user.userName);
+  const [email, setEmail] = useState(user.email);
+  const [intro, setIntro] = useState(user.intro);
+
+  const SaveButtonHandler = () => {
+    dispatch(
+      updateUserInfoSetState({
+        userName: name,
+        email: email,
+        intro: intro
+      })
+    );
+    const answer = window.confirm("저장하시겠어요?");
+    if (answer) setModalOpen(!modalOpen);
+  };
+
+  // edit
   return (
     <St.ModalBox>
       <St.ModalContent>
@@ -23,7 +40,7 @@ function Modal({ modalOpen, setModalOpen }) {
         </St.ModalHeader>
         <St.ModalDiv>계정</St.ModalDiv>
         <St.ModalAvatarWrap>
-          <St.MAvatar src={process.env.PUBLIC_URL + "/personalpageIMG/avatar.jpg"} />
+          <St.MAvatar src={image} />
         </St.ModalAvatarWrap>
 
         <St.Form>
@@ -35,24 +52,36 @@ function Modal({ modalOpen, setModalOpen }) {
               onChange={(event) => {
                 setName(event.target.value);
               }}
-            ></St.EditContent>
+              defaultValue={name}
+              maxLength={10}
+              placeholder="최대 10글자"
+            />
           </St.MEdit>
           <St.MEdit>
             <St.Fix>
               이메일<span style={{ color: "#ff5c00" }}>*</span>
             </St.Fix>
-            <St.EditContent></St.EditContent>
+            <St.EditContent
+              onChange={(event) => {
+                setEmail(event.target.value);
+              }}
+              defaultValue={email}
+              placeholder="올바른 형식을 갖춰주세요"
+            />
           </St.MEdit>
           <St.MEdit>
-            <St.Fix>닉네임</St.Fix>
-            <St.EditContent></St.EditContent>
-          </St.MEdit>
-          <St.MEdit>
-            <St.Fix>한 줄 소개</St.Fix>
-            <St.EditContent></St.EditContent>
+            <St.Fix>소개글</St.Fix>
+            <St.EditContent
+              onChange={(event) => {
+                setIntro(event.target.value);
+              }}
+              defaultValue={intro}
+              maxLength={100}
+              placeholder="최대 100글자"
+            />
           </St.MEdit>
           <St.SaveButtonWrap>
-            <St.SaveButton src={process.env.PUBLIC_URL + "/personalpageIMG/stamp.png"} />
+            <St.SaveButton onClick={SaveButtonHandler} src={process.env.PUBLIC_URL + "/personalpageIMG/stamp.png"} />
           </St.SaveButtonWrap>
         </St.Form>
       </St.ModalContent>

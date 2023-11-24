@@ -20,11 +20,11 @@ const initialValue = {
   // 로그인한 user의 고유 아이디
   uid: "",
   // profile에 들어갈 userName
-  userName: "",
+  userName: "홍길동",
   // profile에 들어갈 사진 url
-  photoUrl: "",
+  photoUrl: "https://cdn-icons-png.flaticon.com/512/12515/12515277.png",
   // profile에 넣어도 되고 안넣어도 되는 한줄 자기소개
-  intro: "",
+  intro: "여러분에 대해서 소개해보세요",
   post: [
     {
       category: "",
@@ -48,7 +48,7 @@ const user = (state = initialValue, action) => {
       return initialValue;
     case UPDATE_INFO:
       console.log(action.payload);
-      return action.payload;
+      return { ...state, ...action.payload };
     case INITIAL_FETECHED_USER_POST:
       return { ...state, post: action.payload };
     case FAILED_LOGIN:
