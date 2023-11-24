@@ -62,12 +62,10 @@ function App() {
     }
   }, [initialFetchData, post.length]);
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        <Router />
-      </ThemeProvider>
-    </>
+      <Router />
+    </ThemeProvider>
   );
 }
 
