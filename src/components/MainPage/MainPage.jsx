@@ -16,9 +16,9 @@ function MainPage({ categorizedPosts }) {
   // const docRef = doc(db, "users");
   // const docSnap = getDoc(docRef);
   // console.log(docSnap.data());
-  const onClickPostHandler = (e) => {
+  const onClickPostHandler = (id) => {
     setDetailIsopen(true);
-    console.log(e.target.id);
+    console.log(id);
   };
   return (
     <St.MainPageContainer>
@@ -26,7 +26,7 @@ function MainPage({ categorizedPosts }) {
       {categorizedPosts.map((item) => {
         console.log(item);
         return (
-          <St.MainPagePost id={item.id} key={item.id} onClick={onClickPostHandler}>
+          <St.MainPagePost id={item.id} key={item.id} onClick={onClickPostHandler(item.id)}>
             <St.MainPagePostUser>
               <St.MainPagePostImgNickname>
                 <img src={item.imgurl} />
