@@ -17,6 +17,7 @@ export const Container = styled.div`
   `}
 `;
 export const UserInfo = styled.div`
+  width: 120px;
   height: 150px;
   line-height: 1.5;
   padding: 15px;
@@ -33,7 +34,34 @@ export const UserInfo = styled.div`
 
   `};
 `;
+export const LoginBtn = styled.button`
+  cursor: pointer;
+  background-color: var(--defaultColor);
+  width: 120px;
+  height: 40px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: bolder;
+  text-align: center;
+  ${({ theme }) => theme.mediaQuery.lg`
+    width: 200px;
+    height: 50px;
+    font-size: 16px;
+  `};
+`;
+export const LoginMessage = styled.p`
+  text-align: center;
+  margin-top: 40px;
+  ${({ theme }) => theme.mediaQuery.lg`
+    margin-top: 30px;
+    font-size: 14px
+`};
+`;
+
 export const UserProfile = styled.div`
+  cursor: pointer;
   text-align: center;
   font-size: 12px;
   height: 100px;

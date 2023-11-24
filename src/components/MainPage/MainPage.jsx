@@ -1,25 +1,52 @@
-import { doc, getDoc } from "firebase/firestore";
-import React from "react";
+// import { doc, getDoc } from "firebase/firestore";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/StyledMainPage/StyledMainPage";
-import { auth, db, storage } from "../../firebase/firebase";
+// import { auth, db, storage } from "../../firebase/firebase";
+import { getFormattedDate } from "../../util/date";
 import Category from "../Category/Category";
 import Header from "../Header";
+import Modal from "./Modal";
 
 function MainPage() {
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
-  console.log(auth);
-  console.log(storage);
-  const docRef = doc(db, "users");
-  const docSnap = getDoc(docRef);
-  console.log(docSnap.data());
+  const [isLoged, setIsLoged] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  // console.log(post);
+  // console.log(auth);
+  // console.log(storage);
+  // const docRef = doc(db, "users");
+  // const docSnap = getDoc(docRef);
+  // console.log(docSnap.data());
+  const onClickPostHandler = (e) => {
+    setIsOpen(true);
+    console.log(e.target.id);
+  };
   return (
     <St.MainPageContainer>
       <Header />
       <St.MainPageCategoryPost>
         <Category />
+        <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
         <St.MainPagePostWrapper>
+          {post.map((item) => {
+            return (
+              <St.MainPagePost key={item.id} onClick={onClickPostHandler}>
+                <St.MainPagePostUser>
+                  <St.MainPagePostImgNickname>
+                    <img src={item.imgurl} />
+                    <St.MainPagePostNickname>{item.id}</St.MainPagePostNickname>
+                  </St.MainPagePostImgNickname>
+                  <St.MainPagePostDate>{getFormattedDate(item.date)}</St.MainPagePostDate>
+                </St.MainPagePostUser>
+                <St.MainPagePostContent>{item.text}</St.MainPagePostContent>
+                <St.MainPagePostInfo>
+                  <St.MainPagePostLike>♥︎200</St.MainPagePostLike>
+                </St.MainPagePostInfo>
+              </St.MainPagePost>
+            );
+          })}
           {/* <St.MainPagePost>
             <St.MainPagePostUser>
               <St.MainPagePostImgNickname>
@@ -36,34 +63,6 @@ function MainPage() {
               <St.MainPagePostLike>♥︎ 200</St.MainPagePostLike>
             </St.MainPagePostInfo>
           </St.MainPagePost> */}
-          <St.MainPagePost>
-            <St.MainPagePostUser>
-              <St.MainPagePostImgNickname>
-                <img src={process.env.PUBLIC_URL + "/categoryimg/usericon.png"} />
-                <St.MainPagePostNickname>팀장장이 최문길</St.MainPagePostNickname>
-              </St.MainPagePostImgNickname>
-              <St.MainPagePostDate>2023. 11. 22 PM 7:01</St.MainPagePostDate>
-            </St.MainPagePostUser>
-            <St.MainPagePostContent>저는 멋진 팀장 최문길임 ㅋ</St.MainPagePostContent>
-            <St.MainPagePostInfo>
-              <St.MainPagePostLike>♥︎ 1.8K</St.MainPagePostLike>
-            </St.MainPagePostInfo>
-          </St.MainPagePost>
-          <St.MainPagePost>
-            <St.MainPagePostUser>
-              <St.MainPagePostImgNickname>
-                <img src={process.env.PUBLIC_URL + "/categoryimg/usericon.png"} />
-                <St.MainPagePostNickname>코린이</St.MainPagePostNickname>
-              </St.MainPagePostImgNickname>
-              <St.MainPagePostDate>2023. 11. 22 PM 7:01</St.MainPagePostDate>
-            </St.MainPagePostUser>
-            <St.MainPagePostContent>
-              멱살잡혀 끌려가는 코린이입니다 오늘 밤엔 잠을 잘 수 없을 것 같아용
-            </St.MainPagePostContent>
-            <St.MainPagePostInfo>
-              <St.MainPagePostLike>♥︎ 10</St.MainPagePostLike>
-            </St.MainPagePostInfo>
-          </St.MainPagePost>
         </St.MainPagePostWrapper>
       </St.MainPageCategoryPost>
     </St.MainPageContainer>

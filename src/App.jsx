@@ -1,8 +1,12 @@
-import React from "react";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
+import React, { useCallback, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./StyledComponents/GlobalStyle";
 import theme from "./StyledComponents/theme/theme";
 import Sample from "./components/Sample/Sample";
+import { db } from "./firebase/firebase";
+import { initialFetchPost } from "./redux/modules/post";
 import Router from "./shared/Router";
 /*
 - router 설치 완료
@@ -23,6 +27,26 @@ redux/ moduls/ 이거봐주세요 text를 읽고 난 후 삭제해 주세요.
 */
 
 function App() {
+  const post = useSelector((state) => state.post);
+  // console.log("포스트 가져오기", post);
+
+  const dispatch = useDispatch();
+  const initialFetchData = useCallback(async () => {
+    const q = query(collection(db, "users"), orderBy("date", "desc"));
+    const querySnapshot = await getDocs(q);
+    querySnapshot.forEach((doc) => {
+      post.unshift({ ...doc.data(), id: doc.id });
+      dispatch(initialFetchPost(post));
+    });
+  }, [post, dispatch]);
+  useEffect(() => {
+    if (post.length) {
+      return;
+    } else {
+      initialFetchData();
+    }
+  }, [initialFetchData, post.length]);
+
   return (
     <>
       <ThemeProvider theme={theme}>

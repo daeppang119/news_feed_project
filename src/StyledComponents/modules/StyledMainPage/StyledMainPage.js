@@ -22,17 +22,17 @@ export const MainPagePostWrapper = styled.div`
   width: 360px;
   margin: 0 auto;
   ${({ theme }) => theme.mediaQuery.md`
-width: 568px;
-  margin: 10px;
+    width: 568px;
+    margin: 10px;
   `};
   ${({ theme }) => theme.mediaQuery.lg`
-width: 800px;
-margin: 10px;
+    width: 800px;
+    margin: 10px;
   `};
 `;
 export const MainPagePost = styled.div`
   box-sizing: border-box;
-  background-color: #fff0f5;
+  background-color: #fff0f5; // var(--defaultColor);
   border-radius: 10px;
   width: 360px;
   height: 180px;
@@ -40,10 +40,10 @@ export const MainPagePost = styled.div`
   margin-bottom: 10px;
   font-size: 12px;
   ${({ theme }) => theme.mediaQuery.md`
-width: 568px;
+    width: 568px;
   `};
   ${({ theme }) => theme.mediaQuery.lg`
-width: 780px
+    width: 780px;
 
   `};
   &:hover {
@@ -62,6 +62,7 @@ export const MainPagePostImgNickname = styled.div`
     margin: 10px;
     width: 36px;
     height: 36px;
+    border-radius: 50%;
   }
 `;
 export const MainPagePostNickname = styled.p`
@@ -71,11 +72,11 @@ export const MainPagePostDate = styled.p`
   margin: 10px;
 `;
 export const MainPagePostContent = styled.div`
-  background-color: var(--defaultColor);
-  color: white;
+  background-color: white;
+  color: #333;
   border-radius: 10px;
-  margin: 10px;
-  padding: 20px 10px;
+  margin: 0 10px;
+  padding: 36px 28px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -84,11 +85,10 @@ font-size: 14px;
   `};
   ${({ theme }) => theme.mediaQuery.lg`
     font-size: 16px;
-    padding: 20px;
 `};
 `;
 export const MainPagePostInfo = styled.div``;
 export const MainPagePostLike = styled.div`
   float: right;
-  margin: 10px;
+  margin: 5px 10px;
 `;

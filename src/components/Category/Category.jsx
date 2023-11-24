@@ -1,31 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import * as St from "../../StyledComponents/modules/StyledCategory/StyledCategory";
 
 function Category() {
+  const [isLoged, setIsLoged] = useState(false);
   return (
     <St.Container>
       <St.UserInfo>
-        <St.UserProfile>
-          <img src={process.env.PUBLIC_URL + "/categoryimg/usericon.png"} />
-          <St.UserNameEmail>
-            <St.UserName>최애의 아이들</St.UserName>
-            <St.UserEmail>testB2B2B2@gmail.com</St.UserEmail>
-          </St.UserNameEmail>
-        </St.UserProfile>
-        <St.PostLike>
-          <St.Post>
-            <p>게시글</p>
-            <p>9개</p>
-          </St.Post>
-          <St.Like>
-            <p>Today♥︎</p>
-            <p>200</p>
-          </St.Like>
-        </St.PostLike>
-        <St.Visitor>
-          <p>프로필 방문자</p>
-          <p>18명</p>
-        </St.Visitor>
+        {!isLoged ? (
+          <>
+            <St.LoginBtn>로그인</St.LoginBtn>
+            <St.LoginMessage>
+              최애의 아이들이 되어
+              <br />
+              일상을 공유해보세요
+            </St.LoginMessage>
+          </>
+        ) : (
+          <>
+            <St.UserProfile>
+              <img src={process.env.PUBLIC_URL + "/categoryimg/usericon.png"} />
+              <St.UserNameEmail>
+                <St.UserName>최애의 아이들</St.UserName>
+                <St.UserEmail>testB2B2B2@gmail.com</St.UserEmail>
+              </St.UserNameEmail>
+            </St.UserProfile>
+            <St.PostLike>
+              <St.Post>
+                <p>게시글</p>
+                <p>9개</p>
+              </St.Post>
+              <St.Like>
+                <p>Today♥︎</p>
+                <p>200</p>
+              </St.Like>
+            </St.PostLike>
+            <St.Visitor>
+              <p>프로필 방문자</p>
+              <p>18명</p>
+            </St.Visitor>
+          </>
+        )}
       </St.UserInfo>
       <St.CategorySelect>
         <select>
