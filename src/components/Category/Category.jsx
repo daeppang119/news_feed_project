@@ -27,7 +27,7 @@ function Category({ setCategorizedBox }) {
               <St.LoginMessage>
                 최애의 아이들이 되어
                 <br />
-                일상을 공유해보세요
+                일상을 공유보세요
               </St.LoginMessage>
             </>
           ) : (

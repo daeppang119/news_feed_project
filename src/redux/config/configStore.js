@@ -1,10 +1,11 @@
 import { combineReducers, createStore } from "redux";
+import category from "../modules/category";
 import post from "../modules/post";
 import user from "../modules/user";
-
 const rootReducers = combineReducers({
   post,
-  user
+  user,
+  category
 });
 const store = createStore(rootReducers);
 

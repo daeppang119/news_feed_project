@@ -5,6 +5,7 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./StyledComponents/GlobalStyle";
 import theme from "./StyledComponents/theme/theme";
 import { db } from "./firebase/firebase";
+import { setInitialListCount } from "./redux/modules/category";
 import { initialFetchPost } from "./redux/modules/post";
 import Router from "./shared/Router";
 /*
@@ -28,7 +29,6 @@ redux/ moduls/ 이거봐주세요 text를 읽고 난 후 삭제해 주세요.
 function App() {
   const post = useSelector((state) => state.post);
   // console.log("포스트 가져오기", post)
-
   const dispatch = useDispatch();
   const initialFetchData = useCallback(async () => {
     const q = query(collection(db, "users"), orderBy("date", "desc"));
@@ -37,6 +37,17 @@ function App() {
       post.unshift({ ...doc.data(), id: doc.id });
       dispatch(initialFetchPost(post));
     });
+    const initialSetCategory = post.reduce((acc, item) => {
+      let count = 1;
+      if (!acc[item]) {
+        acc[item] = count;
+      } else {
+        acc[item] += count;
+      }
+      return acc;
+    }, {});
+    console.log(initialSetCategory);
+    dispatch(setInitialListCount(initialSetCategory));
   }, [post, dispatch]);
   useEffect(() => {
     if (post.length) {
