@@ -4,11 +4,9 @@ import { useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/StyledMainPage/StyledMainPage";
 // import { auth, db, storage } from "../../firebase/firebase";
 import { getFormattedDate } from "../../util/date";
-import Category from "../Category/Category";
-import Header from "../Header";
 import Modal from "./Modal";
 
-function MainPage() {
+function MainPage({ categorizedPosts }) {
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
   const [isLoged, setIsLoged] = useState(false);
@@ -25,29 +23,25 @@ function MainPage() {
   };
   return (
     <St.MainPageContainer>
-      <Header />
-      <St.MainPageCategoryPost>
-        <Category />
-        <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
-        <St.MainPagePostWrapper>
-          {post.map((item) => {
-            return (
-              <St.MainPagePost key={item.id} onClick={onClickPostHandler}>
-                <St.MainPagePostUser>
-                  <St.MainPagePostImgNickname>
-                    <img src={item.imgurl} />
-                    <St.MainPagePostNickname>{item.id}</St.MainPagePostNickname>
-                  </St.MainPagePostImgNickname>
-                  <St.MainPagePostDate>{getFormattedDate(item.date)}</St.MainPagePostDate>
-                </St.MainPagePostUser>
-                <St.MainPagePostContent>{item.text}</St.MainPagePostContent>
-                <St.MainPagePostInfo>
-                  <St.MainPagePostLike>♥︎200</St.MainPagePostLike>
-                </St.MainPagePostInfo>
-              </St.MainPagePost>
-            );
-          })}
-          {/* <St.MainPagePost>
+      <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
+      {categorizedPosts.map((item) => {
+        return (
+          <St.MainPagePost key={item.id} onClick={onClickPostHandler}>
+            <St.MainPagePostUser>
+              <St.MainPagePostImgNickname>
+                <img src={item.imgurl} />
+                <St.MainPagePostNickname>{item.id}</St.MainPagePostNickname>
+              </St.MainPagePostImgNickname>
+              <St.MainPagePostDate>{getFormattedDate(item.date)}</St.MainPagePostDate>
+            </St.MainPagePostUser>
+            <St.MainPagePostContent>{item.text}</St.MainPagePostContent>
+            <St.MainPagePostInfo>
+              <St.MainPagePostLike>♥︎200</St.MainPagePostLike>
+            </St.MainPagePostInfo>
+          </St.MainPagePost>
+        );
+      })}
+      {/* <St.MainPagePost>
             <St.MainPagePostUser>
               <St.MainPagePostImgNickname>
                 <img src={process.env.PUBLIC_URL + "/categoryimg/usericon.png"} />
@@ -63,8 +57,6 @@ function MainPage() {
               <St.MainPagePostLike>♥︎ 200</St.MainPagePostLike>
             </St.MainPagePostInfo>
           </St.MainPagePost> */}
-        </St.MainPagePostWrapper>
-      </St.MainPageCategoryPost>
     </St.MainPageContainer>
   );
 }

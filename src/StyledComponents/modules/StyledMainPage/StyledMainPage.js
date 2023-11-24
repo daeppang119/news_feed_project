@@ -1,24 +1,24 @@
 import styled from "styled-components";
 
+// export const MainPageContainer = styled.div`
+//   /* background-color: lightpink; */
+//   margin: 0 auto;
+//   ${({ theme }) => theme.mediaQuery.md`
+// width: 768px;
+//   `};
+//   ${({ theme }) => theme.mediaQuery.lg`
+// width: 1200px;
+//   `};
+// `;
+// export const MainPageCategoryPost = styled.div` // 카테고리 메인 묶어서 나란히 만들기
+//   ${({ theme }) => theme.mediaQuery.md`
+//   display: flex;
+//   `};
+//   ${({ theme }) => theme.mediaQuery.lg`
+//     margin-left: 40px;
+//   `};
+// `;
 export const MainPageContainer = styled.div`
-  /* background-color: lightpink; */
-  margin: 0 auto;
-  ${({ theme }) => theme.mediaQuery.md`
-width: 768px;
-  `};
-  ${({ theme }) => theme.mediaQuery.lg`
-width: 1200px;
-  `};
-`;
-export const MainPageCategoryPost = styled.div`
-  ${({ theme }) => theme.mediaQuery.md`
-  display: flex;
-  `};
-  ${({ theme }) => theme.mediaQuery.lg`
-    margin-left: 40px;
-  `};
-`;
-export const MainPagePostWrapper = styled.div`
   width: 360px;
   margin: 0 auto;
   ${({ theme }) => theme.mediaQuery.md`

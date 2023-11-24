@@ -113,16 +113,15 @@ export const Post = styled.div`
 export const Like = styled.div`
   display: flex;
 `;
-export const Visitor = styled.div`
-  display: flex;
-  justify-content: space-between;
+export const Logout = styled.div`
+  cursor: pointer;
+  color: #dcdcdc;
+  text-align: center;
   font-size: 12px;
+  margin-top: 20px;
   ${({ theme }) => theme.mediaQuery.lg`
       font-size: 16px;
   `};
-  & p:first-child {
-    color: var(--defaultColor);
-  }
 `;
 export const CategorySelect = styled.div`
   & select {
@@ -151,4 +150,7 @@ export const CategoryBar = styled.div`
       padding: 30px 0 30px 40px;
       font-size: 16px;
   `}
+  & p {
+    cursor: pointer;
+  }
 `;

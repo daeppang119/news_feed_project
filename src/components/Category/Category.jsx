@@ -1,14 +1,32 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/StyledCategory/StyledCategory";
 
-function Category() {
+function Category({ setCategorizedPosts }) {
+  const post = useSelector((state) => state.post);
   const [isLoged, setIsLoged] = useState(false);
+  const [categoryCount, setCategoryCount] = useState(0);
+  const categoryArr = ["전체", "애니메이션", "게임", "운동", "독서"];
+
+  const onChangeHandler = (event) => {
+    const categorizedPost = post.filter((item) => item.category === event.target.value);
+
+    categorizedPost.length == 0 ? setCategorizedPosts(post) : setCategorizedPosts(categorizedPost);
+    setCategoryCount(categorizedPost.length);
+  };
+  console.log(categoryCount);
+
+  const onClickHandler = (event) => {
+    const categorizedPost = post.filter((item) => item.category === event.target.textContent);
+
+    categorizedPost.length == 0 ? setCategorizedPosts(post) : setCategorizedPosts(categorizedPost);
+  };
   return (
     <St.Container>
       <St.UserInfo>
         {!isLoged ? (
           <>
-            <St.LoginBtn>로그인</St.LoginBtn>
+            <St.LoginBtn onClick={() => setIsLoged(true)}>로그인</St.LoginBtn>
             <St.LoginMessage>
               최애의 아이들이 되어
               <br />
@@ -34,28 +52,21 @@ function Category() {
                 <p>200</p>
               </St.Like>
             </St.PostLike>
-            <St.Visitor>
-              <p>프로필 방문자</p>
-              <p>18명</p>
-            </St.Visitor>
+            <St.Logout onClick={() => setIsLoged(false)}>Logout</St.Logout>
           </>
         )}
       </St.UserInfo>
       <St.CategorySelect>
-        <select>
-          <option>전체</option>
-          <option>애니메이션</option>
-          <option>게임</option>
-          <option>운동</option>
-          <option>독서</option>
+        <select onChange={onChangeHandler}>
+          {categoryArr.map((item) => (
+            <option key={item}>{item}</option>
+          ))}
         </select>
       </St.CategorySelect>
       <St.CategoryBar>
-        <p>☐ 전체</p>
-        <p>☐ 애니메이션</p>
-        <p>☐ 게임</p>
-        <p>☐ 운동</p>
-        <p>☐ 독서</p>
+        {categoryArr.map((item) => (
+          <p onClick={onClickHandler}>{item}</p>
+        ))}
       </St.CategoryBar>
     </St.Container>
   );
