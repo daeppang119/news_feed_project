@@ -32,14 +32,7 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
     const newPost = {
       text,
       contents,
-      Date: new Date().toLocaleDateString("ko", {
-        year: "2-digit",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit"
-      }),
+      date: new Date(),
       uid: auth.currentUser.uid || "",
       isEdit: false,
       category: category,

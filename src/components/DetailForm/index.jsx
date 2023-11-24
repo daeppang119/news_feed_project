@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/AddFormStyle/AddFormStyle";
 import { auth, db } from "../../firebase/firebase";
 
-export default function DetailForm({ DetailisOpen, setDetailIsopen, contents }) {
+export default function DetailForm({ DetailisOpen, setDetailIsopen }) {
   const [isEditing, setIsEditing] = useState(false);
 
   const user = useSelector((state) => state.user);
