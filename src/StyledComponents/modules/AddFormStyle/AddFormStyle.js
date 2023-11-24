@@ -43,25 +43,25 @@ export const Container = styled.form`
   justify-content: center;
   flex-wrap: wrap;
   width: 210px;
-  height: 300px;
+  height: 330px;
   margin: auto;
   border-radius: 20px;
   background-image: url("https://i.pinimg.com/564x/5b/4f/12/5b4f120836f452f0f916a7eb885fdd98.jpg");
   background-position: center;
   background-size: cover;
   ${({ theme: { mediaQuery } }) => mediaQuery.md`
-    width: 350px;
-    height: 400px;
+    width: 330px;
+    height: 500px;
   `};
   ${({ theme }) => theme.mediaQuery.lg`
     width: 550px;
-    height: 650px;
+    height: 800px;
   `};
 `;
 
 export const Warpper = styled.div`
   width: 170px;
-  height: 220px;
+  height: 270px;
   border-radius: 30px;
   padding: 10px;
   border: 1px solid pink;
@@ -119,9 +119,12 @@ export const TitleAndDate = styled.div`
 `;
 
 export const Title = styled.p`
+  display: block;
   font-size: 9px;
   margin-left: 3px;
   color: white;
+  width: 100px;
+  word-wrap: break-word;
 
   & input {
     width: 55px;
@@ -236,6 +239,7 @@ export const DetailContent = styled.p`
 `;
 
 export const DetailUserInfo = styled.div`
+  margin-bottom: 10px;
   display: flex;
   flex-direction: row;
   gap: 4px;
@@ -248,7 +252,9 @@ export const DetailUserInfo = styled.div`
 `;
 
 export const AddDate = styled.p`
+  margin-right: 5px;
   font-size: 5px;
+  color: white;
 `;
 
 // 이미지 부분
@@ -267,5 +273,16 @@ export const ImgBox = styled.div`
   color: white;
   & input {
     font-size: 5px;
+  }
+`;
+
+export const DetailImgFigure = styled.div`
+  margin: 0 auto;
+  margin-bottom: 10px;
+  width: 120px;
+  height: 80px;
+  & img {
+    width: 120px;
+    height: 80px;
   }
 `;

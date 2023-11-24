@@ -9,7 +9,7 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, contents }) 
 
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
-  const foundData = post.filter((item) => item.uid === auth.currentUser.uid);
+  const foundData = post[1];
   const [editingText, setEditingText] = useState(foundData.contents);
 
   const onClickDeleteData = async () => {
@@ -38,9 +38,15 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, contents }) 
                   <St.Title>{foundData.text}</St.Title>
                   <St.AddDate>{foundData.Date}</St.AddDate>
                 </St.TitleAndDate>
-                <div>
-                  <img src={process.env.PUBLIC_URL + "/headerimg/logo.png"} />
-                </div>
+                {foundData.imgurl ? (
+                  <St.DetailImgFigure>
+                    <img src={foundData.imgurl} />
+                  </St.DetailImgFigure>
+                ) : (
+                  <St.DetailImgFigure style={{ display: "none" }}>
+                    <img src={foundData.imgurl} />
+                  </St.DetailImgFigure>
+                )}
                 {isEditing ? (
                   <St.Content
                     defaultValue={foundData.contents}
@@ -104,9 +110,16 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, contents }) 
                   <St.Title>{foundData.text}</St.Title>
                   <St.AddDate>{foundData.Date}</St.AddDate>
                 </St.TitleAndDate>
-                <div>
-                  <img src={process.env.PUBLIC_URL + "/headerimg/logo.png"} />
-                </div>
+                {foundData.imgurl ? (
+                  <St.DetailImgFigure>
+                    <img src={foundData.imgurl} />
+                  </St.DetailImgFigure>
+                ) : (
+                  <St.DetailImgFigure style={{ display: "none" }}>
+                    <img src={foundData.imgurl} />
+                  </St.DetailImgFigure>
+                )}
+
                 <St.DetailContent>{foundData.contents}</St.DetailContent>
                 <St.Buttons>
                   <button type="button" onClick={() => setDetailIsopen(false)}>
