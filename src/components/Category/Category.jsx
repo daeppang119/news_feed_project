@@ -6,7 +6,7 @@ function Category({ setCategorizedBox }) {
   const post = useSelector((state) => state.post);
   const [isLoged, setIsLoged] = useState(false);
   const [categoryCount, setCategoryCount] = useState(0);
-  const categoryArr = ["전체", "애니메이션", "게임", "운동", "독서"];
+  const categoryArr = ["All", "Animation", "Game", "Sports", "Book", "Cook", "Lover", "Pet"];
 
   const onChangeHandler = (event) => {
     const categorizedPost = post.filter((item) => item.category === event.target.value);

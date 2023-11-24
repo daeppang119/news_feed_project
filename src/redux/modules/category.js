@@ -20,11 +20,13 @@ export const updateList = (payload) => ({
 
 const initialValue = {
   All: 0,
-  Animation: 0,
+  Lover: 0,
+  Pet: 0,
   Game: 0,
   Sports: 0,
-  Book: 0,
-  Cook: 0
+  Animation: 0,
+  Cook: 0,
+  Book: 0
 };
 
 const category = (state = initialValue, { type, payload }) => {
