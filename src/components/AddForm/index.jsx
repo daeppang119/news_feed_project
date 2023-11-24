@@ -32,7 +32,7 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
     const newPost = {
       text,
       contents,
-      date: new Date(),
+      date: new Date().getTime(),
       uid: auth.currentUser.uid || "",
       isEdit: false,
       category: category,
