@@ -31,7 +31,6 @@ const initialValue = {
       uid: "",
       // 이 객체가 firebase에 저장될 때 생성된 고유 아이디 입니다.
       id: "",
-      uid: "",
       isEdit: false
     }
   ]
