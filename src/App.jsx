@@ -59,7 +59,6 @@ function App() {
     if (post.length) {
       return;
     } else {
-      console.log("1?");
       initialFetchData();
     }
   }, [initialFetchData, post.length]);

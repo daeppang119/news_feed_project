@@ -1,7 +1,8 @@
+import { forwardRef } from "react";
 import styled from "styled-components";
 
-export const LoginLalyout = styled.div`
-  width: 360px;
+export const LoginLayout = styled.div`
+  width: 320px;
   margin: 100px auto;
 `;
 
@@ -34,7 +35,9 @@ export const LoginInput = styled.input`
     border-color: var(--defaultColor);
   }
 `;
-
+export const LoginForwardRefInput = forwardRef(({ type, placeholder, name }, ref) => {
+  return <LoginInput type={type} name={name} placeholder={placeholder} required ref={(props) => (ref[name] = props)} />;
+});
 export const LoginBtn = styled.button`
   width: 100%;
   height: 50px;
