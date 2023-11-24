@@ -4,6 +4,7 @@ import * as St from "../../StyledComponents/modules/StyledCategory/StyledCategor
 
 function Category({ setCategorizedBox }) {
   const post = useSelector((state) => state.post);
+  const category = useSelector((state) => state.category);
   const [isLoged, setIsLoged] = useState(false);
   const [categoryCount, setCategoryCount] = useState(0);
   const categoryArr = ["All", "Animation", "Game", "Sports", "Book", "Cook", "Lover", "Pet"];
@@ -62,11 +63,18 @@ function Category({ setCategorizedBox }) {
           </select>
         </St.CategorySelect>
         <St.CategoryBar>
-          {categoryArr.map((item) => (
+          {/* {categoryArr.map((item) => (
             <p key={item.id} onClick={onClickHandler}>
               {item}
             </p>
-          ))}
+          ))} */}
+          {Object.entries(category).map((item) => {
+            return (
+              <p onClick={onClickHandler}>
+                {item[0]}:{item[1]}
+              </p>
+            );
+          })}
         </St.CategoryBar>
       </St.Container>
     </>
