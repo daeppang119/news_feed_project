@@ -56,6 +56,7 @@ function Category({ setCategorizedPosts }) {
           </>
         )}
       </St.UserInfo>
+
       <St.CategorySelect>
         <select onChange={onChangeHandler}>
           {categoryArr.map((item) => (

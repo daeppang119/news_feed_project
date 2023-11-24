@@ -10,26 +10,16 @@ export const initialFetchedUserPost = (payload) => ({
   type: INITIAL_FETECHED_USER_POST,
   payload
 });
-export const updateUserInfoSetState = (payload) => ({
-  type: UPDATE_INFO,
-  payload
-});
-export const failedLoginSetState = (payload) => ({
-  type: FAILED_LOGIN,
-  payload
-});
+
+export const updateUserInfoSetState = (payload) => ({ type: UPDATE_INFO, payload });
+export const failedLoginSetState = (payload) => ({ type: FAILED_LOGIN, payload });
 
 const initialValue = {
   currentUser: false,
-  // profile에 들어갈 email,
   email: "",
-  // 로그인한 user의 고유 아이디
   uid: "",
-  // profile에 들어갈 userName
   userName: "",
-  // profile에 들어갈 사진 url
   photoUrl: "",
-  // profile에 넣어도 되고 안넣어도 되는 한줄 자기소개
   intro: "",
   post: [
     {
@@ -41,6 +31,7 @@ const initialValue = {
       uid: "",
       // 이 객체가 firebase에 저장될 때 생성된 고유 아이디 입니다.
       id: "",
+      uid: "",
       isEdit: false
     }
   ]

@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./StyledComponents/GlobalStyle";
 import theme from "./StyledComponents/theme/theme";
-import Sample from "./components/Sample/Sample";
 import { db } from "./firebase/firebase";
 import { initialFetchPost } from "./redux/modules/post";
 import Router from "./shared/Router";
@@ -51,8 +50,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        {/* Sample Component는 테스트용입니다. Sample을 보신 후 반드시 삭제해 주셔요 */}
-        <Sample />
+
         <Router />
       </ThemeProvider>
     </>
