@@ -28,6 +28,7 @@ redux/ moduls/ 이거봐주세요 text를 읽고 난 후 삭제해 주세요.
 function App() {
   const post = useSelector((state) => state.post);
   // console.log("포스트 가져오기", post)
+  console.log("render");
 
   const dispatch = useDispatch();
   const initialFetchData = useCallback(async () => {
@@ -48,6 +49,7 @@ function App() {
       initialFetchData();
     }
   }, [initialFetchData, post.length]);
+  console.log(post);
 
   return (
     <>
