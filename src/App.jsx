@@ -37,12 +37,13 @@ function App() {
       post.unshift({ ...doc.data(), id: doc.id });
       dispatch(initialFetchPost(post));
     });
+    console.log(post);
     const initialSetCategory = post.reduce((acc, item) => {
       let count = 1;
-      if (!acc[item]) {
-        acc[item] = count;
+      if (!acc[item.category]) {
+        acc[item.category] = count;
       } else {
-        acc[item] += count;
+        acc[item.category] += count;
       }
       return acc;
     }, {});
