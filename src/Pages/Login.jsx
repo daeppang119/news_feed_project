@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const provider = new GoogleAuthProvider();
   const inputFocus = useRef(null);
 
   useEffect(() => {
@@ -22,13 +23,13 @@ function Login() {
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log(userCredential);
+      const user = userCredential.user;
       dispatch(
         signUpInSetState({
           currentUser: true,
           email: user.email,
-          photoUrl: photoURL,
-          userName: displayName,
+          photoUrl: user.photoURL,
+          userName: user.displayName,
           uid: user.uid
         })
       );
