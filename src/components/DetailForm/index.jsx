@@ -9,7 +9,7 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, contents }) 
 
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
-  const foundData = user.post[0];
+  const foundData = post.map((item) => item.uid === post.uid);
   const [editingText, setEditingText] = useState(foundData.contents);
 
   const onClickDeleteData = async () => {
@@ -27,7 +27,7 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, contents }) 
               <St.Warpper onSubmit={(e) => e.preventDefault()}>
                 <St.DetailUserInfo>
                   <St.AvatarFigure>
-                    <img src={process.env.PUBLIC_URL + "/categoryimg/usericon.png"} />
+                    <img src={foundData.imgulr ?? process.env.PUBLIC_URL + "/categoryimg/usericon.png"} />
                   </St.AvatarFigure>
                   <St.NickNameAndEmail>
                     <St.NickName>{auth.currentUser.displayName}</St.NickName>
@@ -90,7 +90,7 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, contents }) 
               <St.Warpper onSubmit={(e) => e.preventDefault()}>
                 <St.DetailUserInfo>
                   <St.AvatarFigure>
-                    <img src={process.env.PUBLIC_URL + "/categoryimg/usericon.png"} />
+                    <img src={foundData.imgulr ?? process.env.PUBLIC_URL + "/categoryimg/usericon.png"} />
                   </St.AvatarFigure>
                   <St.NickNameAndEmail>
                     <St.NickName>{auth.currentUser.displayName}</St.NickName>

@@ -1,5 +1,5 @@
 import { addDoc, collection, getDocs, query } from "firebase/firestore";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/AddFormStyle/AddFormStyle";
 import { auth, db } from "../../firebase/firebase";
@@ -12,12 +12,14 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
   const user = useSelector((state) => state.user);
   const userDataRef = collection(db, "users");
   const dispatch = useDispatch();
+  const inputRef = useRef({});
 
   const handleAddPost = async () => {
     if (!user.currentUser) return alert("로그인 후 작성 할 수 있습니다.");
+    const text = inputRef.current.text.value;
     if (!user["post"]) user["post"] = [];
     const newPost = {
-      text: title,
+      text,
       contents,
       Date: new Date().toLocaleDateString("ko", {
         year: "2-digit",
@@ -29,7 +31,8 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
       }),
       uid: auth.currentUser.uid || "",
       isEdit: false,
-      category: category
+      category: category,
+      imgurl: ""
     };
     user["post"].unshift(newPost);
     dispatch(updateUserInfoSetState({ ...user }));
@@ -54,9 +57,8 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
         {isOpen ? (
           <St.Main>
             <St.Container
-              onSubmit={async (e) => {
+              onSubmit={(e) => {
                 e.preventDefault();
-                handleAddPost();
               }}
             >
               <St.Warpper>
@@ -64,6 +66,7 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
                   <St.Title>
                     <input
                       value={title}
+                      ref={(props) => (inputRef.current["text"] = props)}
                       onChange={(e) => setTitle(e.target.value)}
                       type="text"
                       placeholder="주제를 정해주세요"
@@ -91,7 +94,9 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
                 </St.Selecter>
 
                 <St.Buttons>
-                  <button type="submit">추가</button>
+                  <button type="button" onClick={handleAddPost}>
+                    추가
+                  </button>
                   <button
                     type="button"
                     onClick={() => {
