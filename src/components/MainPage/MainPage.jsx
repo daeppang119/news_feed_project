@@ -26,7 +26,7 @@ function MainPage({ categorizedPosts }) {
       <Modal isOpen={isOpen} setIsOpen={setIsOpen} />
       {categorizedPosts.map((item) => {
         return (
-          <St.MainPagePost key={item.id} onClick={onClickPostHandler}>
+          <St.MainPagePost id={item.id} key={item.id} onClick={onClickPostHandler}>
             <St.MainPagePostUser>
               <St.MainPagePostImgNickname>
                 <img src={item.imgurl} />
