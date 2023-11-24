@@ -37,7 +37,7 @@ function Join() {
         displayName: defaultNickName(user),
         photoURL: process.env.PUBLIC_URL + "/DefaultProfile/defaultprofile.jpg"
       });
-      console.log(userCredential);
+
       window.alert("회원가입이 완료되었습니다.");
       navigate("/login");
     } catch (error) {

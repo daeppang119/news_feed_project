@@ -1,8 +1,0 @@
-
-
-modules 안에 자신이 만드는  styled component 폴더를 만든 후 
-
-styled component 파일들을 넣어서 사용해 주세요
-
-
-styled를 export 해서 component에 있는 파일에 적용 시킬 예시를 확인해주세요
