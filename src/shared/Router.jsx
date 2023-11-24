@@ -2,6 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Join from "../Pages/Join";
 import Main from "../Pages/Main";
 import PersonalPage from "../Pages/PersonalPage";
+import SampleImageUpload from "../Pages/sample/SampleImageUpload.jsx";
 import SampleLayout from "../Pages/sample/SampleLayout";
 import SampleMain from "../Pages/sample/SampleMain";
 import SampleJoin from "../Pages/sample/Samplejoin.jsx";
@@ -16,6 +17,7 @@ const Router = () => {
           {/* Sample입니다. */}
           <Route path="/SampleMain" element={<SampleMain />} />
           <Route path="/SampleJoin" element={<SampleJoin />} />
+          <Route path="/SampleImageUpload" element={<SampleImageUpload />} />
           {/* join */}
           <Route path="/join" element={<Join />} />
           {/* personal Page  */}

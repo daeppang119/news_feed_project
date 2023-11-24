@@ -222,8 +222,8 @@ const StProgressContainer = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  /* background-color: #042104; */
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: #042104;
+  /* background-color: rgba(0, 0, 0, 0.5); */
   animation: ${rotateParentAnimation} 5s linear infinite;
   div {
     position: relative;

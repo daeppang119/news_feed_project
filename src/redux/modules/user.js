@@ -24,6 +24,8 @@ const initialValue = {
   userName: "",
   // profile에 들어갈 사진 url
   photoUrl: "",
+  // 수정할 때-> 기존 photoUrl 삭제해줘야하므로
+  profilePhotoKey: "",
   // profile에 넣어도 되고 안넣어도 되는 한줄 자기소개
   intro: "",
 
@@ -37,7 +39,8 @@ const initialValue = {
       uid: "",
       // 이 객체가 firebase에 저장될 때 생성된 고유 아이디 입니다.
       id: "",
-      isEdit: false
+      isEdit: false,
+      key: ""
     }
   ]
 };
@@ -49,8 +52,7 @@ const user = (state = initialValue, action) => {
     case SIGN_OUT:
       return initialValue;
     case UPDATE_INFO:
-      console.log(action.payload);
-      return action.payload;
+      return { ...state, ...action.payload };
     case INITIAL_FETECHED_USER_POST:
       return { ...state, post: action.payload };
     case FAILED_LOGIN:

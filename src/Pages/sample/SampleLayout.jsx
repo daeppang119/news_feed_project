@@ -8,6 +8,7 @@ function SampleLayout({ children }) {
         <ul>
           <Link to={"SampleMain"}>SampleMain으로</Link>
           <Link to={"SampleJoin"}>SampleJoin으로</Link>
+          <Link to={"SampleImageUpload"}>SampleImageUpload로</Link>
         </ul>
       </Div>
       {children}
