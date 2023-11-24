@@ -165,14 +165,14 @@ function SampleJoin() {
       </StForm>
 
       {loading && (
-        <StProgressContainer>
+        <StProgressJoinContainer>
           <div>
             {animationArr.map((a, i) => {
               console.log();
-              return <StSpan $i={a} />;
+              return <StProgressJoinSpan $i={a} />;
             })}
           </div>
-        </StProgressContainer>
+        </StProgressJoinContainer>
       )}
 
       {/* 그냥 로그인 버튼 누르면 로그인 되어있음으로 바뀌었다가 안되어있음으로 바뀌는데 이 문제는 나중에 해결해보시죠!! 아니면 해결방안이있다면 공유해요!! */}
@@ -204,7 +204,7 @@ const rotateChildrenAnimation = keyframes`
     transform: scale(0);
   }
 `;
-const StSpan = styled.span`
+const StProgressJoinSpan = styled.span`
   transform: ${(props) => `rotate(calc(18deg*${props.$i}))`};
 
   &::before {
@@ -213,7 +213,7 @@ const StSpan = styled.span`
   }
 `;
 
-const StProgressContainer = styled.div`
+const StProgressJoinContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;

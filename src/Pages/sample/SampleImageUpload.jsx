@@ -11,11 +11,13 @@ function SampleImageUpload() {
   const [serverImage, setServerImage] = useState("");
   const [isUploadProfile, setIsUploadProfile] = useState(false);
   const profilePhotoKey = uuid();
+
   const defaultImg = process.env.PUBLIC_URL + "img/avatar.jpg";
   const user = useSelector((state) => state.user);
   const inputRef = useRef({});
+  const [progressBar, setProgressBar] = useState(0);
   const dispatch = useDispatch();
-  console.log(auth.currentUser);
+
   // 로직은 handleAddPost를 클릭하면, useEffect안에 있는 함수가 실행하여 upload를 합니다.
   // upload를 하는 조건은 이미지 || text가 있어야 합니다. 둘다 있어도 됩니다.
 
@@ -59,6 +61,11 @@ function SampleImageUpload() {
           })
         )
       );
+      // upload끝나면 false 해서 useEffect안 firebase통신 함수 진행 불가 시켜주기 + upload끝나면 ui 감춰줘 state
+      setIsUploadProfile(false);
+
+      // upload끝나면 다시 rest
+      setProgressBar(0);
     } catch (e) {
       alert(e);
     }
@@ -77,6 +84,7 @@ function SampleImageUpload() {
           (snapshot) => {
             const progressBar = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             console.log(`Upload is ${progressBar}% done`);
+            setProgressBar(progressBar);
           },
           (error) => {
             const problem = JSON.stringify(error);
@@ -106,9 +114,9 @@ function SampleImageUpload() {
   useEffect(() => {
     if (isUploadProfile) {
       upDateFireBase();
-      setIsUploadProfile(false);
     }
   }, [isUploadProfile]);
+  console.log(isUploadProfile);
   return (
     <StDiv>
       <div style={{ cursor: "pointer" }} onClick={handleImgClick}>
@@ -128,12 +136,26 @@ function SampleImageUpload() {
         <button onClick={handleAddPost}>저장</button>
         <button onClick={handleCancelPreviewImg}>이미지 취소</button>
       </StBtnGroup>
+
+      {isUploadProfile && (
+        <StProgressUploadContainer>
+          <span>진행률 {progressBar}%</span>
+          <StProgressUploadSpan $progress={progressBar} />
+        </StProgressUploadContainer>
+      )}
     </StDiv>
   );
 }
 
 export default SampleImageUpload;
+const StProgressUploadContainer = styled.div``;
+const StProgressUploadSpan = styled.span`
+  display: block;
+  height: 3px;
 
+  width: ${(props) => props.$progress}%;
+  background-color: #042104;
+`;
 const StDiv = styled.div`
   margin-top: 50px;
   display: flex;
