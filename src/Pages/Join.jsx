@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as St from "../StyledComponents/modules/StyledLogin/StyledLogin";
@@ -21,11 +21,22 @@ function Join() {
     event.preventDefault();
 
     if (password !== passwordCheck) {
-      window.alert("비밀번호가 달라요 다시 확인좀...");
+      window.alert("비밀번호가 일치하지 않습니다.");
       return;
     }
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+      const defaultNickName = (user) => {
+        if (user.displayName === null) {
+          return user.email.split("@")[0];
+        }
+      };
+      console.log(defaultNickName);
+      await updateProfile(user, {
+        displayName: defaultNickName(user),
+        photoURL: process.env.PUBLIC_URL + "/DefaultProfile/defaultprofile.jpg"
+      });
       console.log(userCredential);
       window.alert("회원가입이 완료되었습니다.");
       navigate("/login");

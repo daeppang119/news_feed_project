@@ -20,6 +20,7 @@ function Login() {
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      console.log(userCredential);
       alert("로그인이 완료되었습니다.");
       navigate("/");
     } catch (error) {
