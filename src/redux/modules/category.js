@@ -34,7 +34,7 @@ const category = (state = initialValue, { type, payload }) => {
     case SET_INITIAL_LIST:
       return payload;
 
-    case UPDATE_LIST_COUNT:
+    case UPDATE_LIST:
       return payload;
 
     case UPDATE_LIST_COUNT:
