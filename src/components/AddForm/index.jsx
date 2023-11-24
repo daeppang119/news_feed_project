@@ -1,8 +1,9 @@
 import { addDoc, collection, getDocs, query } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/AddFormStyle/AddFormStyle";
-import { auth, db } from "../../firebase/firebase";
+import { auth, db, storage } from "../../firebase/firebase";
 import { updatePost } from "../../redux/modules/post";
 import { updateUserInfoSetState } from "../../redux/modules/user";
 
@@ -26,6 +27,7 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
       return false;
     }
     const text = inputRef.current.text.value;
+    const photoUrl = await handleImageUpload();
     if (!user["post"]) user["post"] = [];
     const newPost = {
       text,
@@ -41,7 +43,7 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
       uid: auth.currentUser.uid || "",
       isEdit: false,
       category: category,
-      imgurl: ""
+      imgurl: photoUrl || ""
     };
     user["post"].unshift(newPost);
     console.log(user);
@@ -57,6 +59,19 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
     const newPostState = [...dataSet];
 
     dispatch(updatePost(newPostState));
+  };
+
+  const handleImageUpload = async () => {
+    const imgFile = inputRef.current.img.files[0];
+    try {
+      if (!imgFile) return;
+      const imgRef = ref(storage, `Users/${auth.currentUser.uid}/${imgFile.name}`);
+      await uploadBytes(imgRef, imgFile);
+      const downloadUrl = await getDownloadURL(imgRef);
+      return downloadUrl;
+    } catch (e) {
+      alert("img:", e);
+    }
   };
 
   if (auth.currentUser) {
@@ -81,6 +96,9 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
                     />
                   </St.Title>
                 </St.TitleAndDate>
+                <St.ImgBox>
+                  이미지 : <input type="file" ref={(props) => (inputRef.current["img"] = props)} />
+                </St.ImgBox>
                 <St.Content
                   value={contents}
                   onChange={(e) => setContents(e.target.value)}

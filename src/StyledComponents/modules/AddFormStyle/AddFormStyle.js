@@ -9,6 +9,7 @@ export const Main = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   background-color: rgba(0, 0, 0, 0.6);
   z-index: 3;
   animation: modal-show 0.5s;
@@ -40,8 +41,9 @@ export const Container = styled.form`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   width: 210px;
-  height: 250px;
+  height: 300px;
   margin: auto;
   border-radius: 20px;
   background-image: url("https://i.pinimg.com/564x/5b/4f/12/5b4f120836f452f0f916a7eb885fdd98.jpg");
@@ -59,7 +61,7 @@ export const Container = styled.form`
 
 export const Warpper = styled.div`
   width: 170px;
-  height: 210px;
+  height: 220px;
   border-radius: 30px;
   padding: 10px;
   border: 1px solid pink;
@@ -193,7 +195,7 @@ export const Select = styled.select`
 export const Buttons = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-top: 10px;
+  margin-top: 5px;
   gap: 5px;
 
   & button:hover {
@@ -208,6 +210,7 @@ export const Buttons = styled.div`
     color: pink;
     border: 0;
     border-radius: 5px;
+    font-weight: 700;
     cursor: pointer;
     transition: all 0.2s;
     ${({ theme: { mediaQuery } }) => mediaQuery.md`
@@ -246,4 +249,23 @@ export const DetailUserInfo = styled.div`
 
 export const AddDate = styled.p`
   font-size: 5px;
+`;
+
+// 이미지 부분
+
+export const ImgBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin-bottom: 5px;
+  font-size: 5px;
+  align-items: center;
+  border: 1px solid salmon;
+  width: 120px;
+  padding: 3px;
+  border-radius: 5px;
+  color: white;
+  & input {
+    font-size: 5px;
+  }
 `;
