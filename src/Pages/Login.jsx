@@ -1,14 +1,16 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as St from "../StyledComponents/modules/StyledLogin/StyledLogin";
 import { auth } from "../firebase/firebase";
+import { signUpInSetState } from "../redux/modules/user";
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const inputFocus = useRef(null);
 
   useEffect(() => {
@@ -21,15 +23,15 @@ function Login() {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log(userCredential);
-      // dispatch(
-      //   signUpInSetState({
-      //     currentUser: true,
-      //     email: user.email,
-      //     photoUrl: photoURL,
-      //     userName: displayName,
-      //     uid: user.uid
-      //   })
-      // );
+      dispatch(
+        signUpInSetState({
+          currentUser: true,
+          email: user.email,
+          photoUrl: photoURL,
+          userName: displayName,
+          uid: user.uid
+        })
+      );
       alert("로그인이 완료되었습니다.");
       navigate("/");
     } catch (error) {
