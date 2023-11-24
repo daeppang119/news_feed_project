@@ -6,8 +6,7 @@ import { auth, db } from "../../firebase/firebase";
 import { updatePost } from "../../redux/modules/post";
 import { updateUserInfoSetState } from "../../redux/modules/user";
 
-export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
-  const [title, setTitle] = useState("");
+export default function AddForm({ isOpen, setIsopen, contents, setContents, title, setTitle }) {
   const [category, setCategory] = useState("");
   const user = useSelector((state) => state.user);
   const userDataRef = collection(db, "users");
@@ -16,6 +15,16 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
 
   const handleAddPost = async () => {
     if (!user.currentUser) return alert("로그인 후 작성 할 수 있습니다.");
+    if (title === "") {
+      alert("제목을 입력해주세요");
+      return false;
+    } else if (contents === "") {
+      alert("내용을 입력해주세요");
+      return false;
+    } else if (category === "") {
+      alert("카테고리를 지정해주세요");
+      return false;
+    }
     const text = inputRef.current.text.value;
     if (!user["post"]) user["post"] = [];
     const newPost = {
@@ -35,6 +44,7 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
       imgurl: ""
     };
     user["post"].unshift(newPost);
+    console.log(user);
     dispatch(updateUserInfoSetState({ ...user }));
 
     await addDoc(userDataRef, newPost);
@@ -48,8 +58,6 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
 
     dispatch(updatePost(newPostState));
   };
-
-  console.log(user);
 
   if (auth.currentUser) {
     return (
@@ -86,6 +94,7 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
                       setCategory(e.target.value);
                     }}
                   >
+                    <option value="">취미를 선택해 주세요</option>
                     <option value="애니메이션">애니메이션</option>
                     <option value="게임">게임</option>
                     <option value="운동">운동</option>
@@ -94,7 +103,15 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents }) {
                 </St.Selecter>
 
                 <St.Buttons>
-                  <button type="button" onClick={handleAddPost}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleAddPost();
+                      if (title && contents && category) {
+                        setIsopen(false);
+                      }
+                    }}
+                  >
                     추가
                   </button>
                   <button
