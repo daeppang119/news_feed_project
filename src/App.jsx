@@ -44,9 +44,10 @@ function App() {
       } else {
         acc[item] += count;
       }
-      console.log(initialSetCategory);
-      dispatch(setInitialListCount(initialSetCategory));
+      return acc;
     }, {});
+    console.log(initialSetCategory);
+    dispatch(setInitialListCount(initialSetCategory));
   }, [post, dispatch]);
   useEffect(() => {
     if (post.length) {
