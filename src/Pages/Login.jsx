@@ -1,4 +1,4 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,6 +10,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const provider = new GoogleAuthProvider();
   const inputFocus = useRef(null);
 
   useEffect(() => {
@@ -21,16 +22,16 @@ function Login() {
 
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      console.log(userCredential);
-      // dispatch(
-      //   signUpInSetState({
-      //     currentUser: true,
-      //     email: user.email,
-      //     photoUrl: photoURL,
-      //     userName: displayName,
-      //     uid: user.uid
-      //   })
-      // );
+      const user = userCredential.user;
+      dispatch(
+        signUpInSetState({
+          currentUser: true,
+          email: user.email,
+          photoUrl: user.photoURL,
+          userName: user.displayName,
+          uid: user.uid
+        })
+      );
       alert("로그인이 완료되었습니다.");
       navigate("/");
     } catch (error) {
