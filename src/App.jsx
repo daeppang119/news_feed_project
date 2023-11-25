@@ -10,7 +10,7 @@ import Router from "./shared/Router";
 function App() {
   const post = useSelector((state) => state.post);
   const user = useSelector((state) => state.user);
-  // console.log(user);
+  console.log(user);
   // console.log(post);
   const dispatch = useDispatch();
   const initialFetchData = useCallback(async () => {

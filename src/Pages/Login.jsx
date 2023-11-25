@@ -4,20 +4,23 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as St from "../StyledComponents/modules/StyledLogin/StyledLogin";
 import Animate from "../StyledComponents/modules/StyledProgress/StyledProgress";
+import AuthLogin from "../firebase/AuthLogin";
 import { auth } from "../firebase/firebase";
+
 import { initialFetchedUserPost, signOutSetState, signUpInSetState } from "../redux/modules/user";
 function Login() {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // 추가 START
   const post = useSelector((state) => state.post);
   const user = useSelector((state) => state.user);
   const loginFormRef = useRef({});
   const [isLoging, setIsLoging] = useState(false);
+
   // 추가 END
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
@@ -80,7 +83,9 @@ function Login() {
   // 로그인 성공시 로그인한 유저의 정보를 'user' state에 전달합니다.
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      if (user && isLoging) {
+      if (user) {
+        console.log("여기까지 오니??");
+        setIsLoging(true);
         dispatch(
           signUpInSetState({
             currentUser: true,
@@ -92,13 +97,14 @@ function Login() {
         );
         navigate("/");
       } else {
+        setIsLoging(false);
         dispatch(signOutSetState());
       }
     });
     return () => {
       setIsLoging(false);
     };
-  }, [dispatch, isLoging, navigate]);
+  }, [dispatch, isLoging]);
 
   // 로그인 페이지 오면 email input에 포커스 하는 useEffect입니다.
   useEffect(() => {
@@ -145,17 +151,7 @@ function Login() {
           </St.Links>
           <St.LoginBtn>로그인</St.LoginBtn>
         </form>
-        <St.EasyLoginCon>
-          <St.HorizontalBox></St.HorizontalBox>
-          <St.EasyLogin>간편로그인</St.EasyLogin>
-          <St.HorizontalBox></St.HorizontalBox>
-        </St.EasyLoginCon>
-        <div>
-          <St.SnsBtn>구글로 로그인하기</St.SnsBtn>
-        </div>
-        <div>
-          <St.SnsBtn>깃으로 로그인하기</St.SnsBtn>
-        </div>
+        <AuthLogin />
       </St.LoginLayout>
       {isLoging && (
         <Animate.ProgressContainer>
