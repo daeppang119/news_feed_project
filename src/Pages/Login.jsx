@@ -7,7 +7,7 @@ import Animate from "../StyledComponents/modules/StyledProgress/StyledProgress";
 import AuthLogin from "../components/auth/AuthLogin";
 import { auth } from "../firebase/firebase";
 
-import { initialFetchedUserPost, signInSetState, signOutSetState } from "../redux/modules/user";
+import { initialFetchedUserPost, signInSetState } from "../redux/modules/user";
 function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function Login() {
   const [isLoging, setIsLoging] = useState(false);
 
   // 추가 END
-  console.log(user);
+
   const handleSubmitLogin = useCallback(
     async (e) => {
       e.preventDefault();
@@ -53,12 +53,9 @@ function Login() {
   }, [dispatch, post]);
   // 로그인 성공시 로그인한 유저의 정보를 'user' state에 전달합니다.
   useEffect(() => {
-    console.log(user);
     onAuthStateChanged(auth, (authUser) => {
-      //authUser && user.currentUser === false 이렇게 쓰면 안되는데 이유를 모르겠음 일딴 나중에 알아보자..
-      if (authUser) {
-        console.log(authUser);
-        // setIsLoging(false);
+      if (authUser && isLoging) {
+        setIsLoging(false);
         dispatch(
           signInSetState({
             currentUser: true,
@@ -68,16 +65,14 @@ function Login() {
             uid: authUser.uid
           })
         );
-        // navigate("/");
-      } else {
-        dispatch(signOutSetState());
+        navigate("/");
       }
     });
     return () => {
       setIsLoging(false);
     };
   }, [dispatch, isLoging]);
-  console.log(user);
+
   // 로그인 페이지 오면 email input에 포커스 하는 useEffect입니다.
   useEffect(() => {
     loginFormRef.email.focus();
