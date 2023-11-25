@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import * as St from "../StyledComponents/modules/PersonalPage/PersonlPage.js";
-import { updateUserInfoSetState } from "../redux/modules/user.js";
+import * as St from "../../StyledComponents/modules/PersonalPage/PersonlPage.js";
+import { updateUserInfoSetState } from "../../redux/modules/user.js";
 function Modal({ modalOpen, setModalOpen, image }) {
   // modal handler
   const ModalHandler = () => {

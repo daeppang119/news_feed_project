@@ -3,8 +3,8 @@ import { ref } from "firebase/storage";
 import { React, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import * as St from "../StyledComponents/modules/PersonalPage/PersonlPage.js";
-import { auth, storage } from "../firebase/firebase.js";
+import * as St from "../../StyledComponents/modules/PersonalPage/PersonlPage.js";
+import { auth, storage } from "../../firebase/firebase.js";
 import Modal from "./Modal.jsx";
 function Mypage() {
   const [modalOpen, setModalOpen] = useState(false);

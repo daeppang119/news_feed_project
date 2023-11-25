@@ -68,7 +68,7 @@ function Login() {
             uid: authUser.uid
           })
         );
-        // navigate("/");
+        navigate("/");
       } else {
         dispatch(signOutSetState());
       }
