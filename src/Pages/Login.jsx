@@ -6,18 +6,22 @@ import * as St from "../StyledComponents/modules/StyledLogin/StyledLogin";
 import Animate from "../StyledComponents/modules/StyledProgress/StyledProgress";
 import AuthLogin from "../firebase/AuthLogin";
 import { auth } from "../firebase/firebase";
+
 import { initialFetchedUserPost, signOutSetState, signUpInSetState } from "../redux/modules/user";
 function Login() {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   // 추가 START
   const post = useSelector((state) => state.post);
   const user = useSelector((state) => state.user);
   const loginFormRef = useRef({});
   const [isLoging, setIsLoging] = useState(false);
+
   // 추가 END
+
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
   //   try {
@@ -75,27 +79,30 @@ function Login() {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log("여기까지 오니??");
         setIsLoging(true);
-        dispatch(
-          signUpInSetState({
-            currentUser: true,
-            email: user.email,
-            photoUrl: user.photoURL,
-            userName: user.displayName,
-            uid: user.uid
-          })
-        );
-        navigate("/");
-      } else {
-        setIsLoging(false);
-        dispatch(signOutSetState());
+        if (user) {
+          setIsLoging(true);
+          dispatch(
+            signUpInSetState({
+              currentUser: true,
+              email: user.email,
+              photoUrl: user.photoURL,
+              userName: user.displayName,
+              uid: user.uid
+            })
+          );
+          navigate("/");
+        } else {
+          setIsLoging(false);
+          dispatch(signOutSetState());
+        }
       }
     });
     return () => {
       setIsLoging(false);
     };
   }, [dispatch, isLoging]);
+
   // 로그인 페이지 오면 email input에 포커스 하는 useEffect입니다.
   useEffect(() => {
     loginFormRef.email.focus();

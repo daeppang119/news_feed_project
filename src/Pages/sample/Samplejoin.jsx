@@ -7,6 +7,7 @@ import { initialFetchedUserPost, signOutSetState, signUpInSetState } from "../..
 function SampleJoin() {
   const post = useSelector((state) => state.post);
   const user = useSelector((state) => state.user);
+
   const inputRef = useRef({});
   const dispatch = useDispatch();
 
