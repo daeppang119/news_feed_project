@@ -11,7 +11,6 @@ const AuthLogin = () => {
     authService
       .login(e.currentTarget.name)
       .then((userCredential) => {
-        console.log(userCredential);
         dispatch(
           signInAuthService({
             currentUser: true,
@@ -23,7 +22,9 @@ const AuthLogin = () => {
         );
         navigate("/");
       })
-      .catch((e) => alert(e));
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (

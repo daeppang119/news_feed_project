@@ -18,7 +18,7 @@ function App() {
     console.log("app에서 실행");
     // 전체 users라는 문서에서 내용물 다 가져오기
     // orderBy(key값,"desc||asc")
-    const q = query(collection(db, "users"), orderBy("date", "desc"));
+    const q = query(collection(db, "users"), orderBy("date", "asc"));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       post.unshift({ ...doc.data(), id: doc.id });

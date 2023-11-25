@@ -10,7 +10,7 @@ export default function Header({ setIsopen, setTitle, setContents }) {
     dispatch(signInSetState({ currentUser: true }));
   };
   const logouthandle = () => {
-    dispatch(signOutSetState({ currentUser: false }));
+    dispatch(signOutSetState());
   };
   if (user.currentUser) {
     return (
