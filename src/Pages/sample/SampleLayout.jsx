@@ -10,11 +10,7 @@ function SampleLayout({ children }) {
           <Link to={"SampleJoin"}>SampleJoin으로</Link>
           <Link to={"SampleImageUpload"}>SampleImageUpload로</Link>
           <Link to={"login"}>우리 진짜의 로그인 창으로</Link>
-<<<<<<< HEAD
-          <Link to={"personalPage"}>개페</Link>
-=======
           <Link to={"personalPage"}>개인페이지</Link>
->>>>>>> test
         </ul>
       </Div>
       {children}
