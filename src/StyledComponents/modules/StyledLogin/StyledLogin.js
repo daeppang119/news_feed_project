@@ -1,7 +1,8 @@
+import { forwardRef } from "react";
 import styled from "styled-components";
 
-export const LoginLalyout = styled.div`
-  width: 360px;
+export const LoginLayout = styled.div`
+  width: 320px;
   margin: 100px auto;
 `;
 
@@ -34,7 +35,9 @@ export const LoginInput = styled.input`
     border-color: var(--defaultColor);
   }
 `;
-
+export const LoginForwardRefInput = forwardRef(({ type, placeholder, name }, ref) => {
+  return <LoginInput type={type} name={name} placeholder={placeholder} required ref={(props) => (ref[name] = props)} />;
+});
 export const LoginBtn = styled.button`
   width: 100%;
   height: 50px;
@@ -64,7 +67,7 @@ export const Box = styled.div`
   margin: 0 14px;
 `;
 
-export const LinksA = styled.a`
+export const LinksA = styled.span`
   cursor: pointer;
 `;
 
@@ -105,19 +108,4 @@ export const LoginGo = styled.div`
   font-size: 14px;
   text-align: center;
   cursor: pointer;
-`;
-
-export const LayOutContainer = styled.div`
-  // mobile 일 때라고 생각해도 좋을것 같습니다.;
-
-  // 768px 이상일 때;
-  ${({ theme: { mediaQuery } }) => mediaQuery.md`
-   background-color:red;
-  `};
-
-  // 1200px 이상일 때;
-  ${({ theme }) => theme.mediaQuery.lg`
-  background-color : #fff;
-  color : ${theme.defaultColor}
-  `};
 `;

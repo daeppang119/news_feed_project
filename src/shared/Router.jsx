@@ -3,6 +3,7 @@ import Join from "../Pages/Join";
 import Login from "../Pages/Login";
 import Main from "../Pages/Main";
 import PersonalPage from "../Pages/PersonalPage";
+import SampleImageUpload from "../Pages/sample/SampleImageUpload.jsx";
 import SampleLayout from "../Pages/sample/SampleLayout";
 import SampleMain from "../Pages/sample/SampleMain";
 import SampleJoin from "../Pages/sample/Samplejoin.jsx";
@@ -17,6 +18,7 @@ const Router = () => {
           <Route path="/SampleMain" element={<SampleMain />} />
           <Route path="/SampleJoin" element={<SampleJoin />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/SampleImageUpload" element={<SampleImageUpload />} />
           {/* join */}
           <Route path="/join" element={<Join />} />
           {/* personal Page  */}
