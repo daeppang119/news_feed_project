@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, orderBy, query } from "@firebase/firestore";
+import { addDoc, collection, getDocs, query } from "@firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import React, { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,18 +30,16 @@ function SampleMain() {
     user["post"].unshift(newPost);
     console.log(user);
     dispatch(updateUserInfoSetState({ ...user }));
-
+    console.log(newPost);
     // 여기서 부턴 firebase에 추가 후 다시 불러들여 post에 'id'를 부여 하기 위해 다시 추가 하는 로직입니다.
     await addDoc(userDataRef, newPost);
-    const q = query(userDataRef, orderBy("date", "asc"));
-
+    const q = query(userDataRef);
     const querySnapshot = await getDocs(q);
     const dataSet = new Set();
     querySnapshot.forEach((doc) => {
       dataSet.add({ id: doc.id, ...doc.data() });
     });
     const newPostState = [...dataSet];
-
     dispatch(updatePost(newPostState));
   };
 

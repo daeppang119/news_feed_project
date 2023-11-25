@@ -44,7 +44,6 @@ function App() {
     //   console.log(doc.id);
     //   console.log(doc.data);
     // });
-    console.log("초기 웹 실행후 post에 다 들어있는지 확인 =>", post);
   }, [post, dispatch]);
 
   // 원하는것만 데이터에서 얻어오는 함수
@@ -54,7 +53,6 @@ function App() {
   //   const conditionalQuerySnapshot = await getDocs(conditionalQuery);
   //   conditionalQuerySnapshot.forEach((doc) => {});
   // };
-  console.log(post);
   useEffect(() => {
     if (post.length) {
       return;

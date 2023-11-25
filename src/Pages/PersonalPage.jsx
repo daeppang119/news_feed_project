@@ -1,7 +1,7 @@
 import React from "react";
-
+import Mypage from "../components/Mypage";
 function PersonalPage() {
-  return <div>PersonalPage</div>;
+  return <Mypage />;
 }
 
 export default PersonalPage;
