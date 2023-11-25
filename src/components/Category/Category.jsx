@@ -6,7 +6,6 @@ function Category({ setCategorizedBox }) {
   const post = useSelector((state) => state.post);
   const category = useSelector((state) => state.category);
   const [isLoged, setIsLoged] = useState(false);
-  const [categoryCount, setCategoryCount] = useState(0);
   const categoryArr = ["All", "Animation", "Game", "Sports", "Book", "Cook", "Lover", "Pet"];
 
   const onChangeHandler = (event) => {
@@ -15,7 +14,7 @@ function Category({ setCategorizedBox }) {
   };
 
   const onClickHandler = (event) => {
-    const categorizedPost = post.filter((item) => item.category === event.target.textContent);
+    const categorizedPost = post.filter((item) => item.category === event.target.textContent.slice(0, -4));
     setCategorizedBox(categorizedPost);
   };
   return (
@@ -70,7 +69,7 @@ function Category({ setCategorizedBox }) {
           ))} */}
           {Object.entries(category).map((item) => {
             return (
-              <p onClick={onClickHandler}>
+              <p onClick={onClickHandler} key={item}>
                 {item[0]} ({item[1]})
               </p>
             );

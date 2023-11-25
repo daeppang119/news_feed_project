@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import AddForm from "../components/AddForm";
-import Header from "../components/Header";
+import AddForm from "../components/AddForm/AddForm";
+import Header from "../components/Header/Header";
 import MainCard from "../components/MainCard/MainCard";
 
 function Main() {

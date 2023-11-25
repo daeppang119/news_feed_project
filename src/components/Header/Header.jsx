@@ -12,6 +12,7 @@ export default function Header({ setIsopen, setTitle, setContents }) {
   const logouthandle = () => {
     dispatch(signUpInSetState({ currentUser: false }));
   };
+  console.log(user.CurrentUser);
   if (user.currentUser) {
     return (
       <St.Warpper>

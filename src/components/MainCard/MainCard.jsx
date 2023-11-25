@@ -5,7 +5,7 @@ import * as St from "../../StyledComponents/modules/StyledMainCard/StyledMainCar
 // import { auth, db, storage } from "../../firebase/firebase";
 import { getFormattedDate } from "../../util/date";
 import Category from "../Category/Category";
-import DetailForm from "../DetailForm";
+import DetailForm from "../DetailForm/DetailForm";
 
 function MainCard() {
   const user = useSelector((state) => state.user);
