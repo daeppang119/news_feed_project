@@ -1,3 +1,4 @@
+import uuid from "react-uuid";
 const PREFIX = "user/";
 const SIGN_UP_IN = `${PREFIX}SIGN_UP_IN`;
 const SIGN_OUT = `${PREFIX}SIGN_OUT`;
@@ -15,6 +16,7 @@ export const updateUserInfoSetState = (payload) => ({ type: UPDATE_INFO, payload
 export const failedLoginSetState = (payload) => ({ type: FAILED_LOGIN, payload });
 
 const initialValue = {
+  id: uuid(),
   currentUser: false,
   // profile에 들어갈 email,
   email: "",
@@ -27,8 +29,7 @@ const initialValue = {
   // 수정할 때-> 기존 photoUrl 삭제해줘야하므로
   profilePhotoKey: "",
   // profile에 넣어도 되고 안넣어도 되는 한줄 자기소개
-  intro: "",
-
+  intro: "자신을 소개해보세요",
   post: [
     {
       category: "",

@@ -18,12 +18,14 @@ function SamplePersonal() {
   const textRef = useRef();
   const [fireStoreUpdateData, setFireStoreUpdateDate] = useState();
   const [fireStoreRemoveDate, setFireStoreRemoveDate] = useState();
+
   //클릭하면 업뎃 으로 바꾸기
   const handleEdit = (id) => () => {
     const findTargetIndex = post.findIndex((target) => target.id === id);
     post[findTargetIndex].isEdit = true;
     dispatch(editPost([...post]));
   };
+
   // 클릭하면 업뎃 또는 return으로 함수 종료
   const handleUpdate = (prev) => (id) => {
     if (prev === textRef.current.value) return alert("수정해주세요");
@@ -33,6 +35,7 @@ function SamplePersonal() {
     setFireStoreUpdateDate({ ...post[findTargetIndex] });
     dispatch(editPost([...post]));
   };
+
   // 화면 먼저 그려주고 useEffect안에서 데이터 몰래 update하기;
   const updateFireStoreData = useCallback(async () => {
     const userDataRef = doc(db, `users`, fireStoreUpdateData.id);
@@ -73,28 +76,31 @@ function SamplePersonal() {
     }
   }, [deleteFireStoreData, fireStoreRemoveDate]);
   console.log(user.currentUser);
+
   return (
-    <div>
-      {post.map((el, i) => {
-        console.log(el);
-        return (
-          <DivContainer key={el.id}>
-            <Div>
-              <img src={el.imgurl} alt="" />
-              <TextAreaForwad props={el} ref={textRef} />
-              {user.uid === el.uid && (
-                <ConditionalButtonGroup
-                  el={el}
-                  handleEdit={handleEdit}
-                  handleUpdate={handleUpdate}
-                  onClickDeleteData={onClickDeleteData}
-                />
-              )}
-            </Div>
-          </DivContainer>
-        );
-      })}
-    </div>
+    <>
+      <div>
+        {post.map((el, i) => {
+          console.log(el);
+          return (
+            <DivContainer key={el.id}>
+              <Div>
+                <img src={el.imgurl} alt="" />
+                <TextAreaForwad props={el} ref={textRef} />
+                {user.uid === el.uid && (
+                  <ConditionalButtonGroup
+                    el={el}
+                    handleEdit={handleEdit}
+                    handleUpdate={handleUpdate}
+                    onClickDeleteData={onClickDeleteData}
+                  />
+                )}
+              </Div>
+            </DivContainer>
+          );
+        })}
+      </div>
+    </>
   );
 }
 

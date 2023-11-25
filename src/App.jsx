@@ -53,7 +53,6 @@ function App() {
   //   const conditionalQuerySnapshot = await getDocs(conditionalQuery);
   //   conditionalQuerySnapshot.forEach((doc) => {});
   // };
-  console.log(post);
   useEffect(() => {
     if (post.length) {
       return;

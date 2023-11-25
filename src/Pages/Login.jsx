@@ -24,7 +24,6 @@ function Login() {
 
   // const handleSubmit = async (e) => {
   //   e.preventDefault();
-
   //   try {
   //     const userCredential = await signInWithEmailAndPassword(auth, email, password);
   //     const user = userCredential.user;
@@ -44,12 +43,10 @@ function Login() {
   //     alert("아이디 혹은 비밀번호를 잘못 입력 하셨습니다.");
   //   }
   // };
-
   const handleSubmitLogin = useCallback(
     async (e) => {
       e.preventDefault();
       if (user.currentUser !== false) return alert("이미 로그인 되어있습니다.");
-
       setIsLoging(true);
       const email = loginFormRef.email;
       const password = loginFormRef.password;
@@ -63,7 +60,6 @@ function Login() {
     },
     [user.currentUser]
   );
-
   // 파이어베이스와 통신하는 비동기 함수입니다.
   const signInFirebase = useCallback(async () => {
     try {
@@ -79,26 +75,27 @@ function Login() {
       throw new Error("로그인 상태확인해주세요");
     }
   }, [dispatch, post]);
-
   // 로그인 성공시 로그인한 유저의 정보를 'user' state에 전달합니다.
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log("여기까지 오니??");
         setIsLoging(true);
-        dispatch(
-          signUpInSetState({
-            currentUser: true,
-            email: user.email,
-            photoUrl: user.photoURL,
-            userName: user.displayName,
-            uid: user.uid
-          })
-        );
-        navigate("/");
-      } else {
-        setIsLoging(false);
-        dispatch(signOutSetState());
+        if (user) {
+          setIsLoging(true);
+          dispatch(
+            signUpInSetState({
+              currentUser: true,
+              email: user.email,
+              photoUrl: user.photoURL,
+              userName: user.displayName,
+              uid: user.uid
+            })
+          );
+          navigate("/");
+        } else {
+          setIsLoging(false);
+          dispatch(signOutSetState());
+        }
       }
     });
     return () => {
@@ -165,5 +162,4 @@ function Login() {
     </>
   );
 }
-
 export default Login;
