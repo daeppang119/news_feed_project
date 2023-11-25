@@ -1,10 +1,11 @@
+import { getDownloadURL, uploadBytes } from "@firebase/storage";
+import { ref } from "firebase/storage";
 import { React, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import * as St from "../StyledComponents/modules/PersonalPage/PersonlPage.js";
-
+import { auth, storage } from "../firebase/firebase.js";
 import Modal from "./Modal.jsx";
-
 function Mypage() {
   const [modalOpen, setModalOpen] = useState(false);
   const ModalHandler = () => {
@@ -19,17 +20,20 @@ function Mypage() {
   const [loginOk, setloginOk] = useState(user.currentUser);
 
   //이미지 state
-  const [image, setImage] = useState("");
-
-  const setPreviewImg = (event) => {
-    var reader = new FileReader();
-
-    reader.onload = function (event) {
-      setImage(event.target.result);
-    };
-
-    reader.readAsDataURL(event.target.files[0]);
+  const [image, setImage] = useState(null);
+  const dispatch = useDispatch();
+  const handleFileSelect = (event) => {
+    setImage(event.target.files[0]);
   };
+
+  const handleUpload = async () => {
+    const imageRef = ref(storage, `Users/${auth.currentUser.uid}/${image.name}`);
+    await uploadBytes(imageRef, image);
+
+    const downloadURL = await getDownloadURL(imageRef);
+    setImage(downloadURL);
+  };
+
   return (
     <>
       {loginOk === false ? (
@@ -44,14 +48,15 @@ function Mypage() {
               </St.HeadBox>
               {/* 사진 + 변경 */}
               <St.AvatarWrap>
-                <St.Avatar src={image} />
+                <St.Avatar src={user.photoUrl} />
                 <St.ImageLabel for="file">이미지변경</St.ImageLabel>
-                <St.ChangeImg id="file" type="file" onChange={setPreviewImg} />
+                <button onClick={handleUpload}>upload</button>
+                <St.ChangeImg id="file" type="file" onChange={handleFileSelect} />
               </St.AvatarWrap>
               {/* 닉네임, 이메일 */}
               <St.ProfileInfo>
                 <St.Section>
-                  <St.Span>이름</St.Span>
+                  <St.Span>닉네임</St.Span>
                   <St.Span>{user.userName}</St.Span>
                 </St.Section>
                 <St.Section>
@@ -87,9 +92,11 @@ function Mypage() {
                   return (
                     <>
                       <St.Feed key={ea.id}>
-                        <img src={ea.imgurl} />
-                        <p>{ea.text}</p>
-                        <p>{ea.date}</p>
+                        <St.MyNews src={ea.imgurl} />
+                        <St.TextWrap>
+                          내용
+                          <St.MyText>{ea.text}</St.MyText>
+                        </St.TextWrap>
                       </St.Feed>
                     </>
                   );

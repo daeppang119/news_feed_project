@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as St from "../StyledComponents/modules/StyledLogin/StyledLogin";
 import { auth } from "../firebase/firebase";
-
+import { signUpInSetState } from "../redux/modules/user";
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,6 +23,7 @@ function Login() {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
+      console.log(user);
       dispatch(
         signUpInSetState({
           currentUser: true,

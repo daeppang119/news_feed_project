@@ -229,6 +229,8 @@ export const FeedsWrap = styled.div`
   `};
 `;
 export const Feed = styled.div`
+  gap: 20px;
+  display: flex;
   font-size: 16px;
   background-color: #fac0bb;
 
@@ -383,3 +385,19 @@ export const SaveButton = styled.img`
 `;
 
 export const Form = styled.form``;
+export const MyNews = styled.img`
+  width: 50%;
+  height: 100%;
+  border-radius: 10px;
+`;
+export const TextWrap = styled.div`
+  padding: 10px;
+  width: 100%;
+  border: 3px solid white;
+  border-radius: 10px;
+`;
+export const MyText = styled.p`
+  width: 100%;
+  color: white;
+  width: 100%;
+`;

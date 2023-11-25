@@ -46,7 +46,7 @@ function Modal({ modalOpen, setModalOpen, image }) {
         <St.Form>
           <St.MEdit>
             <St.Fix>
-              이름<span style={{ color: "#ff5c00" }}>*</span>
+              닉네임<span style={{ color: "#ff5c00" }}>*</span>
             </St.Fix>
             <St.EditContent
               onChange={(event) => {
