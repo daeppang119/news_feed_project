@@ -1,16 +1,16 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/HeaderStyle/StyledHeader";
-import { signUpInSetState } from "../../redux/modules/user";
+import { signInSetState, signOutSetState } from "../../redux/modules/user";
 
 export default function Header({ setIsopen, setTitle, setContents }) {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const loginhandle = () => {
-    dispatch(signUpInSetState({ currentUser: true }));
+    dispatch(signInSetState({ currentUser: true }));
   };
   const logouthandle = () => {
-    dispatch(signUpInSetState({ currentUser: false }));
+    dispatch(signOutSetState({ currentUser: false }));
   };
   if (user.currentUser) {
     return (

@@ -63,8 +63,8 @@ function App() {
   }, [initialFetchData, post.length]);
   return (
     <>
-      <GlobalStyle />
       <ThemeProvider theme={theme}>
+        <GlobalStyle />
         <Router />
       </ThemeProvider>
     </>
