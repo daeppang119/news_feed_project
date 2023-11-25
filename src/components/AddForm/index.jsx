@@ -103,6 +103,7 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
                   </St.ImgBox>
                   <St.Content
                     value={contents}
+                    ref={(props) => (inputRef.current["text"] = props)}
                     onChange={(e) => setContents(e.target.value)}
                     placeholder="내용을 입력해주세요"
                   ></St.Content>

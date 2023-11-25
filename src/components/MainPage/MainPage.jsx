@@ -17,7 +17,7 @@ function MainPage() {
     setDetailIsopen(true);
     setFindTarget(id);
   };
-  console.log("MainPage Component, not Pages", categoriezedBox);
+
   return (
     <>
       <Category setCategorizedBox={setCategorizedBox} />
