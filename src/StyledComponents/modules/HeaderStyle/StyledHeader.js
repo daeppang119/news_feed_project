@@ -74,11 +74,10 @@ export const InputBox = styled.div`
     ${({ theme: { mediaQuery } }) => mediaQuery.md`
     display: block;
     position: relative;
-
     border: 0;
     background-color: transparent;
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     cursor: pointer;
     scale: 1;
     right: 30px;
@@ -106,7 +105,7 @@ export const Buttons = styled.div`
   `};
   & button {
     ${({ theme: { mediaQuery } }) => mediaQuery.md`
-    color: salmon;
+    color: var(--defaultColor);
     opacity: 0.7;
     font-weight: 1000;
     padding: 6px 8px;
