@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import * as St from "../../StyledComponents/modules/StyledMainPage/StyledModal";
+import * as St from "../../StyledComponents/modules/StyledMainCard/StyledModal";
 
 function Modal({ isOpen, setIsOpen }) {
   const post = useSelector((state) => state.post);

@@ -1,4 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import AddForm from "../components/AddForm";
+import Header from "../components/Header";
+import MainCard from "../components/MainCard/MainCard";
 
 function Main() {
   const post = useSelector((state) => state.post);
@@ -11,7 +15,7 @@ function Main() {
     <>
       <Header setIsopen={setIsopen} setTitle={setTitle} setContents={setContents} />
 
-      <MainPage />
+      <MainCard />
       <AddForm
         isOpen={isOpen}
         setIsopen={setIsopen}

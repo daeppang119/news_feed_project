@@ -71,7 +71,7 @@ function Category({ setCategorizedBox }) {
           {Object.entries(category).map((item) => {
             return (
               <p onClick={onClickHandler}>
-                {item[0]}:{item[1]}
+                {item[0]} ({item[1]})
               </p>
             );
           })}

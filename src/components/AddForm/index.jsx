@@ -39,7 +39,6 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
       imgurl: photoUrl || ""
     };
     user["post"].unshift(newPost);
-    console.log(user);
     dispatch(updateUserInfoSetState({ ...user }));
 
     await addDoc(userDataRef, newPost);
@@ -71,72 +70,83 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
     return (
       <>
         {isOpen ? (
-          <St.Main>
-            <St.Container
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
-            >
-              <St.Warpper>
-                <St.TitleAndDate>
-                  <St.Title>
-                    <input
-                      value={title}
-                      ref={(props) => (inputRef.current["text"] = props)}
-                      onChange={(e) => setTitle(e.target.value)}
-                      type="text"
-                      placeholder="주제를 정해주세요"
-                    />
-                  </St.Title>
-                </St.TitleAndDate>
-                <St.ImgBox>
-                  이미지 : <input type="file" ref={(props) => (inputRef.current["img"] = props)} />
-                </St.ImgBox>
-                <St.Content
-                  value={contents}
-                  onChange={(e) => setContents(e.target.value)}
-                  placeholder="내용을 입력해주세요"
-                ></St.Content>
-                <St.Selecter>
-                  <St.Lable>취미</St.Lable>
-                  <St.Select
-                    value={category}
-                    onChange={(e) => {
-                      setCategory(e.target.value);
-                    }}
-                  >
-                    <option value="">취미를 선택해 주세요</option>
-                    <option value="애니메이션">애니메이션</option>
-                    <option value="게임">게임</option>
-                    <option value="운동">운동</option>
-                    <option value="독서">독서</option>
-                  </St.Select>
-                </St.Selecter>
+          <div
+            style={{
+              position: "fixed",
+              top: "0",
+              left: "0",
+              width: "100%",
+              height: "100%"
+            }}
+          >
+            <St.Main>
+              <St.Container
+                onSubmit={(e) => {
+                  e.preventDefault();
+                }}
+              >
+                <St.Warpper>
+                  <St.TitleAndDate>
+                    <St.Title>
+                      <input
+                        value={title}
+                        ref={(props) => (inputRef.current["text"] = props)}
+                        onChange={(e) => setTitle(e.target.value)}
+                        type="text"
+                        placeholder="주제를 정해주세요"
+                      />
+                    </St.Title>
+                  </St.TitleAndDate>
+                  <St.ImgBox>
+                    이미지 : <input type="file" ref={(props) => (inputRef.current["img"] = props)} />
+                  </St.ImgBox>
+                  <St.Content
+                    value={contents}
+                    ref={(props) => (inputRef.current["text"] = props)}
+                    onChange={(e) => setContents(e.target.value)}
+                    placeholder="내용을 입력해주세요"
+                  ></St.Content>
+                  <St.Selecter>
+                    <St.Lable>취미</St.Lable>
+                    <St.Select
+                      value={category}
+                      onChange={(e) => {
+                        setCategory(e.target.value);
+                      }}
+                    >
+                      <option value="">취미를 선택해 주세요</option>
+                      <option value="애니메이션">애니메이션</option>
+                      <option value="게임">게임</option>
+                      <option value="운동">운동</option>
+                      <option value="독서">독서</option>
+                    </St.Select>
+                  </St.Selecter>
 
-                <St.Buttons>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      handleAddPost();
-                      if (title && contents && category) {
+                  <St.Buttons>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        handleAddPost();
+                        if (title && contents && category) {
+                          setIsopen(false);
+                        }
+                      }}
+                    >
+                      추가
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
                         setIsopen(false);
-                      }
-                    }}
-                  >
-                    추가
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setIsopen(false);
-                    }}
-                  >
-                    홈으로
-                  </button>
-                </St.Buttons>
-              </St.Warpper>
-            </St.Container>
-          </St.Main>
+                      }}
+                    >
+                      홈으로
+                    </button>
+                  </St.Buttons>
+                </St.Warpper>
+              </St.Container>
+            </St.Main>
+          </div>
         ) : null}
       </>
     );

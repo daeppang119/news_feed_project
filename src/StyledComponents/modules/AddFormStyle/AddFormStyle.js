@@ -160,9 +160,6 @@ export const Content = styled.textarea`
   background-color: transparent;
   color: white;
   font-weight: 700;
-  & textarea::placeholder {
-    color: white;
-  }
 `;
 
 export const Selecter = styled.div`

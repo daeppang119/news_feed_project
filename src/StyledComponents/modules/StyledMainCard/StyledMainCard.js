@@ -2,23 +2,30 @@ import styled from "styled-components";
 
 // export const MainPageContainer = styled.div`
 //   /* background-color: lightpink; */
-//   margin: 0 auto;
+//
 //   ${({ theme }) => theme.mediaQuery.md`
-// width: 768px;
+//
 //   `};
 //   ${({ theme }) => theme.mediaQuery.lg`
-// width: 1200px;
+//
 //   `};
 // `;
-// export const MainPageCategoryPost = styled.div` // 카테고리 메인 묶어서 나란히 만들기
-//   ${({ theme }) => theme.mediaQuery.md`
-//   display: flex;
-//   `};
-//   ${({ theme }) => theme.mediaQuery.lg`
-//     margin-left: 40px;
-//   `};
-// `;
-export const MainPageContainer = styled.div`
+export const MainCategoryAndPost = styled.div`
+  // 카테고리 메인 묶어서 나란히 만들기
+  margin: 0 auto;
+  transition: 0.3s ease-in-out;
+  ${({ theme }) => theme.mediaQuery.md`
+  display: flex;
+  width: 768px;
+  transition: 0.3s ease;
+  `};
+  ${({ theme }) => theme.mediaQuery.lg`
+    width: 1200px;
+    transition: 0.3s ease;
+  `};
+`;
+
+export const MainCardContainer = styled.div`
   width: 360px;
   margin: 0 auto;
   ${({ theme }) => theme.mediaQuery.md`
@@ -30,7 +37,7 @@ export const MainPageContainer = styled.div`
     margin: 10px;
   `};
 `;
-export const MainPagePost = styled.div`
+export const MainCard = styled.div`
   box-sizing: border-box;
   background-color: #fff0f5; // var(--defaultColor);
   border-radius: 10px;
@@ -50,12 +57,12 @@ export const MainPagePost = styled.div`
     cursor: pointer;
   }
 `;
-export const MainPagePostUser = styled.div`
+export const MainCardUser = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
-export const MainPagePostImgNickname = styled.div`
+export const MainCardImgNickname = styled.div`
   display: flex;
   align-items: center;
   & img {
@@ -65,13 +72,13 @@ export const MainPagePostImgNickname = styled.div`
     border-radius: 50%;
   }
 `;
-export const MainPagePostNickname = styled.p`
+export const MainCardNickname = styled.p`
   font-size: 14px;
 `;
-export const MainPagePostDate = styled.p`
+export const MainCardDate = styled.p`
   margin: 10px;
 `;
-export const MainPagePostContent = styled.div`
+export const MainCardContent = styled.div`
   background-color: white;
   color: #333;
   border-radius: 10px;
@@ -87,8 +94,8 @@ font-size: 14px;
     font-size: 16px;
 `};
 `;
-export const MainPagePostInfo = styled.div``;
-export const MainPagePostLike = styled.div`
+export const MainCardInfo = styled.div``;
+export const MainCardLike = styled.div`
   float: right;
   margin: 5px 10px;
 `;
