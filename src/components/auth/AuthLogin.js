@@ -1,7 +1,8 @@
-import * as St from "../StyledComponents/modules/StyledLogin/StyledLogin";
-const AuthLogin = ({ authService }) => {
+import AuthService from "../../firebase/auth_service";
+import * as St from "../../StyledComponents/modules/StyledLogin/StyledLogin";
+const AuthLogin = () => {
   const onSocialLogin = (e) => {
-    authService.login(e.currentTarget.textContent);
+    AuthService.login(e.currentTarget.textContent);
   };
   return (
     <>

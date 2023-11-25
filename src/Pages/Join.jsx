@@ -1,9 +1,11 @@
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, updateProfile } from "firebase/auth";
 import React, { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as St from "../StyledComponents/modules/StyledLogin/StyledLogin";
 import Animate from "../StyledComponents/modules/StyledProgress/StyledProgress";
 import { auth } from "../firebase/firebase";
+import { signUpSetState } from "../redux/modules/user";
 
 function Join() {
   // const [email, setEmail] = useState("");
@@ -16,7 +18,7 @@ function Join() {
   const [joinFinished, setJoinFinished] = useState(true);
   const [isLoding, setIsLoading] = useState(false);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const password = signFormRef.password.value;
@@ -39,7 +41,6 @@ function Join() {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       const displayName = user.email.split("@")[0];
-
       await updateProfile(user, {
         displayName,
         photoURL: process.env.PUBLIC_URL + "/DefaultProfile/defaultprofile.jpg"
@@ -48,21 +49,40 @@ function Join() {
       throw new Error(JSON.stringify(error));
     }
   };
+
+  const HandleSignUp = async () => {
+    try {
+      await createUserSignUp();
+      onAuthStateChanged(auth, (authUser) => {
+        if (authUser) {
+          dispatch(
+            signUpSetState({
+              currentUser: true,
+              email: authUser.email,
+              photoUrl: authUser.photoURL,
+              userName: authUser.displayName,
+              uid: authUser.uid
+            })
+          );
+        } else {
+          // 무얼 써야 할지 모르겠다...
+        }
+      });
+    } catch (e) {
+      throw new Error(JSON.stringify(e));
+    }
+  };
   useEffect(() => {
     signFormRef.email.focus();
   }, []);
 
   useEffect(() => {
     if (!joinFinished) {
-      createUserSignUp()
-        .then(() => {
-          // navigate("/login");
-        })
-        .catch((e) => {
-          setIsLoading(false);
-          setJoinFinished(true);
-          alert(e);
-        });
+      HandleSignUp().catch((e) => {
+        setIsLoading(false);
+        setJoinFinished(true);
+        alert(e);
+      });
     }
     return () => {
       // cleanFunction에 넣어준 이유는 페이지 마운트 하면 true값으로 바꿔주어야 또 회원가입시 로딩바가 보이고 createUserSignUp이라는 함수 실행이 됩니다.
