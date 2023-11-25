@@ -176,18 +176,15 @@ export const Lable = styled.p`
 `;
 
 export const Select = styled.select`
-  font-size: 5px;
   border: 1px solid pink;
   outline: 0;
   border-radius: 3px;
   background-color: transparent;
   & option {
-    font-size: 5px;
     ${({ theme: { mediaQuery } }) => mediaQuery.md`
-    font-size: 8px;
+
   `};
     ${({ theme }) => theme.mediaQuery.lg`
-    font-size: 15px;
   `};
   }
 `;

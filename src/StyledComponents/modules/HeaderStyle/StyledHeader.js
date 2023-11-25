@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 export const Warpper = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-around;
   margin: 0 auto;
   align-items: center;
-  height: 100px;
+
   ${({ theme: { mediaQuery } }) => mediaQuery.md`
-   width: 768px;
+    height: 100px;
+    display: flex;
+    justify-content: space-around;
+    width: 768px;
   `};
   ${({ theme }) => theme.mediaQuery.lg`
   width: 1200px;
@@ -16,16 +16,22 @@ export const Warpper = styled.div`
 `;
 
 export const Imgfigure = styled.div`
-  width: 80px;
-  height: 50px;
+  margin: 0 auto;
+  width: 450px;
+  height: 131px;
+  ${({ theme: { mediaQuery } }) => mediaQuery.md`
+    width: 200px;
+    height: 58.2px;
+  `};
+  ${({ theme }) => theme.mediaQuery.lg`
+      width: 200px
+  `};
   & img {
-    width: 70px;
-    height: 40px;
+    width: 450px;
+    height: 131px;
     ${({ theme: { mediaQuery } }) => mediaQuery.md`
-      margin-top: -5px;
-      margin-left: 10px;
-      width: 100px;
-      height: 50px;
+    width: 200px;
+    height: 58.2px;
   `};
     ${({ theme }) => theme.mediaQuery.lg`
       margin-top: -10px;
@@ -33,47 +39,47 @@ export const Imgfigure = styled.div`
       height: 60px;
   `};
   }
-  ${({ theme: { mediaQuery } }) => mediaQuery.md`
-   width: 100px;
-  `};
-  ${({ theme }) => theme.mediaQuery.lg`
-      width: 200px
-  `};
 `;
-
+export const InputLoginBox = styled.div``;
 export const InputBox = styled.div`
-  display: flex;
-  margin-left: 10px;
-  margin-top: -10px;
-
+  ${({ theme: { mediaQuery } }) => mediaQuery.md`
+    align-items: center;
+    display: flex`}
+  // input
   & input {
+    display: none;
+    ${({ theme: { mediaQuery } }) => mediaQuery.md`
+    display: flex;
     font-size: 5px;
-    border: 1px solid salmon;
+    border: 2px solid var(--defaultColor);
     outline: 0;
     border-radius: 15px;
     padding: 5px;
     width: 150px;
-    ${({ theme: { mediaQuery } }) => mediaQuery.md`
     width: 400px;
     font-Size: 10px;
     padding: 10px;
   `};
     // 1200px 이상일 때;
-    ${({ theme }) => theme.mediaQuery.lg`
+    ${({ theme }) => theme.mediaQuery.lg` 
     width: 500px
     margtn-left:10px;
     font-size: 20px;
     padding: 10px;
   `};
   }
+  // button
   & button {
+    display: none;
+    ${({ theme: { mediaQuery } }) => mediaQuery.md`
+    display: block;
     position: relative;
-    right: 30px;
+
     border: 0;
     background-color: transparent;
-    width: 20px;
+    width: 25px;
+    height: 25px;
     cursor: pointer;
-    ${({ theme: { mediaQuery } }) => mediaQuery.md`
     scale: 1;
     right: 30px;
   `};
@@ -86,11 +92,10 @@ export const InputBox = styled.div`
 `;
 
 export const Buttons = styled.div`
-  display: flex;
-  justify-content: center;
-  width: 120px;
-  margin-top: -10px;
+  display: none;
   ${({ theme: { mediaQuery } }) => mediaQuery.md`
+    display: flex;
+    justify-content: center;
     margin-right: 30px;
     width: 150px;
   `};
@@ -100,18 +105,17 @@ export const Buttons = styled.div`
     gap: 20px;
   `};
   & button {
+    ${({ theme: { mediaQuery } }) => mediaQuery.md`
     color: salmon;
     opacity: 0.7;
     font-weight: 1000;
-    font-size: 8px;
     padding: 6px 8px;
     border-radius: 10px;
     border: 0;
     cursor: pointer;
     background-color: transparent;
     transition: all 0.2s;
-    ${({ theme: { mediaQuery } }) => mediaQuery.md`
-   font-size: 15px;
+    font-size: 15px;
   `};
     ${({ theme }) => theme.mediaQuery.lg`
     font-size: 20px;

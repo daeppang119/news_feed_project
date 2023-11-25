@@ -8,7 +8,6 @@ export const Container = styled.div`
   ${({ theme }) => theme.mediaQuery.md`
     display: block;
     font-size: 12px;
-    margin-left: 0px;
   `}
   ${({ theme }) => theme.mediaQuery.lg`
     display: block;

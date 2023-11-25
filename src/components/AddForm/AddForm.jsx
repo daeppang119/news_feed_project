@@ -13,6 +13,7 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
   const userDataRef = collection(db, "users");
   const dispatch = useDispatch();
   const inputRef = useRef({});
+  const categoryArr = ["All", "Animation", "Game", "Sports", "Book", "Cook", "Lover", "Pet"];
 
   const handleAddPost = async () => {
     if (!user.currentUser) return alert("로그인 후 작성 할 수 있습니다.");
@@ -30,13 +31,13 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
     const photoUrl = await handleImageUpload();
     if (!user["post"]) user["post"] = [];
     const newPost = {
-      text,
-      contents,
-      date: new Date().getTime(),
-      uid: auth.currentUser.uid || "",
-      isEdit: false,
       category: category,
-      imgurl: photoUrl || ""
+      imgurl: photoUrl || "",
+      text: title,
+      date: new Date().getTime(),
+      contents: contents,
+      uid: auth.currentUser.uid || "",
+      isEdit: false
     };
     user["post"].unshift(newPost);
     dispatch(updateUserInfoSetState({ ...user }));
@@ -114,11 +115,9 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
                         setCategory(e.target.value);
                       }}
                     >
-                      <option value="">취미를 선택해 주세요</option>
-                      <option value="애니메이션">애니메이션</option>
-                      <option value="게임">게임</option>
-                      <option value="운동">운동</option>
-                      <option value="독서">독서</option>
+                      {categoryArr.map((item) => (
+                        <option key={item}>{item}</option>
+                      ))}
                     </St.Select>
                   </St.Selecter>
 
