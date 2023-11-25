@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/StyledCategory/StyledCategory";
-import { signUpInSetState } from "../../redux/modules/user";
+import { signOutSetState, signUpSetState } from "../../redux/modules/user";
 
 function Category({ setCategorizedBox }) {
   const user = useSelector((state) => state.user);
@@ -21,10 +21,10 @@ function Category({ setCategorizedBox }) {
     categorizedPost.length == 0 ? setCategorizedBox(post) : setCategorizedBox(categorizedPost);
   };
   const loginhandle = () => {
-    dispatch(signUpInSetState({ currentUser: true }));
+    dispatch(signUpSetState({ currentUser: true }));
   };
   const logouthandle = () => {
-    dispatch(signUpInSetState({ currentUser: false }));
+    dispatch(signOutSetState());
   };
 
   return (
