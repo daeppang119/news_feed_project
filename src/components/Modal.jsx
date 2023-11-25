@@ -26,6 +26,7 @@ function Modal({ modalOpen, setModalOpen, image }) {
     );
     const answer = window.confirm("저장하시겠어요?");
     if (answer) setModalOpen(!modalOpen);
+    console.log(user);
   };
 
   // edit
