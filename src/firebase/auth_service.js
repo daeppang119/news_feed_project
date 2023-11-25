@@ -1,10 +1,21 @@
-import { firebaseApp } from "../firebase/firebase";
-import { auth } from "./firebase";
+import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 
-export default class AuthService {
+class AuthService {
+  constructor() {
+    this.auth = getAuth();
+    this.provider = {
+      Google: new GoogleAuthProvider(),
+      Github: new GithubAuthProvider()
+    };
+  }
   login(providerName) {
-    const authProvider = new firebaseApp.auth[`${providerName}AuthProvider`]();
-    console.log(authProvider);
-    return auth().signInWithPopup(authProvider);
+    try {
+      const authProvider = this.provider[providerName];
+      return signInWithPopup(this.auth, authProvider);
+    } catch (e) {
+      throw new Error(JSON.stringify(e));
+    }
   }
 }
+
+export default AuthService;
