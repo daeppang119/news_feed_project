@@ -67,7 +67,7 @@ export const Box = styled.div`
   margin: 0 14px;
 `;
 
-export const LinksA = styled.a`
+export const LinksA = styled.span`
   cursor: pointer;
 `;
 
