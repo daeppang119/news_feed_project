@@ -34,7 +34,7 @@ const initialValue = [];
 const post = (state = initialValue, action) => {
   switch (action.type) {
     case INITIAL_FETCH_POSTS:
-      return action.payload;
+      return [...action.payload];
     case UPDATE_POSTS:
       return action.payload;
     case EDIT_POST:

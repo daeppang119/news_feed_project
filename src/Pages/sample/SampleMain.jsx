@@ -11,9 +11,9 @@ import SamplePersonal from "./SamplePersonal";
 function SampleMain() {
   const inputRef = useRef({});
   const user = useSelector((state) => state.user);
-  console.log(user);
   const userDataRef = collection(db, "users");
   const dispatch = useDispatch();
+
   // 이미지 파일 업로드 후 이미지 url과 같이 post를 추가하는 함수 입니다.
   const handleAddPost = async () => {
     if (!user.currentUser) return alert("로그인 부터 하자");
@@ -49,7 +49,9 @@ function SampleMain() {
     try {
       if (!imgFile) return;
       const imgRef = ref(storage, `Users/${auth.currentUser.uid}/${imgFile.name}`);
-      await uploadBytes(imgRef, imgFile);
+      await uploadBytes(imgRef, imgFile).then((snapshot) => {
+        console.log(snapshot.bytesTransferred);
+      });
       const downloadUrl = await getDownloadURL(imgRef);
       return downloadUrl;
     } catch (e) {
@@ -61,6 +63,9 @@ function SampleMain() {
     <>
       <Div>
         <div>
+          <div>
+            <img src="img/avatar.jpg" alt="" />
+          </div>
           이미지 : <input type="file" ref={(props) => (inputRef.current["img"] = props)} />
         </div>
         <div>

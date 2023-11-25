@@ -10,8 +10,8 @@ import Router from "./shared/Router";
 function App() {
   const post = useSelector((state) => state.post);
   const user = useSelector((state) => state.user);
-  console.log(post);
   console.log(user);
+  // console.log(post);
   const dispatch = useDispatch();
   const initialFetchData = useCallback(async () => {
     console.log("app에서 실행");
@@ -58,17 +58,14 @@ function App() {
     if (post.length) {
       return;
     } else {
-      console.log("1?");
       initialFetchData();
     }
   }, [initialFetchData, post.length]);
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <ThemeProvider theme={theme}>
-        <Router />
-      </ThemeProvider>
-    </>
+      <Router />
+    </ThemeProvider>
   );
 }
 
