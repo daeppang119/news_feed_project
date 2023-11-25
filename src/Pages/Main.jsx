@@ -1,5 +1,8 @@
-import React from "react";
-
+import React, { useState } from "react";
+import { useSelector } from "react-redux/es/hooks/useSelector";
+import AddForm from "../components/AddForm/index";
+import Header from "../components/Header";
+import MainPage from "../components/MainPage/MainPage";
 function Main() {
   const post = useSelector((state) => state.post);
 
