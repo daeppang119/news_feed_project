@@ -46,7 +46,22 @@ function Join() {
         photoURL: process.env.PUBLIC_URL + "/DefaultProfile/defaultprofile.jpg"
       });
     } catch (error) {
-      throw new Error(JSON.stringify(error));
+      switch (error.code) {
+        case "auth/user-not-found" || "auth/wrong-password":
+          throw new Error("이메일 혹은 비밀번호가 일치하지 않습니다.");
+        case "auth/email-already-in-use":
+          throw new Error("이미 사용 중인 이메일입니다.");
+        case "auth/weak-password":
+          throw new Error("비밀번호는 6글자 이상이어야 합니다.");
+        case "auth/network-request-failed":
+          throw new Error("네트워크 연결에 실패 하였습니다.");
+        case "auth/invalid-email":
+          throw new Error("잘못된 이메일 형식입니다.");
+        case "auth/internal-error":
+          throw new Error("잘못된 요청입니다.");
+        default:
+          throw new Error("로그인에 실패 하였습니다.");
+      }
     }
   };
 
