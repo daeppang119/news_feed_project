@@ -109,18 +109,3 @@ export const LoginGo = styled.div`
   text-align: center;
   cursor: pointer;
 `;
-
-export const LayOutContainer = styled.div`
-  // mobile 일 때라고 생각해도 좋을것 같습니다.;
-
-  // 768px 이상일 때;
-  ${({ theme: { mediaQuery } }) => mediaQuery.md`
-   background-color:red;
-  `};
-
-  // 1200px 이상일 때;
-  ${({ theme }) => theme.mediaQuery.lg`
-  background-color : #fff;
-  color : ${theme.defaultColor}
-  `};
-`;
