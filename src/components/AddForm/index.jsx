@@ -39,7 +39,6 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
       imgurl: photoUrl || ""
     };
     user["post"].unshift(newPost);
-    console.log(user);
     dispatch(updateUserInfoSetState({ ...user }));
 
     await addDoc(userDataRef, newPost);

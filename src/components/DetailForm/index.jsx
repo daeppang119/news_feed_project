@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/AddFormStyle/AddFormStyle";
 import { auth, db } from "../../firebase/firebase";
 import { editPost, removePost } from "../../redux/modules/post";
+import { getFormattedDate } from "../../util/date";
 
 export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -108,7 +109,7 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }
                         </St.DetailUserInfo>
                         <St.TitleAndDate>
                           <St.Title>{item.text}</St.Title>
-                          <St.AddDate>{item.Date}</St.AddDate>
+                          <St.AddDate>{getFormattedDate(item.date)}</St.AddDate>
                         </St.TitleAndDate>
                         {item.imgurl ? (
                           <St.DetailImgFigure>
@@ -224,7 +225,7 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }
                         </St.DetailUserInfo>
                         <St.TitleAndDate>
                           <St.Title>{item.text}</St.Title>
-                          <St.AddDate>{item.Date}</St.AddDate>
+                          <St.AddDate>{getFormattedDate(item.date)}</St.AddDate>
                         </St.TitleAndDate>
                         {item.imgurl ? (
                           <St.DetailImgFigure>
