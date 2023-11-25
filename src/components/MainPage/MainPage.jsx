@@ -12,15 +12,20 @@ function MainPage() {
   const post = useSelector((state) => state.post);
   const [categoriezedBox, setCategorizedBox] = useState(post);
   const [DetailisOpen, setDetailIsopen] = useState(false);
+  const [findTarget, setFindTarget] = useState("");
   const onClickPostHandler = (id) => {
     setDetailIsopen(true);
+    setFindTarget(id);
   };
-
+  console.log("MainPage Component, not Pages", categoriezedBox);
   return (
     <>
       <Category setCategorizedBox={setCategorizedBox} />
       <St.MainPageContainer>
-        <DetailForm DetailisOpen={DetailisOpen} setDetailIsopen={setDetailIsopen} />
+        {/* 모달창 */}
+        <DetailForm DetailisOpen={DetailisOpen} setDetailIsopen={setDetailIsopen} findTarget={findTarget} />
+
+        {/* 전체 카드 보여주는 코드  */}
         {categoriezedBox.map((item) => {
           return (
             <St.MainPagePost
