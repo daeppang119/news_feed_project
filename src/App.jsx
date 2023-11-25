@@ -7,6 +7,7 @@ import theme from "./StyledComponents/theme/theme";
 import { db } from "./firebase/firebase";
 import { initialFetchPost } from "./redux/modules/post";
 import Router from "./shared/Router";
+
 function App() {
   const post = useSelector((state) => state.post);
   const user = useSelector((state) => state.user);
@@ -61,10 +62,12 @@ function App() {
     }
   }, [initialFetchData, post.length]);
   return (
-    <ThemeProvider theme={theme}>
+    <>
       <GlobalStyle />
-      <Router />
-    </ThemeProvider>
+      <ThemeProvider theme={theme}>
+        <Router />
+      </ThemeProvider>
+    </>
   );
 }
 
