@@ -17,9 +17,9 @@ const Router = () => {
           {/* Sample입니다. */}
           <Route path="/SampleMain" element={<SampleMain />} />
           <Route path="/SampleJoin" element={<SampleJoin />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/SampleImageUpload" element={<SampleImageUpload />} />
           {/* join */}
+          <Route path="/login" element={<Login />} />
           <Route path="/join" element={<Join />} />
           {/* personal Page  */}
           <Route path="/personalPage" element={<PersonalPage />} />

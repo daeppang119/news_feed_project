@@ -7,13 +7,10 @@ import Animate from "../StyledComponents/modules/StyledProgress/StyledProgress";
 import AuthLogin from "../components/auth/AuthLogin";
 import { auth } from "../firebase/firebase";
 
-import { initialFetchedUserPost, signUpInSetState } from "../redux/modules/user";
+import { initialFetchedUserPost, signInSetState, signOutSetState } from "../redux/modules/user";
 function Login() {
-  // const [email, setEmail] = useState("");
-  // const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   // 추가 START
   const post = useSelector((state) => state.post);
   const user = useSelector((state) => state.user);
@@ -21,32 +18,11 @@ function Login() {
   const [isLoging, setIsLoging] = useState(false);
 
   // 추가 END
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-  //     const user = userCredential.user;
-  //     dispatch(
-  //       signUpInSetState({
-  //         currentUser: true,
-  //         email: user.email,
-  //         photoUrl: user.photoURL,
-  //         userName: user.displayName,
-  //         uid: user.uid
-  //       })
-  //     );
-  //     alert("로그인이 완료되었습니다.");
-  //     navigate("/");
-  //   } catch (error) {
-  //     console.error(error);
-  //     alert("아이디 혹은 비밀번호를 잘못 입력 하셨습니다.");
-  //   }
-  // };
+  console.log(user);
   const handleSubmitLogin = useCallback(
     async (e) => {
       e.preventDefault();
-      if (user.currentUser !== false) return alert("이미 로그인 되어있습니다.");
+      if (user.currentUser) return alert("이미 로그인 되어있습니다.");
       setIsLoging(true);
       const email = loginFormRef.email;
       const password = loginFormRef.password;
@@ -77,11 +53,14 @@ function Login() {
   }, [dispatch, post]);
   // 로그인 성공시 로그인한 유저의 정보를 'user' state에 전달합니다.
   useEffect(() => {
+    console.log(user);
     onAuthStateChanged(auth, (authUser) => {
-      if (authUser && !user.currentUser) {
+      //authUser && user.currentUser === false 이렇게 쓰면 안되는데 이유를 모르겠음 일딴 나중에 알아보자..
+      if (authUser) {
+        console.log(authUser);
         // setIsLoging(false);
         dispatch(
-          signUpInSetState({
+          signInSetState({
             currentUser: true,
             email: authUser.email,
             photoUrl: authUser.photoURL,
@@ -89,14 +68,16 @@ function Login() {
             uid: authUser.uid
           })
         );
-        navigate("/");
+        // navigate("/");
+      } else {
+        dispatch(signOutSetState());
       }
     });
     return () => {
       setIsLoging(false);
     };
   }, [dispatch, isLoging]);
-
+  console.log(user);
   // 로그인 페이지 오면 email input에 포커스 하는 useEffect입니다.
   useEffect(() => {
     loginFormRef.email.focus();

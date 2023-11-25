@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled, { keyframes } from "styled-components";
 import { auth } from "../../firebase/firebase";
-import { initialFetchedUserPost, signOutSetState, signUpInSetState } from "../../redux/modules/user";
+import { initialFetchedUserPost, signUpSetState } from "../../redux/modules/user";
 function SampleJoin() {
   const post = useSelector((state) => state.post);
   const user = useSelector((state) => state.user);
@@ -125,7 +125,7 @@ function SampleJoin() {
         // user가 들어있으면 나중에 삭제 해야할것 같습니다.
         setIsLoged(true);
         dispatch(
-          signUpInSetState({
+          signUpSetState({
             currentUser: true,
             email: user.email,
             photoUrl: user.photoURL,
@@ -137,7 +137,7 @@ function SampleJoin() {
         // 나중에 삭제 해줘야 할것 같습니다.
         setIsLoged(false);
         // Redux의 user 객체 초기화
-        dispatch(signOutSetState());
+        // dispatch(signOutSetState());
       }
     });
   }, [dispatch, setIsLoged]);
