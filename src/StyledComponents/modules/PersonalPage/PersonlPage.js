@@ -243,8 +243,7 @@ export const Feed = styled.div`
   box-shadow: 1px 2px 6px 3px rgba(0, 0, 0, 0.3);
   &:hover {
     transition: 1s;
-    width: 500px;
-    height: 220px;
+    transform: scale(1.1, 1.2);
   }
 
   ${({ theme: { mediaQuery } }) => mediaQuery.md`
@@ -393,7 +392,7 @@ export const MyNews = styled.img`
 export const TextWrap = styled.div`
   padding: 10px;
   width: 100%;
-  border: 3px solid white;
+  border: 1px solid white;
   border-radius: 10px;
 `;
 export const MyText = styled.p`
