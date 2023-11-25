@@ -16,12 +16,13 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-export const fireBase = initializeApp(firebaseConfig);
+export const app = initializeApp(firebaseConfig);
+
 // user정보를 담고있습니다. - firebase와 통신 했을 때 로그인 되어있으면 aut.currentUser가 객체형태로 담겨져 있고 로그인이 안되어있으면 null 값입니다.
-export const auth = getAuth(fireBase);
+export const auth = getAuth(app);
 
 // 이미지 저장하려고 storage를 불러왔습니다.
-export const storage = getStorage(fireBase);
+export const storage = getStorage(app);
 
 // db안에 storage에 등록한 이미지 저장 주소와 text 등을 string으로 담고있는 Cloud firebase 입니다.
-export const db = getFirestore(fireBase);
+export const db = getFirestore(app);

@@ -3,7 +3,9 @@ import reset from "../StyledComponents/reset.module.css";
 const GlobalStyle = createGlobalStyle`
 ${reset}
 
-:root { --defaultColor:${({ theme }) => theme.defaultColor} }
+:root {
+    --defaultColor:${({ theme }) => theme.defaultColor}
+}
 
 html {
     scroll-behavior: smooth;
