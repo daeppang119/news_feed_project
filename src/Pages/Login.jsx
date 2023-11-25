@@ -4,10 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as St from "../StyledComponents/modules/StyledLogin/StyledLogin";
 import Animate from "../StyledComponents/modules/StyledProgress/StyledProgress";
-import AuthLogin from "../firebase/AuthLogin";
+import AuthLogin from "../components/auth/AuthLogin";
 import { auth } from "../firebase/firebase";
 
-import { initialFetchedUserPost, signOutSetState, signUpInSetState } from "../redux/modules/user";
+import { initialFetchedUserPost, signUpInSetState } from "../redux/modules/user";
 function Login() {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
@@ -76,29 +76,25 @@ function Login() {
         }
       );
     } catch (e) {
-      throw new Error("로그인 상태확인해주세요");
+      alert(e);
     }
   }, [dispatch, post]);
 
   // 로그인 성공시 로그인한 유저의 정보를 'user' state에 전달합니다.
   useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        console.log("여기까지 오니??");
-        setIsLoging(true);
+    onAuthStateChanged(auth, (authUser) => {
+      if (authUser && !user.currentUser) {
+        // setIsLoging(false);
         dispatch(
           signUpInSetState({
             currentUser: true,
-            email: user.email,
-            photoUrl: user.photoURL,
-            userName: user.displayName,
-            uid: user.uid
+            email: authUser.email,
+            photoUrl: authUser.photoURL,
+            userName: authUser.displayName,
+            uid: authUser.uid
           })
         );
         navigate("/");
-      } else {
-        setIsLoging(false);
-        dispatch(signOutSetState());
       }
     });
     return () => {
@@ -121,23 +117,11 @@ function Login() {
         <form onSubmit={handleSubmitLogin}>
           <div>
             <St.Ir>아이디(이메일)</St.Ir>
-            <St.LoginForwardRefInput
-              type="email"
-              placeholder="아이디(이메일)"
-              name="email"
-              ref={loginFormRef}
-              required
-            />
+            <St.LoginForwardRefInput type="email" placeholder="아이디(이메일)" name="email" ref={loginFormRef} />
           </div>
           <div>
             <St.Ir>패스워드</St.Ir>
-            <St.LoginForwardRefInput
-              type="password"
-              placeholder="패스워드"
-              name="password"
-              ref={loginFormRef}
-              required
-            />
+            <St.LoginForwardRefInput type="password" placeholder="패스워드" name="password" ref={loginFormRef} />
           </div>
           <St.Links>
             <div>
@@ -149,7 +133,7 @@ function Login() {
               <Link to="/join">회원가입</Link>
             </St.LinksA>
           </St.Links>
-          <St.LoginBtn>로그인</St.LoginBtn>
+          <St.LoginBtn onClick={handleSubmitLogin}>로그인</St.LoginBtn>
         </form>
         <AuthLogin />
       </St.LoginLayout>

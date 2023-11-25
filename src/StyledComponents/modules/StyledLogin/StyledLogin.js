@@ -36,7 +36,7 @@ export const LoginInput = styled.input`
   }
 `;
 export const LoginForwardRefInput = forwardRef(({ type, placeholder, name }, ref) => {
-  return <LoginInput type={type} name={name} placeholder={placeholder} required ref={(props) => (ref[name] = props)} />;
+  return <LoginInput type={type} name={name} placeholder={placeholder} ref={(props) => (ref[name] = props)} />;
 });
 export const LoginBtn = styled.button`
   width: 100%;
