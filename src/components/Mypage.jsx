@@ -18,7 +18,7 @@ function Mypage() {
   console.log(user);
   //마이페이지 로그인 여부
   const [loginOk, setloginOk] = useState(user.currentUser);
-
+  console.log(user.currentUser);
   //이미지 state
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();

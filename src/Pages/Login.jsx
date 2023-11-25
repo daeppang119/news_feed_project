@@ -1,53 +1,101 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import React, { useEffect, useRef, useState } from "react";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as St from "../StyledComponents/modules/StyledLogin/StyledLogin";
 import Animate from "../StyledComponents/modules/StyledProgress/StyledProgress";
+import AuthLogin from "../firebase/AuthLogin";
 import { auth } from "../firebase/firebase";
-import { signUpInSetState } from "../redux/modules/user";
+import { initialFetchedUserPost, signOutSetState, signUpInSetState } from "../redux/modules/user";
 function Login() {
   // const [email, setEmail] = useState("");
   // const [password, setPassword] = useState("");
-
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   // 추가 START
   const post = useSelector((state) => state.post);
   const user = useSelector((state) => state.user);
   const loginFormRef = useRef({});
   const [isLoging, setIsLoging] = useState(false);
   // 추가 END
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const provider = new GoogleAuthProvider();
-  const inputFocus = useRef(null);
-
-  useEffect(() => {
-    inputFocus.current.focus();
-  }, []);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   try {
+  //     const userCredential = await signInWithEmailAndPassword(auth, email, password);
+  //     const user = userCredential.user;
+  //     dispatch(
+  //       signUpInSetState({
+  //         currentUser: true,
+  //         email: user.email,
+  //         photoUrl: user.photoURL,
+  //         userName: user.displayName,
+  //         uid: user.uid
+  //       })
+  //     );
+  //     alert("로그인이 완료되었습니다.");
+  //     navigate("/");
+  //   } catch (error) {
+  //     console.error(error);
+  //     alert("아이디 혹은 비밀번호를 잘못 입력 하셨습니다.");
+  //   }
+  // };
+  const handleSubmitLogin = useCallback(
+    async (e) => {
+      e.preventDefault();
+      if (user.currentUser !== false) return alert("이미 로그인 되어있습니다.");
+      setIsLoging(true);
+      const email = loginFormRef.email;
+      const password = loginFormRef.password;
+      try {
+        await signInFirebase();
+      } catch (e) {
+        throw new Error("로그인 상태 확인해주세요");
+      }
+      email.value = "";
+      password.value = "";
+    },
+    [user.currentUser]
+  );
+  // 파이어베이스와 통신하는 비동기 함수입니다.
+  const signInFirebase = useCallback(async () => {
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-      dispatch(
-        signUpInSetState({
-          currentUser: true,
-          email: user.email,
-          photoUrl: user.photoURL,
-          userName: user.displayName,
-          uid: user.uid
-        })
+      await signInWithEmailAndPassword(auth, loginFormRef.email.value, loginFormRef.password.value).then(
+        (userCredential) => {
+          const userComment = post.filter((target) => {
+            return target.uid === userCredential.user.uid;
+          });
+          dispatch(initialFetchedUserPost(userComment));
+        }
       );
-      alert("로그인이 완료되었습니다.");
-      navigate("/");
-    } catch (error) {
-      console.error(error);
-      alert("아이디 혹은 비밀번호를 잘못 입력 하셨습니다.");
+    } catch (e) {
+      throw new Error("로그인 상태확인해주세요");
     }
-  };
-
+  }, [dispatch, post]);
+  // 로그인 성공시 로그인한 유저의 정보를 'user' state에 전달합니다.
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log("여기까지 오니??");
+        setIsLoging(true);
+        dispatch(
+          signUpInSetState({
+            currentUser: true,
+            email: user.email,
+            photoUrl: user.photoURL,
+            userName: user.displayName,
+            uid: user.uid
+          })
+        );
+        navigate("/");
+      } else {
+        setIsLoging(false);
+        dispatch(signOutSetState());
+      }
+    });
+    return () => {
+      setIsLoging(false);
+    };
+  }, [dispatch, isLoging]);
   // 로그인 페이지 오면 email input에 포커스 하는 useEffect입니다.
   useEffect(() => {
     loginFormRef.email.focus();
@@ -93,17 +141,7 @@ function Login() {
           </St.Links>
           <St.LoginBtn>로그인</St.LoginBtn>
         </form>
-        <St.EasyLoginCon>
-          <St.HorizontalBox></St.HorizontalBox>
-          <St.EasyLogin>간편로그인</St.EasyLogin>
-          <St.HorizontalBox></St.HorizontalBox>
-        </St.EasyLoginCon>
-        <div>
-          <St.SnsBtn>구글로 로그인하기</St.SnsBtn>
-        </div>
-        <div>
-          <St.SnsBtn>깃으로 로그인하기</St.SnsBtn>
-        </div>
+        <AuthLogin />
       </St.LoginLayout>
       {isLoging && (
         <Animate.ProgressContainer>
@@ -117,5 +155,4 @@ function Login() {
     </>
   );
 }
-
 export default Login;
