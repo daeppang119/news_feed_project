@@ -7,16 +7,25 @@ import styled from "styled-components";
 import { auth, storage } from "../../firebase/firebase";
 import { updateUserInfoSetState } from "../../redux/modules/user";
 function SampleImageUpload() {
+  const dispatch = useDispatch();
+  const inputRef = useRef({});
+  const user = useSelector((state) => state.user);
+
+  // 미리보기 사진과 서버에 올릴 사진 state입니다.
   const [previewImage, setPreviewImage] = useState("");
   const [serverImage, setServerImage] = useState("");
-  const [isUploadProfile, setIsUploadProfile] = useState(false);
+
+  //  클릭하면, 이미지 업로드 시작합니다.
+  const [isUploadProfileState, setIsUploadProfileState] = useState(false);
+
+  // 파이어베이스 이동경로 설정해주고 삭제 업뎃 할 때 사용하려고 uuid를 만들어 주었습니다.
   const profilePhotoKey = uuid();
 
+  // profile업로드 할 때 사진안바꿔주면 - 디폴트 처리 하려고 defaultImg로 처리합니다.
   const defaultImg = process.env.PUBLIC_URL + "img/avatar.jpg";
-  const user = useSelector((state) => state.user);
-  const inputRef = useRef({});
+
+  // 업로드 진행률 보여주는 state입니다.
   const [progressBar, setProgressBar] = useState(0);
-  const dispatch = useDispatch();
 
   // 로직은 handleAddPost를 클릭하면, useEffect안에 있는 함수가 실행하여 upload를 합니다.
   // upload를 하는 조건은 이미지 || text가 있어야 합니다. 둘다 있어도 됩니다.
@@ -27,7 +36,7 @@ function SampleImageUpload() {
     inputRef.current.img.click();
   }, []);
 
-  // 이미지 미리보기
+  // 이미지 미리보기 함수
   const handleImgChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -41,12 +50,13 @@ function SampleImageUpload() {
   const handleCancelPreviewImg = () => {
     setPreviewImage(defaultImg);
   };
+
   // handleAddPost를 클릭하면 setIsUpload의 값이 변경되어 리렌더링 되면서 useEffect안에있는 upload함수가 실행됩니다.
   const handleAddPost = () => {
     if (user.currentUser === false) return alert("로그인부터");
     // 현재 글과 이전글이 같고, 이미지가 없으면 return 으로 46번라인 코드 바꿔야함
     if (!serverImage) return;
-    setIsUploadProfile(true);
+    setIsUploadProfileState(true);
   };
 
   // firebase와 통신하는 함수
@@ -61,10 +71,10 @@ function SampleImageUpload() {
           })
         )
       );
-      // upload끝나면 false 해서 useEffect안 firebase통신 함수 진행 불가 시켜주기 + upload끝나면 ui 감춰줘 state
-      setIsUploadProfile(false);
+      // upload끝나면 false 해서 useEffect안 firebase통신 함수 진행 불가 시켜주기 + upload끝나면 ui 감춰주라는 state입니다.
+      setIsUploadProfileState(false);
 
-      // upload끝나면 다시 rest
+      // upload끝나면 다시 progress 진행률 0으로 rest 하는 state입니다.
       setProgressBar(0);
     } catch (e) {
       alert(e);
@@ -83,7 +93,6 @@ function SampleImageUpload() {
           "state_changed",
           (snapshot) => {
             const progressBar = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-            console.log(`Upload is ${progressBar}% done`);
             setProgressBar(progressBar);
           },
           (error) => {
@@ -111,12 +120,13 @@ function SampleImageUpload() {
     }
   };
 
+  // state변경이 되면 재렌더링 후 파이어베이스에 저장해주는 로직입니다.
   useEffect(() => {
-    if (isUploadProfile) {
+    if (isUploadProfileState) {
       upDateFireBase();
     }
-  }, [isUploadProfile]);
-  console.log(isUploadProfile);
+  }, [isUploadProfileState]);
+
   return (
     <StDiv>
       <div style={{ cursor: "pointer" }} onClick={handleImgClick}>
@@ -137,7 +147,8 @@ function SampleImageUpload() {
         <button onClick={handleCancelPreviewImg}>이미지 취소</button>
       </StBtnGroup>
 
-      {isUploadProfile && (
+      {/* 업로드 진행률을 보여주는 코드입니다. */}
+      {isUploadProfileState && (
         <StProgressUploadContainer>
           <span>진행률 {progressBar}%</span>
           <StProgressUploadSpan $progress={progressBar} />
