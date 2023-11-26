@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as St from "../../StyledComponents/modules/StyledCategory/StyledCategory";
+import { auth } from "../../firebase/firebase";
 import { signOutSetState } from "../../redux/modules/user";
 
 function Category({ setCategorizedBox }) {
@@ -50,7 +51,7 @@ function Category({ setCategorizedBox }) {
             <>
               <Link to="/personalPage">
                 <St.UserProfile>
-                  <img src={process.env.PUBLIC_URL + "/categoryimg/usericon.png"} alt="" />
+                  <img src={auth.photoURL || process.env.PUBLIC_URL + "/DefaultProfile/defaultprofile.jpg"} alt="" />
                   <St.UserNameEmail>
                     <St.UserName>{user.userName}</St.UserName>
                     <St.UserEmail>{user.email}</St.UserEmail>

@@ -102,6 +102,7 @@ export const AvatarFigure = styled.div`
 export const NickNameAndEmail = styled.div`
   display: flex;
   flex-direction: column;
+  color: white;
   gap: 2px;
 `;
 export const NickName = styled.p`
@@ -280,5 +281,7 @@ export const DetailImgFigure = styled.div`
   & img {
     width: 120px;
     height: 80px;
+    cursor: zoom-in;
+    border-radius: 10px;
   }
 `;

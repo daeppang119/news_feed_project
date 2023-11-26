@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/StyledMainCard/StyledMainCard";
 // import { auth, db, storage } from "../../firebase/firebase";
+import { auth } from "../../firebase/firebase";
 import { getFormattedDate } from "../../util/date";
 import Category from "../Category/Category";
 import DetailForm from "../DetailForm/DetailForm";
@@ -37,7 +38,7 @@ function MainCard() {
             >
               <St.MainCardUser>
                 <St.MainCardImgNickname>
-                  <img src={item.imgurl} alt="" />
+                  <img src={auth.photoURL || process.env.PUBLIC_URL + "/DefaultProfile/defaultprofile.jpg"} alt="" />
                   <St.MainCardNickname>{item.id}</St.MainCardNickname>
                 </St.MainCardImgNickname>
                 <St.MainCardDate>{getFormattedDate(item.date)}</St.MainCardDate>
