@@ -8,7 +8,7 @@ function Login() {
   return (
     <>
       <St.LoginLayout>
-        <EmailLogin />
+        <EmailLogin isLoging={isLoging} setIsLoging={setIsLoging} />
         {/* social Login */}
         <AuthLogin />
       </St.LoginLayout>

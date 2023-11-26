@@ -1,18 +1,17 @@
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import * as St from "../../StyledComponents/modules/StyledLogin/StyledLogin";
 import { auth } from "../../firebase/firebase";
 import { initialFetchedUserPost, signInSetState } from "../../redux/modules/user";
-function EmailLogin() {
+function EmailLogin({ isLoging, setIsLoging }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   // 추가 START
   const post = useSelector((state) => state.post);
   const user = useSelector((state) => state.user);
   const loginFormRef = useRef({});
-  const [isLoging, setIsLoging] = useState(false);
 
   // 추가 END
 
