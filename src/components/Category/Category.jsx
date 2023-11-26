@@ -1,13 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import * as St from "../../StyledComponents/modules/StyledCategory/StyledCategory";
-import { signOutSetState, signUpSetState } from "../../redux/modules/user";
+import { signOutSetState } from "../../redux/modules/user";
 
 function Category({ setCategorizedBox }) {
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
   const category = useSelector((state) => state.category);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isLoged, setIsLoged] = useState(false);
   const categoryArr = ["All", "Animation", "Game", "Sports", "Book", "Cook", "Lover", "Pet"];
 
@@ -20,9 +22,7 @@ function Category({ setCategorizedBox }) {
     const categorizedPost = post.filter((item) => item.category === event.target.textContent.slice(0, -4));
     categorizedPost.length == 0 ? setCategorizedBox(post) : setCategorizedBox(categorizedPost);
   };
-  const loginhandle = () => {
-    dispatch(signUpSetState({ currentUser: true }));
-  };
+
   const logouthandle = () => {
     dispatch(signOutSetState());
   };
@@ -33,7 +33,13 @@ function Category({ setCategorizedBox }) {
         <St.UserInfo>
           {!user.currentUser ? (
             <>
-              <St.LoginBtn onClick={loginhandle}>로그인</St.LoginBtn>
+              <St.LoginBtn
+                onClick={() => {
+                  navigate("/login");
+                }}
+              >
+                로그인
+              </St.LoginBtn>
               <St.LoginMessage>
                 최애의 아이들이 되어
                 <br />
@@ -42,13 +48,16 @@ function Category({ setCategorizedBox }) {
             </>
           ) : (
             <>
-              <St.UserProfile>
-                <img src={process.env.PUBLIC_URL + "/categoryimg/usericon.png"} alt="" />
-                <St.UserNameEmail>
-                  <St.UserName>{user.userName}</St.UserName>
-                  <St.UserEmail>{user.email}</St.UserEmail>
-                </St.UserNameEmail>
-              </St.UserProfile>
+              <Link to="/personalPage">
+                <St.UserProfile>
+                  <img src={process.env.PUBLIC_URL + "/categoryimg/usericon.png"} alt="" />
+                  <St.UserNameEmail>
+                    <St.UserName>{user.userName}</St.UserName>
+                    <St.UserEmail>{user.email}</St.UserEmail>
+                  </St.UserNameEmail>
+                </St.UserProfile>
+              </Link>
+
               <St.PostLike>
                 <St.Post>
                   <p>게시글</p>
