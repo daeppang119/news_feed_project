@@ -44,7 +44,7 @@ export const MainCard = styled.div`
   background-color: #fff0f5; // var(--defaultColor);
   border-radius: 10px;
   width: 360px;
-  height: 200px;
+  height: 400px;
   padding: 10px;
   margin-bottom: 10px;
   font-size: 12px;
@@ -59,41 +59,50 @@ export const MainCard = styled.div`
     cursor: pointer;
   }
 `;
-export const MainCardTitleUser = styled.div`
-  align-items: center;
-`;
-export const MainCardTitle = styled.h1`
-  font-size: 24px;
-  margin: 15px 10px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`;
-export const MainCardContentWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
-export const MainCardUserImg = styled.div``;
-export const MainCardUser = styled.div`
-  display: flex;
-  align-items: center;
+// export const MainCardTitleUser = styled.div`
+//   align-items: center;
+// `;
+// export const MainCardTitle = styled.h1`
+//   font-size: 24px;
+//   margin: 15px 10px;
+//   overflow: hidden;
+//   text-overflow: ellipsis;
+//   white-space: nowrap;
+// `;
+// export const MainCardContentWrapper = styled.div`
+//   display: flex;
+//   justify-content: space-between;
+// `;
+// export const MainCardUserImg = styled.div``;
+// export const MainCardUser = styled.div`
+//   display: flex;
+//   align-items: center;
 
+//   & img {
+//     margin: 10px;
+//     width: 42px;
+//     height: 42px;
+//     border-radius: 50%;
+//   }
+// `;
+// export const MainCardNicknameDate = styled.div`
+//   align-items: center;
+// `;
+// export const MainCardNickname = styled.p`
+//   font-size: 12px;
+// `;
+export const MainCardImg = styled.div`
+  width: 300px;
+  height: 300px;
+  margin: 5px auto;
   & img {
-    margin: 10px;
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
   }
 `;
-export const MainCardNicknameDate = styled.div`
-  align-items: center;
-`;
-export const MainCardNickname = styled.p`
-  font-size: 12px;
-`;
-export const MainCardEmail = styled.p``;
 export const MainCardDate = styled.p`
-  font-size: 8px;
+  font-size: 10px;
+  color: #828282;
+  padding: 5px 12px 5px 0;
+  float: right;
 `;
 export const MainCardContent = styled.div`
   box-sizing: border-box;
@@ -114,12 +123,4 @@ export const MainCardContent = styled.div`
   ${({ theme }) => theme.mediaQuery.lg`
     font-size: 16px;
 `};
-`;
-export const MainCardImg = styled.div`
-  width: 120px;
-  height: 120px;
-  margin: 5px 0;
-  & img {
-    border-radius: 50%;
-  }
 `;

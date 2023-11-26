@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/StyledMainCard/StyledMainCard";
 // import { auth, db, storage } from "../../firebase/firebase";
-import { auth } from "../../firebase/firebase";
 import { getFormattedDate } from "../../util/date";
 import Category from "../Category/Category";
 import DetailForm from "../DetailForm/DetailForm";
@@ -36,23 +35,10 @@ function MainCard() {
                 onClickPostHandler(item.id);
               }}
             >
-              <St.MainCardContentWrapper>
-                <St.MainCardTitleUser>
-                  <St.MainCardTitle>{item.text}</St.MainCardTitle>
-                  <St.MainCardUser>
-                    <img src={auth.photoURL || process.env.PUBLIC_URL + "/DefaultProfile/defaultprofile.jpg"} alt="" />
-                    <St.MainCardNicknameDate>
-                      <St.MainCardNickname>{item.userName}</St.MainCardNickname>
-                      <St.MainCardDate>{getFormattedDate(item.date)}</St.MainCardDate>
-                    </St.MainCardNicknameDate>
-                  </St.MainCardUser>
-                </St.MainCardTitleUser>
-                <St.MainCardUserImg>
-                  <St.MainCardImg>
-                    <img src={item.imgurl} />
-                  </St.MainCardImg>
-                </St.MainCardUserImg>
-              </St.MainCardContentWrapper>
+              <St.MainCardImg>
+                <img src={item.imgurl} />
+              </St.MainCardImg>
+              <St.MainCardDate>{getFormattedDate(item.date)}</St.MainCardDate>
               <St.MainCardContent>{item.contents}</St.MainCardContent>
             </St.MainCard>
           );
