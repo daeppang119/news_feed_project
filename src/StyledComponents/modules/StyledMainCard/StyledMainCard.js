@@ -37,6 +37,8 @@ export const MainCardContainer = styled.div`
   ${({ theme }) => theme.mediaQuery.lg`
     width: 800px;
     margin: 10px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
   `};
 `;
 export const MainCard = styled.div`
@@ -49,10 +51,8 @@ export const MainCard = styled.div`
   margin-bottom: 10px;
   font-size: 12px;
   ${({ theme }) => theme.mediaQuery.md`
-    width: 568px;
   `};
   ${({ theme }) => theme.mediaQuery.lg`
-    width: 780px;
 
   `};
   &:hover {

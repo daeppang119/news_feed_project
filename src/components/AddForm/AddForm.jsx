@@ -58,6 +58,7 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
       contents: contents,
       uid: auth.currentUser.uid || "",
       isEdit: false,
+      user: user.userName,
       photoKey: photoUrlKeis
     };
     user["post"].unshift(newPost);

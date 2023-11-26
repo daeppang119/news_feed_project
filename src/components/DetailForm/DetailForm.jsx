@@ -319,7 +319,7 @@ function SlideModal({ imgurl }) {
 
 const SliderContainer = styled.div`
   width: 100%;
-  max-width: 320px;
+  max-width: 450px;
   height: 100%;
   &:hover {
     .button-group button {
