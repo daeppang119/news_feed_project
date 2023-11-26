@@ -19,6 +19,8 @@ export const Imgfigure = styled.div`
   margin: 0 auto;
   width: 450px;
   height: 131px;
+  margin-top: 20px;
+  margin-right: 260px;
   ${({ theme: { mediaQuery } }) => mediaQuery.md`
     width: 200px;
     height: 58.2px;
@@ -40,7 +42,9 @@ export const Imgfigure = styled.div`
   `};
   }
 `;
-export const InputLoginBox = styled.div``;
+export const InputLoginBox = styled.div`
+  display: flex;
+`;
 export const InputBox = styled.div`
   ${({ theme: { mediaQuery } }) => mediaQuery.md`
     align-items: center;

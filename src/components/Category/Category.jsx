@@ -45,14 +45,14 @@ function Category({ setCategorizedBox }) {
               <St.UserProfile>
                 <img src={process.env.PUBLIC_URL + "/categoryimg/usericon.png"} alt="" />
                 <St.UserNameEmail>
-                  <St.UserName>최애의 아이들</St.UserName>
-                  <St.UserEmail>testB2B2B2@gmail.com</St.UserEmail>
+                  <St.UserName>{user.userName}</St.UserName>
+                  <St.UserEmail>{user.email}</St.UserEmail>
                 </St.UserNameEmail>
               </St.UserProfile>
               <St.PostLike>
                 <St.Post>
                   <p>게시글</p>
-                  <p>9개</p>
+                  <p>{user.post.length}</p>
                 </St.Post>
                 <St.Like>
                   <p>Today♥︎</p>
