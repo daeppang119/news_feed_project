@@ -64,13 +64,23 @@ export const ModalDiv = styled.div`
   margin: 30px 20px 0px 20px;
 `;
 export const ModalAvatarWrap = styled.figure`
+  display: flex;
+  flex-direction: column;
   padding: 30px;
   /* border-bottom: 1px solid #fac0bb;
   margin: 0px 10px; */
 `;
 export const MAvatar = styled.img`
-  width: 80px;
-  height: 80px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+`;
+export const PreviewAvatar = styled.img`
+  position: absolute;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
 `;
 export const Fix = styled.div`
@@ -82,6 +92,14 @@ export const MEdit = styled.div`
   font-size: 20px;
 `;
 export const EditContent = styled.input`
+  width: 95%;
+  padding: 12px;
+  border-radius: 10px;
+  border-color: transparent;
+  background-color: #fac0bb;
+  margin-top: 10px;
+`;
+export const EditContentfix = styled.input`
   width: 95%;
   padding: 12px;
   border-radius: 10px;

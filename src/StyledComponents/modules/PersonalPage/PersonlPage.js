@@ -91,8 +91,8 @@ export const AvatarWrap = styled.div`
   flex-direction: column;
 `;
 export const Avatar = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
 `;
 export const ImageLabel = styled.label`

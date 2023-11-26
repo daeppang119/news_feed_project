@@ -10,13 +10,12 @@ import Modal from "./MypageModal.jsx";
 function Mypage() {
   const dispatch = useDispatch();
   const [modalOpen, setModalOpen] = useState(false);
+
   const ModalHandler = () => {
     setModalOpen(!modalOpen);
   };
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
-
-  const [haveImg, setHaveImg] = useState(false);
 
   //로그인 여부
   const [loginOk, setloginOk] = useState(user.currentUser);
@@ -54,11 +53,8 @@ function Mypage() {
               {/* 사진 + 변경 */}
               <St.AvatarWrap>
                 <St.Avatar src={user.photoUrl} />
-                <St.ImageLabel for="file">이미지변경</St.ImageLabel>
+                <St.ImageLabel for="file"></St.ImageLabel>
                 <St.ChangeImg id="file" type="file" onChange={handleFileSelect} />
-                <button style={{ cursor: "pointer" }} onClick={handleUpload}>
-                  upload
-                </button>
               </St.AvatarWrap>
               {/* 닉네임, 이메일 */}
               <St.ProfileInfo>
@@ -98,15 +94,16 @@ function Mypage() {
                     <>
                       <St.Feed key={ea.id}>
                         {ea.imgurl.length <= 0 ? (
-                          `${process.env.PUBLIC_URL + "/headerimg/logo.png"}`
+                          <St.MyNews src={process.env.PUBLIC_URL + "/headerimg/logo.png"} />
                         ) : (
                           <St.MyNews src={ea.imgurl} />
                         )}
                         <St.TextWrap>
                           <St.MyText size={"20px"} color={"black"} weight={"700"}>
-                            닉네임 {user.userName}
+                            {user.userName}
                           </St.MyText>
-                          내용{" "}
+                          <hr />
+
                           <St.MyText size={"15px"} color={"white"}>
                             {ea.text}
                           </St.MyText>

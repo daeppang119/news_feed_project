@@ -12,7 +12,6 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }
   const [fireStoreUpdateData, setFireStoreUpdateDate] = useState();
 
   const user = useSelector((state) => state.user);
-  console.log(user);
   const post = useSelector((state) => state.post);
   const textRef = useRef();
 
@@ -112,7 +111,7 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }
                               .map((item) => {
                                 return (
                                   <>
-                                    <St.NickName>{item.userName}</St.NickName>
+                                    <St.NickName key={item}>{item.userName}</St.NickName>
                                     <St.Email>{item.email}</St.Email>
                                   </>
                                 );
