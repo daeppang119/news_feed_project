@@ -11,7 +11,7 @@ import DetailForm from "../DetailForm/DetailForm";
 function MainCard() {
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
-  console.log(post);
+
   const [categoriezedBox, setCategorizedBox] = useState(...[post]);
   const [DetailisOpen, setDetailIsopen] = useState(false);
   const [findTarget, setFindTarget] = useState("");
@@ -28,7 +28,7 @@ function MainCard() {
         <DetailForm DetailisOpen={DetailisOpen} setDetailIsopen={setDetailIsopen} findTarget={findTarget} />
 
         {/* 전체 카드 보여주는 코드  */}
-        {post.map((item) => {
+        {categoriezedBox.map((item) => {
           return (
             <St.MainCard
               key={item.id}
@@ -36,17 +36,24 @@ function MainCard() {
                 onClickPostHandler(item.id);
               }}
             >
-              <St.MainCardUser>
-                <St.MainCardImgNickname>
-                  <img src={auth.photoURL || process.env.PUBLIC_URL + "/DefaultProfile/defaultprofile.jpg"} alt="" />
-                  <St.MainCardNickname>{item.id}</St.MainCardNickname>
-                </St.MainCardImgNickname>
-                <St.MainCardDate>{getFormattedDate(item.date)}</St.MainCardDate>
-              </St.MainCardUser>
-              <St.MainCardContent>{item.text}</St.MainCardContent>
-              <St.MainCardInfo>
-                <St.MainCardLike>♥︎200</St.MainCardLike>
-              </St.MainCardInfo>
+              <St.MainCardContentWrapper>
+                <St.MainCardTitleUser>
+                  <St.MainCardTitle>{item.text}</St.MainCardTitle>
+                  <St.MainCardUser>
+                    <img src={auth.photoURL || process.env.PUBLIC_URL + "/DefaultProfile/defaultprofile.jpg"} alt="" />
+                    <St.MainCardNicknameDate>
+                      <St.MainCardNickname>{item.userName}</St.MainCardNickname>
+                      <St.MainCardDate>{getFormattedDate(item.date)}</St.MainCardDate>
+                    </St.MainCardNicknameDate>
+                  </St.MainCardUser>
+                </St.MainCardTitleUser>
+                <St.MainCardUserImg>
+                  <St.MainCardImg>
+                    <img src={item.imgurl} />
+                  </St.MainCardImg>
+                </St.MainCardUserImg>
+              </St.MainCardContentWrapper>
+              <St.MainCardContent>{item.contents}</St.MainCardContent>
             </St.MainCard>
           );
         })}

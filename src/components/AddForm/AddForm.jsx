@@ -27,6 +27,7 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
       alert("카테고리를 지정해주세요");
       return false;
     }
+    console.log(user.currentUser);
     const text = inputRef.current.text.value;
     const photoUrl = await handleImageUpload();
     if (!user["post"]) user["post"] = [];
@@ -37,7 +38,9 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
       date: new Date().getTime(),
       contents: contents,
       uid: auth.currentUser.uid || "",
-      isEdit: false
+      isEdit: false,
+      userName: user.userName,
+      email: user.email
     };
     user["post"].unshift(newPost);
     dispatch(updateUserInfoSetState({ ...user }));
