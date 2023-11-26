@@ -258,7 +258,7 @@ export const AddDate = styled.p`
 
 export const ImgBox = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   gap: 5px;
   margin-bottom: 5px;
   font-size: 5px;
@@ -278,10 +278,10 @@ export const DetailImgFigure = styled.div`
   margin-bottom: 10px;
   width: 120px;
   height: 80px;
+  position: relative;
   & img {
     width: 120px;
     height: 80px;
-    cursor: zoom-in;
     border-radius: 10px;
   }
 `;

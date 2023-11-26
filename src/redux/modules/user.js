@@ -7,6 +7,9 @@ const FAILED_LOGIN = `${PREFIX}FAILED_LOGIN`;
 const INITIAL_FETECHED_USER_POST = `${PREFIX}INITIAL_FETECHED_USER_POST`;
 const SOCIAL_LOGIN = `${PREFIX}SOCIAL_LOGIN`;
 
+// 추가한 actionValue입니다.
+const ADD_POST = `${PREFIX}ADD_POST`;
+
 export const signUpSetState = (payload) => ({ type: SIGN_UP, payload });
 export const signInSetState = (payload) => ({ type: SIGN_IN, payload });
 export const signOutSetState = (payload) => ({ type: SIGN_OUT, payload });
@@ -17,6 +20,12 @@ export const initialFetchedUserPost = (payload) => ({
 export const updateUserInfoSetState = (payload) => ({ type: UPDATE_INFO, payload });
 export const failedLoginSetState = (payload) => ({ type: FAILED_LOGIN, payload });
 export const signInAuthService = (payload) => ({ type: SOCIAL_LOGIN, payload });
+
+// 추가한 actionCreator입니다.
+export const addPostSetState = (payload) => ({
+  type: ADD_POST,
+  payload
+});
 
 const initialValue = {
   currentUser: false,
@@ -38,8 +47,6 @@ const initialValue = {
       imgurl: "",
       text: "",
       date: "",
-      //게시글
-      contents: "",
       // 로그인한 user의 고유 아이디 입니다.
       uid: "",
       // 이 객체가 firebase에 저장될 때 생성된 고유 아이디 입니다.
@@ -65,6 +72,8 @@ const user = (state = initialValue, action) => {
     case FAILED_LOGIN:
       return { ...state, ...action.payload };
     case SOCIAL_LOGIN:
+      return { ...state, ...action.payload };
+    case ADD_POST:
       return { ...state, ...action.payload };
     default:
       return state;
