@@ -5,7 +5,8 @@ export const Container = styled.div`
   margin: auto;
   background-color: white;
   min-width: 0;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   // 768px 이상일 때;
   ${({ theme: { mediaQuery } }) => mediaQuery.md`
    background-color: #fac0bb;
@@ -14,7 +15,8 @@ export const Container = styled.div`
    
    width:100%;
    display :flex; 
-    height:100vh;
+    height:100%;
+    min-height: 100vh;
   `};
 
   // 1200px 이상일 때;
@@ -22,7 +24,8 @@ export const Container = styled.div`
   background-color: #fac0bb;
   max-width: 1280px;
   display :flex; 
-  height:100vh;
+  height:100%;
+  min-height: 100vh;
   `};
 `;
 
@@ -158,7 +161,6 @@ export const FeedsBox = styled.div`
   background-color: white;
   max-width: 768px;
   box-shadow: 3px 4px 9px 0px rgba(0, 0, 0, 0.3);
-
   ${({ theme: { mediaQuery } }) => mediaQuery.md`
 
     margin-top: 30px;
@@ -267,7 +269,6 @@ export const Feed = styled.div`
   `};
 `;
 
-export const Form = styled.form``;
 export const MyNews = styled.img`
   margin-bottom: 10px;
   width: 100%;

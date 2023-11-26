@@ -113,3 +113,4 @@ export const SaveButton = styled.img`
     transform: scale(1.1);
   }
 `;
+export const Form = styled.form``;

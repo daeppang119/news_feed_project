@@ -4,7 +4,7 @@ import { React, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import * as St from "../../StyledComponents/modules/PersonalPage/PersonlPage.js";
-import { auth, db, storage } from "../../firebase/firebase.js";
+import { auth, storage } from "../../firebase/firebase.js";
 import { updateUserInfoSetState } from "../../redux/modules/user.js";
 import Modal from "./MypageModal.jsx";
 function Mypage() {
@@ -16,9 +16,7 @@ function Mypage() {
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
 
-  console.log(user);
-  console.log(db);
-  console.log(auth);
+  const [haveImg, setHaveImg] = useState(false);
 
   //로그인 여부
   const [loginOk, setloginOk] = useState(user.currentUser);
@@ -99,11 +97,16 @@ function Mypage() {
                   return (
                     <>
                       <St.Feed key={ea.id}>
-                        <St.MyNews src={ea.imgurl} />
+                        {ea.imgurl.length <= 0 ? (
+                          `${process.env.PUBLIC_URL + "/headerimg/logo.png"}`
+                        ) : (
+                          <St.MyNews src={ea.imgurl} />
+                        )}
                         <St.TextWrap>
                           <St.MyText size={"20px"} color={"black"} weight={"700"}>
-                            {user.userName}
+                            닉네임 {user.userName}
                           </St.MyText>
+                          내용{" "}
                           <St.MyText size={"15px"} color={"white"}>
                             {ea.text}
                           </St.MyText>
