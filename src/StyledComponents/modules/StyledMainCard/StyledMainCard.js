@@ -22,6 +22,7 @@ export const MainCategoryAndPost = styled.div`
   ${({ theme }) => theme.mediaQuery.lg`
     width: 1200px;
     transition: 0.3s ease;
+    justify-content: space-between;
   `};
 `;
 
