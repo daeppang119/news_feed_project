@@ -91,14 +91,17 @@ function SampleImageUpload() {
         const uploadTask = uploadBytesResumable(imgRef, serverImage, metaData);
         uploadTask.on(
           "state_changed",
+          // 진행률 보여주는 코드
           (snapshot) => {
             const progressBar = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
             setProgressBar(progressBar);
           },
+          // 에러나면 처리하는 코드
           (error) => {
             const problem = JSON.stringify(error);
             throw new Error(problem);
           },
+          // url
           (a) => {
             getDownloadURL(uploadTask.snapshot.ref).then((url) => {
               resolve(url);
@@ -157,7 +160,10 @@ function SampleImageUpload() {
     </StDiv>
   );
 }
-
+// A 가 B한테 좋아요 받음
+// B가 클릭 한번 더 하면 state 값 0으로 바꾸고
+// A가 좋아요를 받은 user의 정보들이 있나요? A의 uid
+// B의 uid 가 있고
 export default SampleImageUpload;
 const StProgressUploadContainer = styled.div``;
 const StProgressUploadSpan = styled.span`
