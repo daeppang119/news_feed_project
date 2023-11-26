@@ -12,6 +12,7 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }
   const [fireStoreUpdateData, setFireStoreUpdateDate] = useState();
 
   const user = useSelector((state) => state.user);
+  console.log(user);
   const post = useSelector((state) => state.post);
   const textRef = useRef();
 
@@ -100,11 +101,22 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }
                       <St.Warpper onSubmit={(e) => e.preventDefault()}>
                         <St.DetailUserInfo>
                           <St.AvatarFigure>
-                            <img src={user.photoUrl} alt="" />
+                            <img
+                              src={auth.photoURL || process.env.PUBLIC_URL + "/DefaultProfile/defaultprofile.jpg"}
+                              alt=""
+                            />
                           </St.AvatarFigure>
                           <St.NickNameAndEmail>
-                            <St.NickName>{user.userName}</St.NickName>
-                            <St.Email>{user.email}</St.Email>
+                            {post
+                              .filter((item) => item.id === findTarget)
+                              .map((item) => {
+                                return (
+                                  <>
+                                    <St.NickName>{item.userName}</St.NickName>
+                                    <St.Email>{item.email}</St.Email>
+                                  </>
+                                );
+                              })}
                           </St.NickNameAndEmail>
                         </St.DetailUserInfo>
                         <St.TitleAndDate>
@@ -113,7 +125,13 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }
                         </St.TitleAndDate>
                         {item.imgurl ? (
                           <St.DetailImgFigure>
-                            <img src={item.imgurl} alt="" />
+                            <img
+                              onClick={() => {
+                                window.open(item.imgurl);
+                              }}
+                              src={item.imgurl}
+                              alt=""
+                            />
                           </St.DetailImgFigure>
                         ) : (
                           <St.DetailImgFigure style={{ display: "none" }}>
@@ -216,7 +234,10 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }
                       <St.Warpper onSubmit={(e) => e.preventDefault()}>
                         <St.DetailUserInfo>
                           <St.AvatarFigure>
-                            <img src={user.photoUrl} alt="" />
+                            <img
+                              src={auth.photoURL || process.env.PUBLIC_URL + "/DefaultProfile/defaultprofile.jpg"}
+                              alt=""
+                            />
                           </St.AvatarFigure>
                           <St.NickNameAndEmail>
                             <St.NickName>{user.userName}</St.NickName>
@@ -229,7 +250,13 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }
                         </St.TitleAndDate>
                         {item.imgurl ? (
                           <St.DetailImgFigure>
-                            <img src={item.imgurl} alt="" />
+                            <img
+                              onClick={() => {
+                                window.open(item.imgurl);
+                              }}
+                              src={item.imgurl}
+                              alt=""
+                            />
                           </St.DetailImgFigure>
                         ) : (
                           <St.DetailImgFigure style={{ display: "none" }}>
