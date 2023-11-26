@@ -1,13 +1,14 @@
 import { getDownloadURL, uploadBytes } from "@firebase/storage";
 import { ref } from "firebase/storage";
 import { React, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import * as St from "../StyledComponents/modules/PersonalPage/PersonlPage.js";
-import { auth, storage } from "../firebase/firebase.js";
-import Modal from "./Modal.jsx";
+import * as St from "../../StyledComponents/modules/PersonalPage/PersonlPage.js";
+import { auth, db, storage } from "../../firebase/firebase.js";
+import { updateUserInfoSetState } from "../../redux/modules/user.js";
+import Modal from "./MypageModal.jsx";
 function Mypage() {
-  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [modalOpen, setModalOpen] = useState(false);
   const ModalHandler = () => {
     setModalOpen(!modalOpen);

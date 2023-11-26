@@ -2,10 +2,10 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, updateProfile } fro
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import * as St from "../StyledComponents/modules/StyledLogin/StyledLogin";
-import Animate from "../StyledComponents/modules/StyledProgress/StyledProgress";
-import { auth } from "../firebase/firebase";
-import { signUpSetState } from "../redux/modules/user";
+import * as St from "../../StyledComponents/modules/StyledLogin/StyledLogin.js";
+import Animate from "../../StyledComponents/modules/StyledProgress/StyledProgress";
+import { auth } from "../../firebase/firebase.js";
+import { signUpSetState } from "../../redux/modules/user";
 
 function SignUp() {
   const signFormRef = useRef();
