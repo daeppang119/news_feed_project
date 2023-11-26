@@ -65,7 +65,6 @@ function Login() {
             uid: authUser.uid
           })
         );
-        navigate("/");
       }
     });
     return () => {

@@ -229,13 +229,12 @@ export const FeedsWrap = styled.div`
   `};
 `;
 export const Feed = styled.div`
-  gap: 20px;
-  display: flex;
+  gap: 30px;
   font-size: 16px;
   background-color: #fac0bb;
 
   padding: 20px;
-  width: 100%;
+  width: 50%;
   height: 200px;
 
   cursor: pointer;
@@ -243,7 +242,7 @@ export const Feed = styled.div`
   box-shadow: 1px 2px 6px 3px rgba(0, 0, 0, 0.3);
   &:hover {
     transition: 1s;
-    transform: scale(1.1, 1.2);
+    transform: scale(1.1, 1.1);
   }
 
   ${({ theme: { mediaQuery } }) => mediaQuery.md`
@@ -261,8 +260,8 @@ export const Feed = styled.div`
   background-color: #fac0bb;
 
   
-
-  height: 200px;
+  width:300px;
+  height: 250px;
   padding: 20px;
   border-radius: 20px;
   `};
@@ -385,18 +384,23 @@ export const SaveButton = styled.img`
 
 export const Form = styled.form``;
 export const MyNews = styled.img`
-  width: 50%;
-  height: 100%;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 70%;
   border-radius: 10px;
 `;
 export const TextWrap = styled.div`
-  padding: 10px;
+  color: white;
   width: 100%;
-  border: 1px solid white;
   border-radius: 10px;
 `;
 export const MyText = styled.p`
+  font-weight: ${(f) => f.weight};
+  margin-bottom: 10px;
   width: 100%;
-  color: white;
-  width: 100%;
+  color: ${(c) => c.color};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: ${(f) => f.size};
 `;

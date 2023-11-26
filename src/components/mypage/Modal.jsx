@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as St from "../../StyledComponents/modules/PersonalPage/PersonlPage.js";
 import { updateUserInfoSetState } from "../../redux/modules/user.js";
-function Modal({ modalOpen, setModalOpen, image }) {
+function Modal({ modalOpen, setModalOpen }) {
   // modal handler
   const ModalHandler = () => {
     setModalOpen(!modalOpen);
@@ -41,7 +41,7 @@ function Modal({ modalOpen, setModalOpen, image }) {
         </St.ModalHeader>
         <St.ModalDiv>계정</St.ModalDiv>
         <St.ModalAvatarWrap>
-          <St.MAvatar src={image} />
+          <St.MAvatar src={user.photoUrl} />
         </St.ModalAvatarWrap>
 
         <St.Form>

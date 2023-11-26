@@ -2,37 +2,44 @@ import { getDownloadURL, uploadBytes } from "@firebase/storage";
 import { ref } from "firebase/storage";
 import { React, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as St from "../../StyledComponents/modules/PersonalPage/PersonlPage.js";
-import { auth, storage } from "../../firebase/firebase.js";
+import { auth, db, storage } from "../../firebase/firebase.js";
+import { updateUserInfoSetState } from "../../redux/modules/user.js";
 import Modal from "./Modal.jsx";
 function Mypage() {
+  const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
   const ModalHandler = () => {
     setModalOpen(!modalOpen);
   };
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
-  console.log(post);
-  //마이페이지 포스트 초기값배열
+
   console.log(user);
-  //마이페이지 로그인 여부
+  console.log(db);
+  console.log(auth);
+
+  //로그인 여부
   const [loginOk, setloginOk] = useState(user.currentUser);
-  console.log(loginOk);
-  console.log(user.currentUser);
+
   //이미지 state
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
+
   const handleFileSelect = (event) => {
     setImage(event.target.files[0]);
   };
 
   const handleUpload = async () => {
-    const imageRef = ref(storage, `Users/${auth.currentUser.uid}/${image.name}`);
+    const imageRef = ref(storage, `Users/${auth.currentUser.email}/${image.name}`);
     await uploadBytes(imageRef, image);
-
     const downloadURL = await getDownloadURL(imageRef);
-    setImage(downloadURL);
+    dispatch(
+      updateUserInfoSetState({
+        photoUrl: downloadURL
+      })
+    );
   };
 
   return (
@@ -51,8 +58,10 @@ function Mypage() {
               <St.AvatarWrap>
                 <St.Avatar src={user.photoUrl} />
                 <St.ImageLabel for="file">이미지변경</St.ImageLabel>
-                <button onClick={handleUpload}>upload</button>
                 <St.ChangeImg id="file" type="file" onChange={handleFileSelect} />
+                <button style={{ cursor: "pointer" }} onClick={handleUpload}>
+                  upload
+                </button>
               </St.AvatarWrap>
               {/* 닉네임, 이메일 */}
               <St.ProfileInfo>
@@ -71,9 +80,7 @@ function Mypage() {
 
               {/* 로그아웃, 홈 */}
               <St.DirectSection>
-                <Link to={"/"}>
-                  <St.Direct>로그아웃</St.Direct>
-                </Link>
+                <St.Direct>로그아웃</St.Direct>
                 <span>|</span>
                 <Link to={"/sampleMain"}>
                   <St.Direct>홈으로</St.Direct>
@@ -95,8 +102,12 @@ function Mypage() {
                       <St.Feed key={ea.id}>
                         <St.MyNews src={ea.imgurl} />
                         <St.TextWrap>
-                          내용
-                          <St.MyText>{ea.text}</St.MyText>
+                          <St.MyText size={"20px"} color={"black"} weight={"700"}>
+                            {user.userName}
+                          </St.MyText>
+                          <St.MyText size={"15px"} color={"white"}>
+                            {ea.text}
+                          </St.MyText>
                         </St.TextWrap>
                       </St.Feed>
                     </>
