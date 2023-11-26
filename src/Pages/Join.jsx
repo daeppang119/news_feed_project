@@ -42,8 +42,7 @@ function Join() {
       const user = userCredential.user;
       const displayName = user.email.split("@")[0];
       await updateProfile(user, {
-        displayName,
-        photoURL: process.env.PUBLIC_URL + "/DefaultProfile/defaultprofile.jpg"
+        displayName
       });
     } catch (error) {
       switch (error.code) {
@@ -74,7 +73,7 @@ function Join() {
             signUpSetState({
               currentUser: true,
               email: authUser.email,
-              photoUrl: authUser.photoURL,
+              photoUrl: authUser.photoURL || process.env.PUBLIC_URL + "/DefaultProfile/defaultprofile.jpg",
               userName: authUser.displayName,
               uid: authUser.uid
             })
