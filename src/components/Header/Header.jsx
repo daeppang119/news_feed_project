@@ -62,7 +62,13 @@ export default function Header({ setIsopen, setTitle, setContents }) {
           >
             로그인
           </button>
-          <button>회원가입</button>
+          <button
+            onClick={() => {
+              navigate("/join");
+            }}
+          >
+            회원가입
+          </button>
         </St.Buttons>
       </St.Warpper>
     );

@@ -180,7 +180,9 @@ export const Select = styled.select`
   outline: 0;
   border-radius: 3px;
   background-color: transparent;
+  font-size: 5px;
   & option {
+    font-size: 15px;
     ${({ theme: { mediaQuery } }) => mediaQuery.md`
 
   `};

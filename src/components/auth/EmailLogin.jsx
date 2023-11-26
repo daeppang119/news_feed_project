@@ -56,7 +56,7 @@ function EmailLogin({ isLoging, setIsLoging }) {
           signInSetState({
             currentUser: true,
             email: authUser.email,
-            photoUrl: authUser.photoURL,
+            photoUrl: authUser.photoURL || process.env.PUBLIC_URL + "/DefaultProfile/defaultprofile.jpg",
             userName: authUser.displayName,
             uid: authUser.uid
           })
