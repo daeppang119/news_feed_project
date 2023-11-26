@@ -128,14 +128,6 @@ export const Section = styled.section`
   padding: 18px;
   background-color: #fac0bb;
 `;
-// export const EmailSection = styled.section`
-//   gap: 10px;
-//   display: flex;
-//   margin: 10px;
-//   border-radius: 15px;
-//   padding: 18px;
-//   background-color: #fac0bb;
-// `;
 
 export const Span = styled.p`
   word-break: break-all;
@@ -239,13 +231,8 @@ export const Feed = styled.div`
   width: 50%;
   height: 200px;
 
-  cursor: pointer;
   border-radius: 20px;
   box-shadow: 1px 2px 6px 3px rgba(0, 0, 0, 0.3);
-  &:hover {
-    transition: 1s;
-    transform: scale(1.1, 1.1);
-  }
 
   ${({ theme: { mediaQuery } }) => mediaQuery.md`
   background-color: #fac0bb;
@@ -263,7 +250,7 @@ export const Feed = styled.div`
 
   
   width:300px;
-  height: 250px;
+
   padding: 20px;
   border-radius: 20px;
   `};
@@ -272,7 +259,7 @@ export const Feed = styled.div`
 export const MyNews = styled.img`
   margin-bottom: 10px;
   width: 100%;
-  height: 70%;
+  height: 60%;
   border-radius: 10px;
 `;
 export const TextWrap = styled.div`
