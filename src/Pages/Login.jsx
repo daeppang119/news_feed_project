@@ -1,4 +1,4 @@
-import { GoogleAuthProvider, signInWithEmailAndPassword } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,7 +11,6 @@ function Login() {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const provider = new GoogleAuthProvider();
   const inputFocus = useRef(null);
 
   useEffect(() => {
@@ -39,6 +38,19 @@ function Login() {
       console.error(error);
       alert("아이디 혹은 비밀번호를 잘못 입력 하셨습니다.");
     }
+  };
+
+  const googleBtn = async () => {
+    const googleProvider = new GoogleAuthProvider();
+    const googleData = await signInWithPopup(auth, googleProvider);
+    console.log(googleData);
+    navigate("/");
+  };
+  const githubBtn = async () => {
+    const githubProvider = new GithubAuthProvider();
+    const GithubData = await signInWithPopup(auth, githubProvider);
+    console.log(GithubData);
+    navigate("/");
   };
 
   return (
@@ -92,10 +104,10 @@ function Login() {
         <St.HorizontalBox></St.HorizontalBox>
       </St.EasyLoginCon>
       <div>
-        <St.SnsBtn>구글로 로그인하기</St.SnsBtn>
+        <St.SnsBtn onClick={googleBtn}>구글로 로그인하기</St.SnsBtn>
       </div>
       <div>
-        <St.SnsBtn>깃으로 로그인하기</St.SnsBtn>
+        <St.SnsBtn onClick={githubBtn}>깃으로 로그인하기</St.SnsBtn>
       </div>
     </St.LoginLalyout>
   );
