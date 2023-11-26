@@ -42,13 +42,14 @@ export const Container = styled.form`
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  width: 210px;
-  height: 330px;
+  width: 380px;
+  height: 600px;
   margin: auto;
   border-radius: 20px;
-  background-image: url("https://i.pinimg.com/564x/5b/4f/12/5b4f120836f452f0f916a7eb885fdd98.jpg");
+  /* background-image: url("https://i.pinimg.com/564x/5b/4f/12/5b4f120836f452f0f916a7eb885fdd98.jpg");
   background-position: center;
-  background-size: cover;
+  background-size: cover; */
+  background-color: #fff0f5;
   ${({ theme: { mediaQuery } }) => mediaQuery.md`
     width: 330px;
     height: 500px;
@@ -60,11 +61,11 @@ export const Container = styled.form`
 `;
 
 export const Warpper = styled.div`
-  width: 170px;
-  height: 270px;
+  width: 340px;
+  height: 560px;
   border-radius: 30px;
   padding: 10px;
-  border: 1px solid pink;
+  border: 1px solid var(--defaultColor);
   ${({ theme: { mediaQuery } }) => mediaQuery.md`
     scale: 1.5;
   `};
@@ -105,12 +106,8 @@ export const NickNameAndEmail = styled.div`
   color: white;
   gap: 2px;
 `;
-export const NickName = styled.p`
-  font-size: 7px;
-`;
-export const Email = styled.p`
-  font-size: 5px;
-`;
+export const NickName = styled.p``;
+export const Email = styled.p``;
 export const TitleAndDate = styled.div`
   display: flex;
   justify-content: space-between;
@@ -121,31 +118,29 @@ export const TitleAndDate = styled.div`
 
 export const Title = styled.p`
   display: block;
-  font-size: 9px;
+
   margin-left: 3px;
-  color: white;
   width: 100px;
   word-wrap: break-word;
 
   & input {
     width: 55px;
     height: 9px;
-    font-size: 5px;
+
     border: 1px solid salmon;
     border-radius: 5px;
     outline: 0;
     padding: 3px;
     background-color: transparent;
-    color: white;
+
     ${({ theme: { mediaQuery } }) => mediaQuery.md`
       width: 80px;
       height: 10px;
-      font-size: 6px;
+
       margin-left: -2px;
   `};
   }
   & input::placeholder {
-    color: white;
   }
 `;
 
@@ -153,13 +148,13 @@ export const Content = styled.textarea`
   height: 80px;
   width: 160px;
   border: 1px solid salmon;
-  font-size: 7px;
+
   padding: 5px;
   border-radius: 5px;
   resize: none;
   outline: 0;
   background-color: transparent;
-  color: white;
+
   font-weight: 700;
 `;
 
@@ -172,7 +167,6 @@ export const Selecter = styled.div`
 `;
 
 export const Lable = styled.p`
-  font-size: 8px;
   color: white;
 `;
 
@@ -181,9 +175,8 @@ export const Select = styled.select`
   outline: 0;
   border-radius: 3px;
   background-color: transparent;
-  font-size: 5px;
+
   & option {
-    font-size: 15px;
     ${({ theme: { mediaQuery } }) => mediaQuery.md`
 
   `};
@@ -204,7 +197,6 @@ export const Buttons = styled.div`
   }
 
   & button {
-    font-size: 5px;
     padding: 3px 5px;
     background-color: transparent;
     color: pink;
@@ -214,7 +206,7 @@ export const Buttons = styled.div`
     cursor: pointer;
     transition: all 0.2s;
     ${({ theme: { mediaQuery } }) => mediaQuery.md`
-    font-size: 7px;
+
   `};
   }
 `;
@@ -225,13 +217,12 @@ export const DetailContent = styled.p`
   height: 80px;
   width: 160px;
   border: 1px solid salmon;
-  font-size: 7px;
+
   padding: 5px;
   border-radius: 5px;
   resize: none;
   outline: 0;
   background-color: transparent;
-  color: white;
   font-weight: 700;
 `;
 
@@ -250,8 +241,6 @@ export const DetailUserInfo = styled.div`
 
 export const AddDate = styled.p`
   margin-right: 5px;
-  font-size: 5px;
-  color: white;
 `;
 
 // 이미지 부분
@@ -261,15 +250,13 @@ export const ImgBox = styled.div`
   flex-direction: row;
   gap: 5px;
   margin-bottom: 5px;
-  font-size: 5px;
+
   align-items: center;
   border: 1px solid salmon;
   width: 120px;
   padding: 3px;
   border-radius: 5px;
-  color: white;
   & input {
-    font-size: 5px;
   }
 `;
 
