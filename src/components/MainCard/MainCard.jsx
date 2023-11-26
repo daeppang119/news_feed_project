@@ -10,7 +10,8 @@ import DetailForm from "../DetailForm/DetailForm";
 function MainCard() {
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
-  const [categoriezedBox, setCategorizedBox] = useState(post);
+  console.log(post);
+  const [categoriezedBox, setCategorizedBox] = useState(...[post]);
   const [DetailisOpen, setDetailIsopen] = useState(false);
   const [findTarget, setFindTarget] = useState("");
   const onClickPostHandler = (id) => {
@@ -26,7 +27,7 @@ function MainCard() {
         <DetailForm DetailisOpen={DetailisOpen} setDetailIsopen={setDetailIsopen} findTarget={findTarget} />
 
         {/* 전체 카드 보여주는 코드  */}
-        {categoriezedBox.map((item) => {
+        {post.map((item) => {
           return (
             <St.MainCard
               key={item.id}

@@ -1,4 +1,4 @@
-import { addDoc, collection, getDocs, query } from "firebase/firestore";
+import { addDoc, collection, getDocs, orderBy, query } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -43,7 +43,7 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
     dispatch(updateUserInfoSetState({ ...user }));
 
     await addDoc(userDataRef, newPost);
-    const q = query(userDataRef);
+    const q = query(userDataRef, orderBy("date", "desc"));
     const querySnapshot = await getDocs(q);
     const dataSet = new Set();
     querySnapshot.forEach((doc) => {
@@ -125,6 +125,7 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
                     <button
                       type="button"
                       onClick={() => {
+                        //
                         handleAddPost();
                         if (title && contents && category) {
                           setIsopen(false);
