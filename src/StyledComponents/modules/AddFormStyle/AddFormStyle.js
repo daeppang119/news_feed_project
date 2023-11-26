@@ -263,11 +263,11 @@ export const ImgBox = styled.div`
 export const DetailImgFigure = styled.div`
   margin: 0 auto;
   margin-bottom: 10px;
-  width: 120px;
-  height: 80px;
+  width: 200px;
+  height: 200px;
   & img {
-    width: 120px;
-    height: 80px;
+    width: 200px;
+    height: 200px;
     cursor: zoom-in;
     border-radius: 10px;
   }
