@@ -25,7 +25,7 @@ export const auth = getAuth(app);
 export const storage = getStorage(app);
 
 // db안에 storage에 등록한 이미지 저장 주소와 text 등을 string으로 담고있는 Cloud firebase 입니다.
-export const db = getFirestore(firebaseApp);
+export const db = getFirestore(app);
 
 console.log("db", db);
 console.log("storage", storage);
