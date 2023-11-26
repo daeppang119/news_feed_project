@@ -1,10 +1,17 @@
-import React, { useState } from "react";
-import * as St from "../StyledComponents/modules/StyledLogin/StyledLogin";
-import Animate from "../StyledComponents/modules/StyledProgress/StyledProgress";
-import AuthLogin from "../components/auth/AuthLogin";
-import EmailLogin from "../components/auth/EmailLogin";
-function Login() {
-  const [isLoging, setIsLoging] = useState(false);
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import React, { useCallback, useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import * as St from "../../StyledComponents/modules/StyledLogin/StyledLogin";
+import { auth } from "../../firebase/firebase";
+import { initialFetchedUserPost, signInSetState } from "../../redux/modules/user";
+function EmailLogin({ isLoging, setIsLoging }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  // 추가 START
+  const post = useSelector((state) => state.post);
+  const user = useSelector((state) => state.user);
+  const loginFormRef = useRef({});
 
   // 추가 END
 
@@ -49,7 +56,7 @@ function Login() {
           signInSetState({
             currentUser: true,
             email: authUser.email,
-            photoUrl: authUser.photoURL,
+            photoUrl: authUser.photoURL || process.env.PUBLIC_URL + "/DefaultProfile/defaultprofile.jpg",
             userName: authUser.displayName,
             uid: authUser.uid
           })
@@ -68,21 +75,34 @@ function Login() {
   }, []);
   return (
     <>
-      <St.LoginLayout>
-        <EmailLogin isLoging={isLoging} setIsLoging={setIsLoging} />
-        {/* social Login */}
-        <AuthLogin />
-      </St.LoginLayout>
-      {isLoging && (
-        <Animate.ProgressContainer>
+      <Link to="/">
+        <St.Logo>
+          <img src={process.env.PUBLIC_URL + "/Logo/logo.png"} alt="" />
+        </St.Logo>
+      </Link>
+      <form onSubmit={handleSubmitLogin}>
+        <div>
+          <St.Ir>아이디(이메일)</St.Ir>
+          <St.LoginForwardRefInput type="email" placeholder="아이디(이메일)" name="email" ref={loginFormRef} />
+        </div>
+        <div>
+          <St.Ir>패스워드</St.Ir>
+          <St.LoginForwardRefInput type="password" placeholder="패스워드" name="password" ref={loginFormRef} />
+        </div>
+        <St.Links>
           <div>
-            {Animate.EffectionsNumber.map((a) => {
-              return <Animate.ProgressSpan key={a} $i={a} />;
-            })}
+            <St.LinksA>아이디 찾기</St.LinksA>
+            <St.Box></St.Box>
+            <St.LinksA>비밀번호 찾기</St.LinksA>
           </div>
-        </Animate.ProgressContainer>
-      )}
+          <St.LinksA>
+            <Link to="/join">회원가입</Link>
+          </St.LinksA>
+        </St.Links>
+        <St.LoginBtn onClick={handleSubmitLogin}>로그인</St.LoginBtn>
+      </form>
     </>
   );
 }
-export default Login;
+
+export default EmailLogin;

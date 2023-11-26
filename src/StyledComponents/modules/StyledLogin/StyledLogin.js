@@ -91,7 +91,7 @@ export const HorizontalBox = styled.div`
 `;
 
 export const SnsBtn = styled.button`
-  width: 360px;
+  width: 320px;
   height: 50px;
   font-size: 16px;
   text-align: center;

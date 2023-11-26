@@ -7,6 +7,7 @@ import theme from "./StyledComponents/theme/theme";
 import { db } from "./firebase/firebase";
 import { initialFetchPost } from "./redux/modules/post";
 import Router from "./shared/Router";
+
 function App() {
   const post = useSelector((state) => state.post);
   const user = useSelector((state) => state.user);
@@ -17,7 +18,7 @@ function App() {
     console.log("app에서 실행");
     // 전체 users라는 문서에서 내용물 다 가져오기
     // orderBy(key값,"desc||asc")
-    const q = query(collection(db, "users"), orderBy("date", "desc"));
+    const q = query(collection(db, "users"), orderBy("date", "asc"));
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       post.unshift({ ...doc.data(), id: doc.id });
@@ -61,10 +62,12 @@ function App() {
     }
   }, [initialFetchData, post.length]);
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <Router />
-    </ThemeProvider>
+    <>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <Router />
+      </ThemeProvider>
+    </>
   );
 }
 

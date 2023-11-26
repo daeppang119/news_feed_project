@@ -11,6 +11,7 @@ function SampleLayout({ children }) {
           <Link to={"SampleImageUpload"}>SampleImageUpload로</Link>
           <Link to={"login"}>우리 진짜의 로그인 창으로</Link>
           <Link to={"personalPage"}>개인페이지</Link>
+          <Link to={"SampleSocialLogin"}>SampleSocialLogin으로</Link>
         </ul>
       </Div>
       {children}

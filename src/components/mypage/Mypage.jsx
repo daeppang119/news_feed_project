@@ -1,11 +1,10 @@
 import { getDownloadURL, uploadBytes } from "@firebase/storage";
 import { ref } from "firebase/storage";
 import { React, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import * as St from "../../StyledComponents/modules/PersonalPage/PersonlPage.js";
-import { auth, db, storage } from "../../firebase/firebase.js";
-import { updateUserInfoSetState } from "../../redux/modules/user.js";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import * as St from "../StyledComponents/modules/PersonalPage/PersonlPage.js";
+import { auth, storage } from "../firebase/firebase.js";
 import Modal from "./Modal.jsx";
 function Mypage() {
   const navigate = useNavigate();
@@ -25,7 +24,6 @@ function Mypage() {
 
   //이미지 state
   const [image, setImage] = useState(null);
-  const dispatch = useDispatch();
 
   const handleFileSelect = (event) => {
     setImage(event.target.files[0]);
@@ -82,7 +80,7 @@ function Mypage() {
               <St.DirectSection>
                 <St.Direct>로그아웃</St.Direct>
                 <span>|</span>
-                <Link to={"/sampleMain"}>
+                <Link to={"/"}>
                   <St.Direct>홈으로</St.Direct>
                 </Link>
               </St.DirectSection>
