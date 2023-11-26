@@ -14,6 +14,7 @@ export const MainCategoryAndPost = styled.div`
   // 카테고리 메인 묶어서 나란히 만들기
   margin: 0 auto;
   transition: 0.3s ease-in-out;
+
   ${({ theme }) => theme.mediaQuery.md`
   display: flex;
   width: 768px;

@@ -1,16 +1,15 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import * as St from "../../StyledComponents/modules/HeaderStyle/StyledHeader";
-import { signUpSetState } from "../../redux/modules/user";
+import { signOutSetState } from "../../redux/modules/user";
 
 export default function Header({ setIsopen, setTitle, setContents }) {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const loginhandle = () => {
-    dispatch(signUpSetState({ currentUser: true }));
-  };
+  const navigate = useNavigate();
   const logouthandle = () => {
-    dispatch(signUpSetState({ currentUser: false }));
+    dispatch(signOutSetState());
   };
   // console.log(user.CurrentUser);
   if (user.currentUser) {
@@ -56,7 +55,13 @@ export default function Header({ setIsopen, setTitle, setContents }) {
         </St.InputBox>
 
         <St.Buttons>
-          <button onClick={loginhandle}>로그인</button>
+          <button
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            로그인
+          </button>
           <button>회원가입</button>
         </St.Buttons>
       </St.Warpper>
