@@ -108,7 +108,7 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }
                           </St.AvatarFigure>
                           <St.NickNameAndEmail>
                             {post
-                              .filter((item) => item.id === findTarget)
+                              .filter((item) => item.uid === post.uid)
                               .map((item) => {
                                 return (
                                   <>
