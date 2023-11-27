@@ -1,11 +1,11 @@
 import { deleteDoc, doc, updateDoc } from "firebase/firestore";
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styled from "styled-components";
 import * as St from "../../StyledComponents/modules/AddFormStyle/AddFormStyle";
 import { auth, db } from "../../firebase/firebase";
 import { editPost, removePost } from "../../redux/modules/post";
 import { getFormattedDate } from "../../util/date";
+import SlideModal from "./SlideModal";
 export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }) {
   const [isEditing, setIsEditing] = useState(false);
   const [fireStoreRemoveDate, setFireStoreRemoveDate] = useState();
@@ -267,106 +267,3 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }
     );
   }
 }
-function SlideModal({ imgurl }) {
-  console.log(imgurl);
-  const [imageIndex, setImageIndex] = useState(0);
-  const showNextImage = () => {
-    setImageIndex((idx) => {
-      if (idx === imgurl.length - 1) return 0;
-      return idx + 1;
-    });
-  };
-  const showPrevImage = () => {
-    setImageIndex((idx) => {
-      if (idx === 0) return imgurl.length - 1;
-      return idx - 1;
-    });
-  };
-
-  return (
-    <SliderContainer>
-      <div>
-        <div className="slide-wrapper">
-          {imgurl.map((url) => (
-            <img key={url} src={url} alt="" style={{ translate: `${-100 * imageIndex}%` }} />
-          ))}
-
-          <div className="button-group">
-            <button
-              className="right-button"
-              style={{ right: "0", display: `${imageIndex === imgurl.length - 1 ? "none" : "block"}` }}
-              onClick={showNextImage}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
-              </svg>
-            </button>
-            <button
-              className="left-button"
-              style={{ left: "0", display: `${imageIndex === 0 ? "none" : "block"}` }}
-              onClick={showPrevImage}
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-    </SliderContainer>
-  );
-}
-
-const SliderContainer = styled.div`
-  width: 100%;
-  max-width: 450px;
-  height: 100%;
-  &:hover {
-    .button-group button {
-      opacity: 1;
-      visibility: 1;
-    }
-  }
-  position: relative;
-  > div {
-    width: 100%;
-    height: 100%;
-  }
-  .slide-wrapper {
-    width: 100%;
-    overflow: hidden;
-    display: flex;
-  }
-
-  img {
-    display: block;
-    aspect-ratio: 4/3;
-    width: 100%;
-    object-fit: cover;
-    flex-shrink: 0;
-    flex-grow: 0;
-    transition: translate 300ms ease-in-out;
-  }
-
-  .button-group button {
-    display: block;
-    position: absolute;
-    opacity: 0;
-    visibility: 0;
-    top: 0;
-    bottom: 0;
-    padding: 8px;
-    cursor: pointer;
-    transition: background-color 100ms ease-in-out;
-    &:hover,
-    &:focus-visible {
-      background-color: rgba(0, 0, 0, 0.1);
-    }
-    svg {
-      stroke: white;
-      fill: #000;
-      width: 16px;
-      height: 8px;
-    }
-  }
-`;

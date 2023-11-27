@@ -1,8 +1,8 @@
 import styled from "styled-components";
+
 export const SliderContainer = styled.div`
   width: 100%;
-  max-width: 320px;
-  height: 240px;
+  max-width: 300px;
   &:hover {
     .button-group button {
       opacity: 1;
@@ -36,10 +36,11 @@ export const SliderContainer = styled.div`
     position: absolute;
     opacity: 0;
     visibility: 0;
-    top: 0;
-    bottom: 0;
-    padding: 16px;
+    top: 50%;
+    transform: translate(0, -50%);
+    padding: 4px;
     cursor: pointer;
+    border-radius: 100%;
     transition: background-color 100ms ease-in-out;
     &:hover,
     &:focus-visible {
@@ -48,9 +49,35 @@ export const SliderContainer = styled.div`
     svg {
       stroke: white;
       fill: #000;
-      width: 32px;
-      height: 32px;
+      width: 12px;
+      height: 8px;
     }
+  }
+`;
+export const MyPersonalSlideContainer = styled(SliderContainer)`
+  height: 146px;
+  border-radius: 12px;
+  overflow: hidden;
+`;
+export const MyPersonalBtn = styled.button`
+  position: absolute;
+  display: block;
+  opacity: 0;
+  visibility: 0;
+  top: 50%;
+  transform: translate(0, -50%);
+  padding: 16px !important;
+  cursor: pointer;
+  border-radius: 100%;
+  &:hover,
+  &:focus-visible {
+    background-color: transparent !important;
+  }
+  svg {
+    stroke: white;
+    fill: #000;
+    width: 24px !important;
+    height: 16px !important;
   }
 `;
 export const DeleteImage = styled.button`
@@ -71,11 +98,4 @@ export const DeleteImage = styled.button`
     background-color: transparent;
     color: #333;
   }
-`;
-
-export const Div = styled.div`
-  display: grid;
-  place-content: center center;
-  font-size: 30px;
-  height: 100vh;
 `;

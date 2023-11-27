@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import * as St from "../../StyledComponents/modules/PersonalPage/PersonlPage.js";
 import { auth, storage } from "../../firebase/firebase.js";
 import { updateUserInfoSetState } from "../../redux/modules/user.js";
+import MyPageSlide from "./MyPageSlide.jsx";
 import Modal from "./MypageModal.jsx";
 function Mypage() {
   const dispatch = useDispatch();
@@ -40,9 +41,7 @@ function Mypage() {
 
   return (
     <>
-      {loginOk === false ? (
-        <h1>ㅎㅇ</h1>
-      ) : (
+      {loginOk && (
         <St.Container>
           <St.ProfileWrap>
             <St.ProfileBox>
@@ -53,7 +52,7 @@ function Mypage() {
               {/* 사진 + 변경 */}
               <St.AvatarWrap>
                 <St.Avatar src={user.photoUrl} />
-                <St.ImageLabel for="file"></St.ImageLabel>
+                <St.ImageLabel html-for="file"></St.ImageLabel>
                 <St.ChangeImg id="file" type="file" onChange={handleFileSelect} />
               </St.AvatarWrap>
               {/* 닉네임, 이메일 */}
@@ -96,7 +95,7 @@ function Mypage() {
                         {ea.imgurl.length <= 0 ? (
                           <St.MyNews src={process.env.PUBLIC_URL + "/headerimg/logo.png"} />
                         ) : (
-                          <St.MyNews src={ea.imgurl} />
+                          <MyPageSlide imgurl={ea.imgurl} />
                         )}
                         <St.TextWrap>
                           <St.MyText size={"20px"} color={"black"} weight={"700"}>
