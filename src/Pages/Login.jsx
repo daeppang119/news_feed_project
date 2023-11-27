@@ -6,6 +6,8 @@ import EmailLogin from "../components/auth/EmailLogin";
 function Login() {
   const [isLoging, setIsLoging] = useState(false);
 
+  // 추가 END
+
   return (
     <>
       <St.LoginLayout>

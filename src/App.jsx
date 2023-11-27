@@ -5,13 +5,14 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./StyledComponents/GlobalStyle";
 import theme from "./StyledComponents/theme/theme";
 import { db } from "./firebase/firebase";
+import { setInitialListCount } from "./redux/modules/category";
 import { initialFetchPost } from "./redux/modules/post";
 import Router from "./shared/Router";
 
 function App() {
   const post = useSelector((state) => state.post);
   const user = useSelector((state) => state.user);
-  console.log(user);
+  // console.log(user);
   // console.log(post);
   const dispatch = useDispatch();
   const initialFetchData = useCallback(async () => {
@@ -24,6 +25,17 @@ function App() {
       post.unshift({ ...doc.data(), id: doc.id });
       dispatch(initialFetchPost(post));
     });
+    const initialSetCategory = post.reduce((acc, item) => {
+      let count = 1;
+      if (!acc[item.category]) {
+        acc[item.category] = count;
+      } else {
+        acc[item.category] += count;
+      }
+      return acc;
+    }, {});
+    // console.log(initialSetCategory);
+    dispatch(setInitialListCount(initialSetCategory));
 
     // users의 특정 문서에서 내용물 다 가져오기 - 로그인 시 무언가 해줄 때 좋을듯
     // const conditionRef = collection(db, "users");

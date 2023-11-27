@@ -5,14 +5,13 @@ import * as St from "../../StyledComponents/modules/AddFormStyle/AddFormStyle";
 import { auth, db } from "../../firebase/firebase";
 import { editPost, removePost } from "../../redux/modules/post";
 import { getFormattedDate } from "../../util/date";
-
+import SlideModal from "./SlideModal";
 export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }) {
   const [isEditing, setIsEditing] = useState(false);
   const [fireStoreRemoveDate, setFireStoreRemoveDate] = useState();
   const [fireStoreUpdateData, setFireStoreUpdateDate] = useState();
 
   const user = useSelector((state) => state.user);
-  console.log(user);
   const post = useSelector((state) => state.post);
   const textRef = useRef();
 
@@ -97,8 +96,8 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }
                   }}
                 >
                   <St.Main>
-                    <St.Container>
-                      <St.Warpper onSubmit={(e) => e.preventDefault()}>
+                    <St.Container onSubmit={(e) => e.preventDefault()}>
+                      <St.Warpper>
                         <St.DetailUserInfo>
                           <St.AvatarFigure>
                             <img
@@ -112,7 +111,7 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }
                               .map((item) => {
                                 return (
                                   <>
-                                    <St.NickName>{item.userName}</St.NickName>
+                                    <St.NickName key={item}>{item.userName}</St.NickName>
                                     <St.Email>{item.email}</St.Email>
                                   </>
                                 );
@@ -125,17 +124,11 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }
                         </St.TitleAndDate>
                         {item.imgurl ? (
                           <St.DetailImgFigure>
-                            <img
-                              onClick={() => {
-                                window.open(item.imgurl);
-                              }}
-                              src={item.imgurl}
-                              alt=""
-                            />
+                            <SlideModal imgurl={item.imgurl} />
                           </St.DetailImgFigure>
                         ) : (
                           <St.DetailImgFigure style={{ display: "none" }}>
-                            <img src={item.imgurl} alt="" />
+                            <SlideModal imgurl={item.imgurl} />
                           </St.DetailImgFigure>
                         )}
                         {isEditing ? (
@@ -230,8 +223,8 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }
                   }}
                 >
                   <St.Main>
-                    <St.Container>
-                      <St.Warpper onSubmit={(e) => e.preventDefault()}>
+                    <St.Container onSubmit={(e) => e.preventDefault()}>
+                      <St.Warpper>
                         <St.DetailUserInfo>
                           <St.AvatarFigure>
                             <img
@@ -250,17 +243,11 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }
                         </St.TitleAndDate>
                         {item.imgurl ? (
                           <St.DetailImgFigure>
-                            <img
-                              onClick={() => {
-                                window.open(item.imgurl);
-                              }}
-                              src={item.imgurl}
-                              alt=""
-                            />
+                            <SlideModal imgurl={item.imgurl} />
                           </St.DetailImgFigure>
                         ) : (
                           <St.DetailImgFigure style={{ display: "none" }}>
-                            <img src={item.imgurl} alt="" />
+                            <SlideModal imgurl={item.imgurl} />
                           </St.DetailImgFigure>
                         )}
 

@@ -2,11 +2,12 @@ import { addDoc, collection, getDocs, orderBy, query } from "firebase/firestore"
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import React, { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import uuid from "react-uuid";
 import * as St from "../../StyledComponents/modules/AddFormStyle/AddFormStyle";
 import { auth, db, storage } from "../../firebase/firebase";
 import { updatePost } from "../../redux/modules/post";
 import { updateUserInfoSetState } from "../../redux/modules/user";
-
+import AddSlider from "./AddSlider";
 export default function AddForm({ isOpen, setIsopen, contents, setContents, title, setTitle }) {
   const [category, setCategory] = useState("");
   const user = useSelector((state) => state.user);
@@ -15,6 +16,26 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
   const inputRef = useRef({});
   const categoryArr = ["All", "Animation", "Game", "Sports", "Book", "Cook", "Lover", "Pet"];
 
+  const [showImages, setShowImages] = useState([]);
+  const [uploadImages, setUploadImages] = useState([]);
+  // 이미지 미리보여주는 함수
+  const previewImages = (e) => {
+    const files = e.target.files;
+    let imagesUrl = [...showImages];
+    uploadImages.push(files[0]);
+
+    for (let i = 0; i < files.length; i++) {
+      const currentImageUrl = URL.createObjectURL(files[i]);
+      imagesUrl.push(currentImageUrl);
+    }
+
+    if (imagesUrl.length > 5) {
+      imagesUrl.splice(0, 5);
+    }
+
+    setShowImages(imagesUrl);
+  };
+  console.log(uploadImages);
   const handleAddPost = async () => {
     if (!user.currentUser) return alert("로그인 후 작성 할 수 있습니다.");
     if (title === "") {
@@ -27,17 +48,18 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
       alert("카테고리를 지정해주세요");
       return false;
     }
-    const text = inputRef.current.text.value;
-    const photoUrl = await handleImageUpload();
+    const [photoUrlKeis, imagesUrl] = await handleUpLoadPostImages();
     if (!user["post"]) user["post"] = [];
     const newPost = {
       category: category,
-      imgurl: photoUrl || "",
+      imgurl: imagesUrl || "",
       text: title,
       date: new Date().getTime(),
       contents: contents,
       uid: auth.currentUser.uid || "",
-      isEdit: false
+      isEdit: false,
+      user: user.userName,
+      photoKey: photoUrlKeis
     };
     user["post"].unshift(newPost);
     dispatch(updateUserInfoSetState({ ...user }));
@@ -54,17 +76,18 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
     dispatch(updatePost(newPostState));
   };
 
-  const handleImageUpload = async () => {
-    const imgFile = inputRef.current.img.files[0];
-    try {
-      if (!imgFile) return;
-      const imgRef = ref(storage, `Users/${auth.currentUser.uid}/${imgFile.name}`);
-      await uploadBytes(imgRef, imgFile);
-      const downloadUrl = await getDownloadURL(imgRef);
-      return downloadUrl;
-    } catch (e) {
-      alert("img:", e);
+  const handleUpLoadPostImages = async () => {
+    let photoUrlKeis = [];
+    let imagesUrl = [];
+    for (let i = 0; i < uploadImages.length; i++) {
+      const postUrlKey = uuid();
+      photoUrlKeis.push(postUrlKey);
+      let upLoadImageRef = ref(storage, `${user.uid}/${postUrlKey}`);
+      await uploadBytes(upLoadImageRef, uploadImages[i]);
+      await getDownloadURL(upLoadImageRef).then((url) => imagesUrl.push(url));
     }
+    setUploadImages([]);
+    return [photoUrlKeis, imagesUrl];
   };
 
   if (auth.currentUser) {
@@ -99,7 +122,14 @@ export default function AddForm({ isOpen, setIsopen, contents, setContents, titl
                     </St.Title>
                   </St.TitleAndDate>
                   <St.ImgBox>
-                    이미지 : <input type="file" ref={(props) => (inputRef.current["img"] = props)} />
+                    {showImages.length ? <AddSlider showImages={showImages} setShowImages={setShowImages} /> : null}
+                    이미지 :
+                    <input
+                      type="file"
+                      multiple
+                      ref={(props) => (inputRef.current["img"] = props)}
+                      onChange={previewImages}
+                    />
                   </St.ImgBox>
                   <St.Content
                     value={contents}

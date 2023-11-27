@@ -5,7 +5,8 @@ export const Container = styled.div`
   margin: auto;
   background-color: white;
   min-width: 0;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
   // 768px 이상일 때;
   ${({ theme: { mediaQuery } }) => mediaQuery.md`
    background-color: #fac0bb;
@@ -14,7 +15,8 @@ export const Container = styled.div`
    
    width:100%;
    display :flex; 
-    height:100vh;
+    height:100%;
+    min-height: 100vh;
   `};
 
   // 1200px 이상일 때;
@@ -22,7 +24,8 @@ export const Container = styled.div`
   background-color: #fac0bb;
   max-width: 1280px;
   display :flex; 
-  height:100vh;
+  height:100%;
+  min-height: 100vh;
   `};
 `;
 
@@ -88,8 +91,8 @@ export const AvatarWrap = styled.div`
   flex-direction: column;
 `;
 export const Avatar = styled.img`
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
 `;
 export const ImageLabel = styled.label`
@@ -125,14 +128,6 @@ export const Section = styled.section`
   padding: 18px;
   background-color: #fac0bb;
 `;
-// export const EmailSection = styled.section`
-//   gap: 10px;
-//   display: flex;
-//   margin: 10px;
-//   border-radius: 15px;
-//   padding: 18px;
-//   background-color: #fac0bb;
-// `;
 
 export const Span = styled.p`
   word-break: break-all;
@@ -158,7 +153,6 @@ export const FeedsBox = styled.div`
   background-color: white;
   max-width: 768px;
   box-shadow: 3px 4px 9px 0px rgba(0, 0, 0, 0.3);
-
   ${({ theme: { mediaQuery } }) => mediaQuery.md`
 
     margin-top: 30px;
@@ -229,23 +223,16 @@ export const FeedsWrap = styled.div`
   `};
 `;
 export const Feed = styled.div`
-  gap: 20px;
-  display: flex;
+  gap: 30px;
   font-size: 16px;
   background-color: #fac0bb;
 
   padding: 20px;
-  width: 100%;
+  width: 50%;
   height: 200px;
 
-  cursor: pointer;
   border-radius: 20px;
   box-shadow: 1px 2px 6px 3px rgba(0, 0, 0, 0.3);
-  &:hover {
-    transition: 1s;
-    width: 500px;
-    height: 220px;
-  }
 
   ${({ theme: { mediaQuery } }) => mediaQuery.md`
   background-color: #fac0bb;
@@ -262,142 +249,31 @@ export const Feed = styled.div`
   background-color: #fac0bb;
 
   
+  width:300px;
 
-  height: 200px;
   padding: 20px;
   border-radius: 20px;
   `};
 `;
 
-export const ModalBox = styled.div`
-  visibility: visible;
-  position: fixed;
-  inset: 0px;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: saturate(180%) blur(8px);
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const ModalContent = styled.div`
-  width: 520px;
-  background-color: white;
-  border-radius: 30px;
-  max-height: 90vh;
-  min-height: 70vh;
-  overflow-y: auto;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 12px 60px 5px;
-  ${({ theme: { mediaQuery } }) => mediaQuery.md`
-  width:100%;
-  max-width: 620px;
-  `}
-
-  ${({ theme }) => theme.mediaQuery.lg` 
-  width:100%;
-  max-width: 620px;
-   `}
-`;
-
-export const ModalHeader = styled.div`
-  background-color: white;
-  border-top-right-radius: 30px;
-  border-top-left-radius: 30px;
-`;
-export const CloseWrap = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-export const CloseBtn = styled.img`
-  position: relative;
-  right: 20px;
-  top: 15px;
-  width: 20px;
-  cursor: pointer;
-  &:hover {
-    transition: 0.5s;
-    transform: scale(1.3);
-  }
-`;
-export const HeaderText = styled.div`
-  padding: 10px;
-  font-size: 16px;
-  border-bottom: 1px solid #fac0bb;
-  margin: 5px 20px;
-`;
-export const ModalDiv = styled.div`
-  padding: 10px;
-  font-size: 25px;
-  font-weight: 700;
-  border-bottom: 1px solid #fac0bb;
-  margin: 30px 20px 0px 20px;
-`;
-export const ModalAvatarWrap = styled.figure`
-  padding: 30px;
-  /* border-bottom: 1px solid #fac0bb;
-  margin: 0px 10px; */
-`;
-export const MAvatar = styled.img`
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-`;
-export const Fix = styled.div`
-  font-size: 17px;
-  margin-left: 3px;
-`;
-export const MEdit = styled.div`
-  padding: 16px;
-  font-size: 20px;
-`;
-export const EditContent = styled.input`
-  width: 95%;
-  padding: 12px;
-  border-radius: 10px;
-  border-color: transparent;
-  background-color: #fac0bb;
-  margin-top: 10px;
-`;
-export const SaveButtonWrap = styled.div`
-  height: 150px;
-  display: flex;
-  justify-content: flex-end;
-`;
-export const SaveButton = styled.img`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  position: relative;
-  right: 40px;
-  top: 30px;
-
-  width: 50px;
-  height: 50px;
-  object-fit: contain;
-
-  cursor: pointer;
-  transition: 0.5s;
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
-
-export const Form = styled.form``;
 export const MyNews = styled.img`
-  width: 50%;
-  height: 100%;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 60%;
   border-radius: 10px;
 `;
 export const TextWrap = styled.div`
-  padding: 10px;
+  color: white;
   width: 100%;
-  border: 3px solid white;
   border-radius: 10px;
 `;
 export const MyText = styled.p`
+  font-weight: ${(f) => f.weight};
+  margin-bottom: 10px;
   width: 100%;
-  color: white;
-  width: 100%;
+  color: ${(c) => c.color};
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: ${(f) => f.size};
 `;

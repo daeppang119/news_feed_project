@@ -1,25 +1,26 @@
 import { getDownloadURL, uploadBytes } from "@firebase/storage";
 import { ref } from "firebase/storage";
 import { React, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import * as St from "../StyledComponents/modules/PersonalPage/PersonlPage.js";
-import { auth, storage } from "../firebase/firebase.js";
-import Modal from "./Modal.jsx";
+import * as St from "../../StyledComponents/modules/PersonalPage/PersonlPage.js";
+import { auth, storage } from "../../firebase/firebase.js";
+import { updateUserInfoSetState } from "../../redux/modules/user.js";
+import MyPageSlide from "./MyPageSlide.jsx";
+import Modal from "./MypageModal.jsx";
 function Mypage() {
+  const dispatch = useDispatch();
   const [modalOpen, setModalOpen] = useState(false);
+
   const ModalHandler = () => {
     setModalOpen(!modalOpen);
   };
   const user = useSelector((state) => state.user);
   const post = useSelector((state) => state.post);
-  console.log(post);
-  //마이페이지 포스트 초기값배열
-  console.log(user);
-  //마이페이지 로그인 여부
+
+  //로그인 여부
   const [loginOk, setloginOk] = useState(user.currentUser);
-  console.log(loginOk);
-  console.log(user.currentUser);
+
   //이미지 state
   const [image, setImage] = useState(null);
 
@@ -28,18 +29,19 @@ function Mypage() {
   };
 
   const handleUpload = async () => {
-    const imageRef = ref(storage, `Users/${auth.currentUser.uid}/${image.name}`);
+    const imageRef = ref(storage, `Users/${auth.currentUser.email}/${image.name}`);
     await uploadBytes(imageRef, image);
-
     const downloadURL = await getDownloadURL(imageRef);
-    setImage(downloadURL);
+    dispatch(
+      updateUserInfoSetState({
+        photoUrl: downloadURL
+      })
+    );
   };
 
   return (
     <>
-      {loginOk === false ? (
-        <h1>ㅎㅇ</h1>
-      ) : (
+      {loginOk && (
         <St.Container>
           <St.ProfileWrap>
             <St.ProfileBox>
@@ -50,8 +52,7 @@ function Mypage() {
               {/* 사진 + 변경 */}
               <St.AvatarWrap>
                 <St.Avatar src={user.photoUrl} />
-                <St.ImageLabel for="file">이미지변경</St.ImageLabel>
-                <button onClick={handleUpload}>upload</button>
+                <St.ImageLabel html-for="file"></St.ImageLabel>
                 <St.ChangeImg id="file" type="file" onChange={handleFileSelect} />
               </St.AvatarWrap>
               {/* 닉네임, 이메일 */}
@@ -71,9 +72,7 @@ function Mypage() {
 
               {/* 로그아웃, 홈 */}
               <St.DirectSection>
-                <Link to={"/"}>
-                  <St.Direct>로그아웃</St.Direct>
-                </Link>
+                <St.Direct>로그아웃</St.Direct>
                 <span>|</span>
                 <Link to={"/"}>
                   <St.Direct>홈으로</St.Direct>
@@ -93,10 +92,20 @@ function Mypage() {
                   return (
                     <>
                       <St.Feed key={ea.id}>
-                        <St.MyNews src={ea.imgurl} />
+                        {ea.imgurl.length <= 0 ? (
+                          <St.MyNews src={process.env.PUBLIC_URL + "/headerimg/logo.png"} />
+                        ) : (
+                          <MyPageSlide imgurl={ea.imgurl} />
+                        )}
                         <St.TextWrap>
-                          내용
-                          <St.MyText>{ea.text}</St.MyText>
+                          <St.MyText size={"20px"} color={"black"} weight={"700"}>
+                            {user.userName}
+                          </St.MyText>
+                          <hr />
+
+                          <St.MyText size={"15px"} color={"white"}>
+                            {ea.text}
+                          </St.MyText>
                         </St.TextWrap>
                       </St.Feed>
                     </>
