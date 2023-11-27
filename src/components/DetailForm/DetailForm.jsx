@@ -101,7 +101,7 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }
                         <St.DetailUserInfo>
                           <St.AvatarFigure>
                             <img
-                              src={auth.photoURL || process.env.PUBLIC_URL + "/DefaultProfile/defaultprofile.jpg"}
+                              src={user.photoUrl || process.env.PUBLIC_URL + "/DefaultProfile/defaultprofile.jpg"}
                               alt=""
                             />
                           </St.AvatarFigure>
@@ -228,7 +228,7 @@ export default function DetailForm({ DetailisOpen, setDetailIsopen, findTarget }
                         <St.DetailUserInfo>
                           <St.AvatarFigure>
                             <img
-                              src={auth.photoURL || process.env.PUBLIC_URL + "/DefaultProfile/defaultprofile.jpg"}
+                              src={user.photoUrl || process.env.PUBLIC_URL + "/DefaultProfile/defaultprofile.jpg"}
                               alt=""
                             />
                           </St.AvatarFigure>
